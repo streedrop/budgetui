@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
-import TransactionItem from './TransactionItem.jsx'
+import CategoryItem from './CategoryItem.jsx'
 import { Link } from 'react-router-dom';
 
-function Transactions() {
-  const [transactions, setTransactions] = useState([]);
+function Categories() {
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/transactions')
+    fetch('http://localhost:3000/api/categories')
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch');
         return res.json();
       })
       .then(data => {
-        setTransactions(data);
+        setCategories(data);
         setLoading(false);
       })
       .catch(err => {
@@ -28,13 +28,13 @@ function Transactions() {
 
   return (
     <div>
-      <h1>Transactions</h1>
-      <Link to="/transactions/new">Add a new transaction</Link>
-      {transactions.map(transaction => (
-        <TransactionItem key={transaction.id} description={transaction.description} amount={transaction.amount} />
+      <h1>Categories</h1>
+      <Link to="/categories/new">Add a new category</Link>
+      {categories.map(category => (
+        <CategoryItem key={category.id} name={category.name} description={category.description} />
       ))}
     </div>
   );
 }
 
-export default Transactions
+export default Categories
