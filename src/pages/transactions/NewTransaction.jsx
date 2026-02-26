@@ -8,7 +8,7 @@ function NewTransaction() {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/categories')
+        fetch('/api/categories')
             .then(res => res.json())
             .then(data => setCategories(data));
 
@@ -21,7 +21,7 @@ function NewTransaction() {
             const data = Object.fromEntries(formData);
 
             try {
-                const response = await fetch('http://localhost:3000/api/transactions', {
+                const response = await fetch('/api/transactions', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

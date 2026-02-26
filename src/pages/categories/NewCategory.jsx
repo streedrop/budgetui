@@ -14,7 +14,7 @@ function NewCategory() {
             const data = Object.fromEntries(formData);
 
             try {
-                const response = await fetch('http://localhost:3000/api/categories', {
+                const response = await fetch('/api/categories', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

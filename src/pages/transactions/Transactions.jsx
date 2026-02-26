@@ -8,7 +8,7 @@ function Transactions() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/transactions')
+    fetch('/api/transactions')
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch');
         return res.json();
