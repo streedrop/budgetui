@@ -53,9 +53,9 @@ function NewTransaction() {
     }
 
     return (
-        <div className="newTransaction">
+        <div id="main">
             <h1>New transaction</h1>
-            <form>
+            <form className="newTransaction">
                 <label htmlFor="description">Description: </label>
                 <input type="text" id="description" name="description" />
                 <label htmlFor="amount">Amount: </label>

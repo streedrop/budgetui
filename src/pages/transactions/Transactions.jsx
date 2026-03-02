@@ -1,3 +1,5 @@
+import './Transactions.css'
+
 import { useState, useEffect } from 'react';
 import TransactionItem from './TransactionItem.jsx'
 import { Link } from 'react-router-dom';
@@ -8,6 +10,7 @@ function Transactions() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+
     fetch('/api/transactions')
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch');
@@ -27,12 +30,14 @@ function Transactions() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <div id="main">
       <h1>Transactions</h1>
       <Link to="/transactions/new">Add a new transaction</Link>
-      {transactions.map(transaction => (
-        <TransactionItem key={transaction.id} description={transaction.description} amount={transaction.amount} />
-      ))}
+      <div className="transactionList">
+        {transactions.map(transaction => (
+          <TransactionItem key={transaction.id} description={transaction.description} amount={transaction.amount} category={transaction.category_name} />
+        ))}
+      </div>
     </div>
   );
 }

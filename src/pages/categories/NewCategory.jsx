@@ -46,9 +46,9 @@ function NewCategory() {
     }
 
     return (
-        <div className="newCategory">
+        <div id="main">
             <h1>New category</h1>
-            <form>
+            <form className="newCategory">
                 <label htmlFor="name">Name: </label>
                 <input type="text" id="name" name="name" />
                 <label htmlFor="description">Description: </label>

@@ -1,10 +1,11 @@
 import './TransactionItem.css'
 
-function TransactionItem({ id, description, amount }) {
+function TransactionItem({ id, description, amount, category }) {
     return (
         <div className="transactionItem" key={id}>
-            <p>{description}</p>
-            <p>{amount} $</p>
+            <p className="description">{description}</p>
+            <p className="amount">{amount} $</p>
+            <p className="category"><em>{category}</em></p>
         </div>
     );
 }

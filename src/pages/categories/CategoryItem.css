@@ -1,4 +1,11 @@
 div.categoryItem {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-items: start;
+    align-items: center;
+    border: 2px solid white;
+    margin: 10px auto;
+    padding: 10px 30px;
+    border-radius: 10px;
+    height: 75px;
 }

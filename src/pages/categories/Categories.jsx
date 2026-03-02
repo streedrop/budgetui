@@ -1,3 +1,5 @@
+import './Categories.css'
+
 import { useState, useEffect } from 'react';
 import CategoryItem from './CategoryItem.jsx'
 import { Link } from 'react-router-dom';
@@ -27,12 +29,14 @@ function Categories() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <div id="main">
       <h1>Categories</h1>
       <Link to="/categories/new">Add a new category</Link>
-      {categories.map(category => (
-        <CategoryItem key={category.id} name={category.name} description={category.description} />
-      ))}
+      <div className="categoryList">
+        {categories.map(category => (
+          <CategoryItem key={category.id} name={category.name} description={category.description} />
+        ))}
+      </div>
     </div>
   );
 }
