@@ -1,7 +1,8 @@
-import './Transactions.css'
+import { fetchTransactions, deleteTransaction } from './transaction.api.js';
+
+import TransactionList from './TransactionList.jsx'
 
 import { useState, useEffect } from 'react';
-import TransactionItem from './TransactionItem.jsx'
 import { Link } from 'react-router-dom';
 
 function Transactions() {
@@ -10,13 +11,9 @@ function Transactions() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-
-    fetch('/api/transactions')
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch');
-        return res.json();
-      })
+    fetchTransactions()
       .then(data => {
+        console.log(data);
         setTransactions(data);
         setLoading(false);
       })
@@ -26,6 +23,13 @@ function Transactions() {
       });
   }, []);
 
+    const handleDelete = async (id) => {
+      const res = await deleteTransaction(id);
+      if (!res.ok) return;
+  
+      setTransactions(prev => prev.filter(transaction => transaction.id !== id));
+    };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -33,11 +37,7 @@ function Transactions() {
     <div id="main">
       <h1>Transactions</h1>
       <Link to="/transactions/new">Add a new transaction</Link>
-      <div className="transactionList">
-        {transactions.map(transaction => (
-          <TransactionItem key={transaction.id} description={transaction.description} amount={transaction.amount} category={transaction.category_name} />
-        ))}
-      </div>
+      <TransactionList transactions={transactions} onDelete={handleDelete}></TransactionList>
     </div>
   );
 }

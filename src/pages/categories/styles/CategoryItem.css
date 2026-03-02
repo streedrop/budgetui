@@ -1,6 +1,6 @@
-div.categoryItem {
+.categoryItem {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 40% 50% 10%;
     justify-items: start;
     align-items: center;
     border: 2px solid white;

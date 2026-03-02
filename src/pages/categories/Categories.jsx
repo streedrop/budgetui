@@ -1,7 +1,8 @@
-import './Categories.css'
+import { fetchCategories, deleteCategory } from './category.api.js';
+
+import CategoryList from './CategoryList.jsx'
 
 import { useState, useEffect } from 'react';
-import CategoryItem from './CategoryItem.jsx'
 import { Link } from 'react-router-dom';
 
 function Categories() {
@@ -10,11 +11,7 @@ function Categories() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/api/categories')
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch');
-        return res.json();
-      })
+    fetchCategories()
       .then(data => {
         setCategories(data);
         setLoading(false);
@@ -25,6 +22,13 @@ function Categories() {
       });
   }, []);
 
+  const handleDelete = async (id) => {
+    const res = await deleteCategory(id);
+    if (!res.ok) return;
+
+    setCategories(prev => prev.filter(category => category.id !== id));
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -32,11 +36,7 @@ function Categories() {
     <div id="main">
       <h1>Categories</h1>
       <Link to="/categories/new">Add a new category</Link>
-      <div className="categoryList">
-        {categories.map(category => (
-          <CategoryItem key={category.id} name={category.name} description={category.description} />
-        ))}
-      </div>
+      <CategoryList categories={categories} onDelete={handleDelete}></CategoryList>
     </div>
   );
 }

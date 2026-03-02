@@ -1,4 +1,4 @@
-import './NewCategory.css'
+import CategoryForm from './CategoryForm.jsx'
 
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -48,14 +48,7 @@ function NewCategory() {
     return (
         <div id="main">
             <h1>New category</h1>
-            <form className="newCategory">
-                <label htmlFor="name">Name: </label>
-                <input type="text" id="name" name="name" />
-                <label htmlFor="description">Description: </label>
-                <input type="text" id="description" name="description" />
-                <button type="button" id="cancel" onClick={handleCancel}>Cancel</button>
-                <button type="submit">Add</button>
-            </form>
+            <CategoryForm onCancel={handleCancel}></CategoryForm>
         </div>
     );
 }

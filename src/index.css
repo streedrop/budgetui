@@ -75,3 +75,14 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.delete,
+.cancel {
+  background-color: rgb(172, 0, 0);
+}
+
+.delete:hover,
+.cancel:hover {
+  background-color: red;
+  border-color: transparent;
+}

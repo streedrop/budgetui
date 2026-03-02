@@ -1,16 +1,19 @@
-import './NewTransaction.css'
-
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import TransactionForm from './TransactionForm';
+import { fetchCategories } from '../categories/category.api';
 
 function NewTransaction() {
 
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch('/api/categories')
-            .then(res => res.json())
-            .then(data => setCategories(data));
+        const loadCategories = async () => {
+            const data = await fetchCategories(); // fetchCategories returns res.json()
+            setCategories(data);
+        };
+
+        loadCategories();
 
         const form = document.querySelector('form');
 
@@ -55,22 +58,7 @@ function NewTransaction() {
     return (
         <div id="main">
             <h1>New transaction</h1>
-            <form className="newTransaction">
-                <label htmlFor="description">Description: </label>
-                <input type="text" id="description" name="description" />
-                <label htmlFor="amount">Amount: </label>
-                <input type="text" id="amount" name="amount" />
-                <label htmlFor="category">Category:</label>
-                <select id="category" name="category">
-                    {categories.map(category => (
-                        <option key={category.id} value={category.id}>
-                            {category.name}
-                        </option>
-                    ))}
-                </select>
-                <button type="button" id="cancel" onClick={handleCancel}>Cancel</button>
-                <button type="submit">Add</button>
-            </form>
+            <TransactionForm categories={categories} onCancel={handleCancel}></TransactionForm>
         </div>
     );
 }

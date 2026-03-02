@@ -1,0 +1,7 @@
+.newCategory {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    row-gap: 1rem;
+    width: 50%;
+    margin: 0 auto;
+}
