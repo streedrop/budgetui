@@ -1,7 +1,7 @@
 .transactionItem {
     display: grid;
-    grid-template-columns: 65% 20% 15%;
-    column-gap: 10px;
+    grid-template-columns: 3fr 2fr 1fr 1fr;
+    column-gap: 5px;
     justify-items: start;
     align-items: center;
     border: 2px solid white;
@@ -23,5 +23,5 @@
 
 .transactionItem button {
     grid-row: span 2;
-    justify-self: center;
+    justify-self: end;
 }

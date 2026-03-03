@@ -6,8 +6,9 @@ import NavBar from './components/navbar/NavBar.jsx'
 import Home from './pages/home/home.jsx'
 import Categories from './pages/categories/Categories.jsx'
 import NewCategory from './pages/categories/NewCategory.jsx'
-import Transactions from './pages/transactions/transactions.jsx'
+import Transactions from './pages/transactions/Transactions.jsx'
 import NewTransaction from './pages/transactions/NewTransaction.jsx'
+import EditTransaction from './pages/transactions/EditTransaction.jsx'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/categories/new" element={<NewCategory />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/transactions/new" element={<NewTransaction />} />
+          <Route path="/transactions/edit/:id" element={<EditTransaction />} />
         </Routes>
       </main>
     </>
