@@ -7,8 +7,7 @@ import Home from './pages/home/home.jsx'
 import Categories from './pages/categories/Categories.jsx'
 import NewCategory from './pages/categories/NewCategory.jsx'
 import Transactions from './pages/transactions/Transactions.jsx'
-import NewTransaction from './pages/transactions/NewTransaction.jsx'
-import EditTransaction from './pages/transactions/EditTransaction.jsx'
+import TransactionForm from './pages/transactions/TransactionForm.jsx'
 
 function App() {
   return (
@@ -22,8 +21,8 @@ function App() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/categories/new" element={<NewCategory />} />
           <Route path="/transactions" element={<Transactions />} />
-          <Route path="/transactions/new" element={<NewTransaction />} />
-          <Route path="/transactions/edit/:id" element={<EditTransaction />} />
+          <Route path="/transactions/new" element={<TransactionForm />} />
+          <Route path="/transactions/edit/:id" element={<TransactionForm />} />
         </Routes>
       </main>
     </>
