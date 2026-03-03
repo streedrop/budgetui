@@ -1,6 +1,6 @@
 .categoryItem {
     display: grid;
-    grid-template-columns: 40% 50% 10%;
+    grid-template-columns: 2fr 3fr 1fr 1fr;
     justify-items: start;
     align-items: center;
     border: 2px solid white;
@@ -8,4 +8,8 @@
     padding: 10px 30px;
     border-radius: 10px;
     height: 75px;
+}
+
+.categoryItem button {
+    justify-self: end;
 }
