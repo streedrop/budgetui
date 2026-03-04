@@ -13,7 +13,6 @@ function Transactions() {
   useEffect(() => {
     fetchTransactions()
       .then(data => {
-        console.log(data);
         setTransactions(data);
         setLoading(false);
       })

@@ -13,7 +13,7 @@ function TransactionItem({ transaction, onDelete }) {
     return (
         <div className="transactionItem" key={transaction.id}>
             <p className="description"><b>{transaction.description}</b></p>
-            <p className="amount">{transaction.amount} $</p>
+            <p className="amount">{transaction.is_expense ? '-' : '+'}{transaction.amount} $</p>
             <div className="actions">
                 <button type="button" className="edit" onClick={() => goToEdit()}><i className="fa-regular fa-pen-to-square fa-xl"></i></button>
                 <button type="button" className="delete" onClick={() => onDelete(transaction.id)}><i className="fa-regular fa-circle-xmark fa-xl"></i></button>
