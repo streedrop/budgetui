@@ -1,4 +1,5 @@
 import { fetchCategories, deleteCategory } from './category.api.js';
+import { deleteTransactionsByCategory } from '../transactions/transaction.api.js';
 
 import CategoryList from './CategoryList.jsx'
 
@@ -23,7 +24,14 @@ function Categories() {
   }, []);
 
   const handleDelete = async (id) => {
-    const res = await deleteCategory(id);
+
+    if(!confirm("Are you sure you want to delete this category and all its transactions?"))
+      return;
+
+    let res = await deleteTransactionsByCategory(id);
+    if (!res.ok) return;
+
+    res = await deleteCategory(id);
     if (!res.ok) return;
 
     setCategories(prev => prev.filter(category => category.id !== id));
