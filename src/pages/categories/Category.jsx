@@ -39,6 +39,7 @@ function Category() {
     return (
         <div id="main">
             <h1>{category.name}</h1>
+            <p><em>{category.description}</em></p>
             <TransactionList transactions={transactions} onDelete={handleDelete}></TransactionList>
         </div>
     );

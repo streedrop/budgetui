@@ -10,6 +10,8 @@ import CategoryForm from './pages/categories/CategoryForm.jsx'
 import Transactions from './pages/transactions/Transactions.jsx'
 import TransactionForm from './pages/transactions/TransactionForm.jsx'
 
+import Charts from './pages/charts/Charts.jsx'
+
 function App() {
   return (
     <>
@@ -26,6 +28,7 @@ function App() {
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/transactions/new" element={<TransactionForm />} />
           <Route path="/transactions/edit/:id" element={<TransactionForm />} />
+          <Route path="/charts" element={<Charts />} />
         </Routes>
       </main>
     </>

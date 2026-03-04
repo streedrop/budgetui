@@ -1,0 +1,17 @@
+.recharts-tooltip-item-value {
+    font-weight: bold;
+}
+
+.recharts-tooltip-item-separator {
+    display: none;
+}
+
+.chart {
+    display: flex;
+    flex-direction: column;
+}
+
+.chartList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
