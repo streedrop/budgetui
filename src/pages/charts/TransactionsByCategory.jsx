@@ -28,13 +28,14 @@ function TransactionsByCategory({ transactions }) {
                 fill: `hsl(${(index * 360 / categories.length) % 360}, 70%, 55%)`
             }))
         );
-    }, []);
+    }, [transactions]);
 
+    if (transactions.length === 0) return <p>No transactions to display.</p>;
     if (categories.length === 0) return <p>Loading...</p>;
 
     return (
         <PieChart width={400} height={400}>
-            <Pie data={categories} nameKey="name" dataKey="value" cx="50%" cy="50%" outerRadius={150} isAnimationActive={false} />
+            <Pie data={categories} nameKey="name" dataKey="value" cx="50%" cy="50%" outerRadius={150}/>
             <Tooltip
                 formatter={(value, name) => [` ${value.toFixed(2)} $`, name]}
             />
