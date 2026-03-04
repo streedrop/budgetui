@@ -23,12 +23,12 @@ function Transactions() {
       });
   }, []);
 
-    const handleDelete = async (id) => {
-      const res = await deleteTransaction(id);
-      if (!res.ok) return;
-  
-      setTransactions(prev => prev.filter(transaction => transaction.id !== id));
-    };
+  const handleDelete = async (id) => {
+    const res = await deleteTransaction(id);
+    if (!res.ok) return;
+
+    setTransactions(prev => prev.filter(transaction => transaction.id !== id));
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;

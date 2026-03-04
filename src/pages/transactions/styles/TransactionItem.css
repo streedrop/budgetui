@@ -1,24 +1,36 @@
 .transactionItem {
     display: grid;
-    grid-template-columns: 3fr 2fr 1fr 1fr;
+    grid-template-columns: 3fr 3fr 2fr;
     column-gap: 5px;
     justify-items: start;
     align-items: center;
     border: 2px solid white;
     margin: 10px auto;
-    padding: 10px 30px;
+    padding: 10px 20px;
     border-radius: 10px;
     height: 75px;
 }
 
-.transactionItem .amount {
-    grid-row: span 2;
+.transactionItem .amount, 
+.transactionItem .date {
     justify-self: end;
     align-self: center;
 }
 
 .transactionItem .category {
     color: gray;
+}
+
+.transactionItem .category:hover {
+    text-decoration: underline;
+    color: rgb(97, 97, 97);
+}
+
+.transactionItem .actions {
+    display: flex;
+    gap: 5px;
+    grid-row: span 2;
+    justify-self: end;
 }
 
 .transactionItem button {

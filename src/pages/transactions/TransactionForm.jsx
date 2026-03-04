@@ -82,6 +82,8 @@ function TransactionForm() {
                         </option>
                     ))}
                 </select>
+                <label htmlFor="date">Date:</label>
+                <input type="date" id="date" name="date" defaultValue={data.date ? data.date.split("T")[0] : ""}></input>
                 <button type="button" className="cancel" onClick={handleCancel}>Cancel</button>
                 <button className="save" type="submit">{isEditMode ? 'Save' : 'Add'}</button>
             </form>

@@ -2,20 +2,27 @@ import './styles/CategoryItem.css'
 
 import { useNavigate } from 'react-router-dom';
 
-function CategoryItem({ id, name, description, onDelete }) {
+function CategoryItem({ category, onDelete }) {
 
     const navigate = useNavigate();
 
-    const goToEdit = (id) => {
-        navigate(`/categories/edit/${id}`);
+    const goToInfo = () => {
+        navigate(`/categories/${category.id}`);
+    }
+
+    const goToEdit = () => {
+        navigate(`/categories/edit/${category.id}`);
     }
 
     return (
-        <div className="categoryItem" key={id}>
-            <p>{name}</p>
-            <p>{description}</p>
-            <button type="button" className="edit" onClick={() => goToEdit(id)}><i className="fa-regular fa-pen-to-square fa-xl"></i></button>
-            <button type="button" className="delete" onClick={() => onDelete(id)}><i className="fa-regular fa-circle-xmark fa-xl"></i></button>
+        <div className="categoryItem" key={category.id}>
+            <p className="name"><b>{category.name}</b></p>
+            <p className="description">{category.description}</p>
+            <div className="actions">
+                <button type="button" className="info" onClick={() => goToInfo()}><i className="fa-solid fa-info fa-xl"></i></button>
+                <button type="button" className="edit" onClick={() => goToEdit()}><i className="fa-regular fa-pen-to-square fa-xl"></i></button>
+                <button type="button" className="delete" onClick={() => onDelete(id)}><i className="fa-regular fa-circle-xmark fa-xl"></i></button>
+            </div>
         </div>
     );
 }

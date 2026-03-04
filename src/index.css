@@ -20,8 +20,6 @@
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
   text-decoration: inherit;
 }
 
@@ -95,5 +93,14 @@ button:focus-visible {
 .edit:hover,
 .save:hover {
   background-color: rgb(0, 102, 255);
+  border-color: transparent;
+}
+
+.info {
+  background-color: rgb(0, 102, 0);
+}
+
+.info:hover {
+  background-color: green;
   border-color: transparent;
 }

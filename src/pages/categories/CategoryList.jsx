@@ -7,7 +7,7 @@ function CategoryList({ categories, onDelete }) {
     return (
         <div className="categoryList">
             {categories.map(category => (
-                <CategoryItem key={category.id} id={category.id} name={category.name} description={category.description} onDelete={onDelete} />
+                <CategoryItem key={category.id} category={category} onDelete={onDelete} />
             ))}
         </div>
     );

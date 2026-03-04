@@ -14,6 +14,14 @@ export async function fetchTransaction(id) {
     return res.json();
 }
 
+export async function fetchTransactionsByCategory(id) {
+    const res = await fetch(`/api/transactions/category/${id}`);
+
+    if (!res.ok) throw new Error("Failed to fetch transactions for category!");
+
+    return res.json();
+}
+
 export async function insertTransaction(data) {
     const res = await fetch('/api/transactions', {
         method: 'POST',
