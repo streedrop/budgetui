@@ -14,6 +14,8 @@ function CategoryForm() {
     const isEditMode = Boolean(id);                     // ID = editing, No ID = creating
     const [data, setFormData] = useState(emptyFormData);    // Form data
 
+    const navigate = useNavigate();
+
     // Fetch the category & pre-fill form
     useEffect(() => {
         if (!isEditMode) return;
@@ -37,11 +39,11 @@ function CategoryForm() {
             await updateCategory(id, data);
         else
             await insertCategory(data);
+
+        navigate('/categories');
     };
 
     // Cancel button
-    const navigate = useNavigate();
-
     const handleCancel = () => {
         navigate('/categories');
     }

@@ -18,6 +18,8 @@ function TransactionForm() {
     const [categories, setCategories] = useState([]);   // Category list
     const [data, setFormData] = useState(emptyFormData);    // Form data
 
+    const navigate = useNavigate();
+
     // Populate category list
     useEffect(() => {
         const loadCategories = async () => {
@@ -51,11 +53,11 @@ function TransactionForm() {
             await updateTransaction(id, data);
         else
             await insertTransaction(data);
+
+        navigate('/transactions');
     };
 
     // Cancel button
-    const navigate = useNavigate();
-
     const handleCancel = () => {
         navigate('/transactions');
     }
