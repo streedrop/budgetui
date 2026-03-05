@@ -7,7 +7,6 @@ import { fetchTransaction, insertTransaction, updateTransaction } from './transa
 
 const emptyFormData = {
     description: "",
-    is_expense: 1,
     amount: "",
     category_id: ""
 };
@@ -68,18 +67,6 @@ function TransactionForm() {
             <form className="transactionForm" onSubmit={handleSubmit}>
                 <label htmlFor="description">Description: </label>
                 <input type="text" id="description" name="description" defaultValue={data.description} />
-
-                <label>Type: </label>
-                <div className="type">
-                    <div>
-                        <input type="radio" id="expense" name="is_expense" value="1" defaultChecked={data.is_expense} />
-                        <label htmlFor="expense">Expense</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="income" name="is_expense" value="0" defaultChecked={!data.is_expense} />
-                        <label htmlFor="income">Income</label>
-                    </div>
-                </div>
 
                 <label htmlFor="amount">Amount: </label>
                 <input type="text" id="amount" name="amount" defaultValue={data.amount} />

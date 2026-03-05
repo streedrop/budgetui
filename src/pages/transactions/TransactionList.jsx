@@ -20,10 +20,10 @@ function TransactionList({ transactions, onDelete }) {
                 transactions: []
             };
 
-        if(transaction.is_expense)
-            acc[monthKey].sum -= Number(transaction.amount);
-        else 
+        if(transaction.is_income == true)
             acc[monthKey].sum += Number(transaction.amount);
+        else 
+            acc[monthKey].sum -= Number(transaction.amount);
         
         acc[monthKey].transactions.push(transaction);
 

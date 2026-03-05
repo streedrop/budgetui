@@ -11,6 +11,9 @@ function Categories() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const [incomeCategories, setIncomeCategories] = useState([]);
+  const [expenseCategories, setExpenseCategories] = useState([]);
+
   useEffect(() => {
     fetchCategories()
       .then(data => {
@@ -22,6 +25,11 @@ function Categories() {
         setLoading(false);
       });
   }, []);
+
+  useEffect(()=> {
+    setIncomeCategories(categories.filter(category => category.is_income == true));
+    setExpenseCategories(categories.filter(category => category.is_income == false));
+  }, [categories])
 
   const handleDelete = async (id) => {
 
@@ -44,7 +52,10 @@ function Categories() {
     <div id="main">
       <h1>Categories</h1>
       <Link to="/categories/new">Add a new category</Link>
-      <CategoryList categories={categories} onDelete={handleDelete}></CategoryList>
+      <h2>Income</h2>
+      <CategoryList categories={incomeCategories} onDelete={handleDelete}></CategoryList>
+      <h2>Expenses</h2>
+      <CategoryList categories={expenseCategories} onDelete={handleDelete}></CategoryList>
     </div>
   );
 }

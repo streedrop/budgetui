@@ -7,6 +7,7 @@ import { fetchCategory, insertCategory, updateCategory } from './category.api';
 const emptyFormData = {
     name: "",
     description: "",
+    is_income: 0
 };
 
 function CategoryForm() {
@@ -51,11 +52,22 @@ function CategoryForm() {
     return (
         <div id="main">
             <h1>{isEditMode ? 'Edit category' : 'New category'}</h1>
-            <form className="newCategory" onSubmit={handleSubmit}>
+            <form className="categoryForm" onSubmit={handleSubmit}>
                 <label htmlFor="name">Name: </label>
                 <input type="text" id="name" name="name" defaultValue={data.name} />
                 <label htmlFor="description">Description: </label>
                 <input type="text" id="description" name="description" defaultValue={data.description} />
+                <label>Type: </label>
+                <div className="type">
+                    <div>
+                        <input type="radio" id="expense" name="is_income" value="0" defaultChecked={!data.is_income} />
+                        <label htmlFor="expense">Expenses</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="income" name="is_income" value="1" defaultChecked={data.is_income} />
+                        <label htmlFor="income">Income</label>
+                    </div>
+                </div>
                 <button type="button" className="cancel" onClick={handleCancel}>Cancel</button>
                 <button type="submit" className="save">{isEditMode ? 'Save' : 'Add'}</button>
             </form>

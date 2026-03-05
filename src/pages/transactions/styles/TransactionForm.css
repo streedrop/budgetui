@@ -5,12 +5,3 @@
     width: 50%;
     margin: 0 auto;
 }
-
-.transactionForm .type {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.transactionForm .type input{
-    margin-right: 10px;
-}
