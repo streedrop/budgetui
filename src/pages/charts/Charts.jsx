@@ -1,15 +1,14 @@
-import './styles/Charts.css'
-
 import { useState, useEffect } from 'react';
 import { fetchTransactions } from '../transactions/transaction.api.js';
-import TransactionsByCategory from './TransactionsByCategory.jsx';
-import ExpensesVsIncome from './ExpensesVsIncome.jsx';
+
+import ChartList from './ChartList.jsx';
 
 function Charts() {
 
     const [transactions, setTransactions] = useState([]);
     const [filtered, setFiltered] = useState([]);
 
+    // FETCH TRANSACTIONS INITIALLY
     useEffect(() => {
         fetchTransactions()
             .then(data => {
@@ -17,6 +16,8 @@ function Charts() {
                 setFiltered(data);
             })
     }, []);
+
+    // FILTER TRANSACTIONS FROM FORM
 
     const filter = (e) => {
         const form = new FormData(e.target.form);
@@ -30,8 +31,6 @@ function Charts() {
                     (year === -1 || date.getFullYear() === year);
             }));
     }
-
-    if (transactions.length === 0) return <p>Loading...</p>;
 
     return (
         <div id="main">
@@ -59,16 +58,8 @@ function Charts() {
                     <option value="2025">2025</option>
                 </select>
             </form>
-            <div className="chartList">
-                <div className="chart">
-                    <h2>Transactions by category</h2>
-                    <TransactionsByCategory transactions={filtered}></TransactionsByCategory>
-                </div>
-                <div className="chart">
-                    <h2>Expenses vs Income</h2>
-                    <ExpensesVsIncome transactions={filtered}></ExpensesVsIncome>
-                </div>
-            </div>
+
+            <ChartList transactions={filtered}></ChartList>
         </div>
     );
 }

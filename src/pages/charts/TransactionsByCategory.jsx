@@ -1,41 +1,26 @@
-import './styles/Charts.css'
-
 import { PieChart, Pie, Tooltip } from "recharts";
 import { useState, useEffect } from 'react';
 
-function TransactionsByCategory({ transactions }) {
+function TransactionsByCategory({ categories }) {
 
-    const [categories, setCategories] = useState([]);
+    const [data, setData] = useState([]);
 
+    // Add color
     useEffect(() => {
-        const categories = transactions
-            // Split into their corresponding category, by name
-            .reduce((categories, transaction) => {
-                const existing = categories.find(item => item.name === transaction.category_name);
-
-                if (existing)
-                    existing.value += Number(transaction.amount);
-                else
-                    categories.push({ name: transaction.category_name, value: Number(transaction.amount) });
-
-                return categories;
-            }, []);
-
-        setCategories(categories
+        setData(categories
             // Add the color for the diagram
             .map((category, index) => ({
                 ...category,
                 fill: `hsl(${(index * 360 / categories.length) % 360}, 70%, 55%)`
             }))
         );
-    }, [transactions]);
+    }, [categories]);
 
-    if (transactions.length === 0) return <p>No transactions to display.</p>;
     if (categories.length === 0) return <p>Loading...</p>;
 
     return (
         <PieChart width={400} height={400}>
-            <Pie data={categories} nameKey="name" dataKey="value" cx="50%" cy="50%" outerRadius={150}/>
+            <Pie data={data} nameKey="name" dataKey="value" cx="50%" cy="50%" outerRadius={150}/>
             <Tooltip
                 formatter={(value, name) => [` ${value.toFixed(2)} $`, name]}
             />
