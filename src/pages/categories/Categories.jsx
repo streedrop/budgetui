@@ -14,6 +14,8 @@ function Categories() {
   const [incomeCategories, setIncomeCategories] = useState([]);
   const [expenseCategories, setExpenseCategories] = useState([]);
 
+  const [sum, setSum] = useState(0);
+
   useEffect(() => {
     fetchCategories()
       .then(data => {
@@ -26,14 +28,20 @@ function Categories() {
       });
   }, []);
 
-  useEffect(()=> {
+  useEffect(() => {
     setIncomeCategories(categories.filter(category => category.is_income == true));
     setExpenseCategories(categories.filter(category => category.is_income == false));
-  }, [categories])
+    setSum(categories.reduce(((sum, category) => {
+      if (category.is_income)
+        return sum + Number(category.goal)
+      else
+        return sum - Number(category.goal)
+    }), 0));
+  }, [categories]);
 
   const handleDelete = async (id) => {
 
-    if(!confirm("Are you sure you want to delete this category and all its transactions?"))
+    if (!confirm("Are you sure you want to delete this category and all its transactions?"))
       return;
 
     let res = await deleteTransactionsByCategory(id);
@@ -49,13 +57,12 @@ function Categories() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div id="main">
+    <div id="main" className="categoriesOverview">
       <h1>Categories</h1>
       <Link to="/categories/new">Add a new category</Link>
-      <h2>Income</h2>
-      <CategoryList categories={incomeCategories} onDelete={handleDelete}></CategoryList>
-      <h2>Expenses</h2>
-      <CategoryList categories={expenseCategories} onDelete={handleDelete}></CategoryList>
+      <h2>Income - Expenses: {sum} $ / month</h2>
+      <CategoryList categories={incomeCategories} is_income={true} onDelete={handleDelete}></CategoryList>
+      <CategoryList categories={expenseCategories} is_income={false} onDelete={handleDelete}></CategoryList>
     </div>
   );
 }

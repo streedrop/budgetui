@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import TransactionList from '../transactions/TransactionList.jsx'
 
-import { fetchTransactionsByCategory } from "../transactions/transaction.api";
+import { deleteTransaction, fetchTransactionsByCategory } from "../transactions/transaction.api";
 import { fetchCategory } from "./category.api";
 
 function Category() {
@@ -39,7 +39,10 @@ function Category() {
     return (
         <div id="main">
             <h1>{category.name}</h1>
-            <p><em>{category.description}</em></p>
+            {category.description && (
+                <p><em>{category.description}</em></p>
+            )}
+            <p><em>{category.is_income ? 'Monthly prediction: ' : 'Monthly limit: '}{category.goal} $ / month</em></p>
             <TransactionList transactions={transactions} onDelete={handleDelete}></TransactionList>
         </div>
     );
