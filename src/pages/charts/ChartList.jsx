@@ -2,15 +2,17 @@ import './styles/ChartList.css';
 
 import { useState, useEffect } from 'react';
 
-import TransactionsByCategory from './TotalByCategory/TransactionsByCategoryPie.jsx';
+import TotalByCategoryPie from './TotalByCategory/TotalByCategoryPie.jsx';
+import TotalByCategoryBar from './TotalByCategory/TotalByCategoryBar.jsx';
 import ExpensesVsIncomePie from './ExpensesVsIncome/ExpensesVsIncomePie.jsx';
 import ExpensesVsIncomeBar from './ExpensesVsIncome/ExpensesVsIncomeBar.jsx';
+import ForecastVsActual from './ForecastVsActual/ForecastVsActual.jsx';
 
-function ChartList({ transactions }) {
+function ChartList({ transactions, categories }) {
 
     // GROUP TRANSACTIONS BY CATEGORY
 
-    const categories = transactions
+    const totalByCategory = transactions
         // Split into their corresponding category, by name
         .reduce((categories, transaction) => {
             const existing = categories.find(item => item.name === transaction.category_name);
@@ -21,7 +23,7 @@ function ChartList({ transactions }) {
                 categories.push({ name: transaction.category_name, value: Number(transaction.amount) });
 
             return categories;
-        }, [transactions]);
+        }, []);
 
     // CALCULATE INCOME AND EXPENSE SUMS
     const [incomeSum, setIncomeSum] = useState(0);
@@ -42,13 +44,33 @@ function ChartList({ transactions }) {
 
     }, [transactions]);
 
+    // FORECAST VS ACTUAL
+    const categoriesArray = categories
+        .map((category) => ({
+            name: category.name,
+            forecast: Number(category.goal),
+            actual: 0
+        }));
+
+    const forecastVsActual = transactions
+        // Split into their corresponding category, by name
+        .reduce((categories, transaction) => {
+            categories.find(item => item.name === transaction.category_name).actual += Number(transaction.amount);
+
+            return categories;
+        }, categoriesArray);
+
     if (transactions.length === 0) return <p>Nothing to display.</p>;
 
     return (
         <div className="chartList">
             <div className="chart">
-                <h2>Transactions by category</h2>
-                <TransactionsByCategory categories={categories}></TransactionsByCategory>
+                <h2>Total by category</h2>
+                <TotalByCategoryPie categories={totalByCategory}></TotalByCategoryPie>
+            </div>
+            <div className="chart">
+                <h2>Total by category</h2>
+                <TotalByCategoryBar categories={totalByCategory}></TotalByCategoryBar>
             </div>
             <div className="chart">
                 <h2>Expenses vs Income</h2>
@@ -57,6 +79,10 @@ function ChartList({ transactions }) {
             <div className="chart">
                 <h2>Expenses vs Income</h2>
                 <ExpensesVsIncomeBar income={incomeSum} expense={expenseSum}></ExpensesVsIncomeBar>
+            </div>
+            <div className="chart">
+                <h2>Forecast vs Actual</h2>
+                <ForecastVsActual categories={forecastVsActual}></ForecastVsActual>
             </div>
         </div>
     )

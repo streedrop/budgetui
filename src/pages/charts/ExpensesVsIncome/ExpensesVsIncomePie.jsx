@@ -8,7 +8,7 @@ function ExpensesVsIncomePie({ income, expense }) {
     ];
 
     return (
-        <PieChart width={400} height={400}>
+        <PieChart height={400} width={`100%`}>
             <Pie data={data} nameKey="name" dataKey="value" cx="50%" cy="50%" outerRadius={150} />
             <Tooltip
                 formatter={(value, name) => [` ${value.toFixed(2)} $`, name]}

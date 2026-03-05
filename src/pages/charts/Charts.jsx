@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchTransactions } from '../transactions/transaction.api.js';
+import { fetchCategories } from '../categories/category.api.js';
 
 import ChartList from './ChartList.jsx';
 
@@ -7,13 +8,19 @@ function Charts() {
 
     const [transactions, setTransactions] = useState([]);
     const [filtered, setFiltered] = useState([]);
+    const [categories, setCategories] = useState([]);
 
-    // FETCH TRANSACTIONS INITIALLY
+    // FETCH TRANSACTIONS AND CATEGORIES INITIALLY
     useEffect(() => {
         fetchTransactions()
             .then(data => {
                 setTransactions(data);
                 setFiltered(data);
+            });
+
+        fetchCategories()
+            .then(data => {
+                setCategories(data);
             })
     }, []);
 
@@ -59,7 +66,7 @@ function Charts() {
                 </select>
             </form>
 
-            <ChartList transactions={filtered}></ChartList>
+            <ChartList transactions={filtered} categories={categories}></ChartList>
         </div>
     );
 }

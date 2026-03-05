@@ -1,7 +1,7 @@
 import { PieChart, Pie, Tooltip } from "recharts";
 import { useState, useEffect } from 'react';
 
-function TransactionsByCategory({ categories }) {
+function TotalByCategoryPie({ categories }) {
 
     const [data, setData] = useState([]);
 
@@ -16,10 +16,10 @@ function TransactionsByCategory({ categories }) {
         );
     }, [categories]);
 
-    if (categories.length === 0) return <p>Loading...</p>;
+    if (categories.length === 0) return <p>Nothing to display.</p>;
 
     return (
-        <PieChart width={400} height={400}>
+        <PieChart height={400} width={`100%`}>
             <Pie data={data} nameKey="name" dataKey="value" cx="50%" cy="50%" outerRadius={150}/>
             <Tooltip
                 formatter={(value, name) => [` ${value.toFixed(2)} $`, name]}
@@ -28,4 +28,4 @@ function TransactionsByCategory({ categories }) {
     );
 }
 
-export default TransactionsByCategory
+export default TotalByCategoryPie
