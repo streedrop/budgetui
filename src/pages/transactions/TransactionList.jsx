@@ -2,8 +2,7 @@ import './styles/TransactionList.css'
 
 import TransactionItem from './TransactionItem'
 
-function TransactionList({ transactions, onDelete }) {
-
+function TransactionList({ transactions, onDelete, editable = true }) {
     // group transactions by month for display
     const groupedByMonth = transactions.reduce((acc, transaction) => {
         const date = new Date(transaction.date);
@@ -30,6 +29,7 @@ function TransactionList({ transactions, onDelete }) {
         return acc;
     }, {});
 
+    if (transactions.length == 0) return <div>No transactions to display.</div>;
 
     return (
         <div className="transactionList">
@@ -46,6 +46,7 @@ function TransactionList({ transactions, onDelete }) {
                                 key={transaction.id}
                                 transaction={transaction}
                                 onDelete={onDelete}
+                                editable={editable}
                             />
                         ))
                     }

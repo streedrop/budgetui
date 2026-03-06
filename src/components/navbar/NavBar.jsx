@@ -8,6 +8,7 @@ function NavBar() {
       <Link to="/categories">Categories</Link>
       <Link to="/transactions">Transactions</Link>
       <Link to="/charts">Charts</Link>
+      <Link to="/import">Import</Link>
     </nav>
   );
 }

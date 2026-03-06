@@ -5,6 +5,7 @@ import CategoryList from './CategoryList.jsx'
 
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import CategoryItem from './CategoryItem.jsx';
 
 function Categories() {
   const [categories, setCategories] = useState([]);
@@ -61,6 +62,9 @@ function Categories() {
       <h1>Categories</h1>
       <Link to="/categories/new">Add a new category</Link>
       <h2>Income - Expenses: {sum} $ / month</h2>
+      <div className="categoryList">
+        <CategoryItem onDelete={handleDelete}></CategoryItem>
+      </div>
       <CategoryList categories={incomeCategories} is_income={true} onDelete={handleDelete}></CategoryList>
       <CategoryList categories={expenseCategories} is_income={false} onDelete={handleDelete}></CategoryList>
     </div>

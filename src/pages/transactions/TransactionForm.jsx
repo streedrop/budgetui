@@ -48,6 +48,9 @@ function TransactionForm() {
         const formData = new FormData(evt.target);
         const data = Object.fromEntries(formData);
 
+        if(data.category === "")
+            data.category = null;
+
         if (isEditMode)
             await updateTransaction(id, data);
         else
@@ -79,7 +82,7 @@ function TransactionForm() {
                             category_id: Number(e.target.value)
                         })
                     }>
-                    <option value="">Select category</option>
+                    <option value="">Uncategorized</option>
                     {categories.map(category => (
                         <option key={category.id} value={category.id}>
                             {category.name}

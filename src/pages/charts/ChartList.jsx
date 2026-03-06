@@ -55,7 +55,12 @@ function ChartList({ transactions, categories }) {
     const forecastVsActual = transactions
         // Split into their corresponding category, by name
         .reduce((categories, transaction) => {
-            categories.find(item => item.name === transaction.category_name).actual += Number(transaction.amount);
+            const category = categories.find(item => item.name === transaction.category_name);
+
+            if (category)
+                category.actual += Number(transaction.amount);
+            else if (categories.length > 0)
+                console.log(`ERROR: Couldn't find category ${transaction.category_name} in list ${categories}`)
 
             return categories;
         }, categoriesArray);

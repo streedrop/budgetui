@@ -3,3 +3,8 @@
     height: 100px;
     margin: auto;
 }
+
+.transactionListContainer {
+    width: 50%;
+    margin: 0 auto;
+}

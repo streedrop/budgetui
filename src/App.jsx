@@ -12,6 +12,8 @@ import TransactionForm from './pages/transactions/TransactionForm.jsx'
 
 import Charts from './pages/charts/Charts.jsx'
 
+import Import from './pages/import/Import.jsx'
+
 function App() {
   return (
     <>
@@ -29,6 +31,7 @@ function App() {
           <Route path="/transactions/new" element={<TransactionForm />} />
           <Route path="/transactions/edit/:id" element={<TransactionForm />} />
           <Route path="/charts" element={<Charts />} />
+          <Route path="/import" element={<Import />} />
         </Routes>
       </main>
     </>

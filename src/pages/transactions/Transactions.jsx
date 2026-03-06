@@ -1,3 +1,5 @@
+import './styles/Transactions.css'
+
 import { fetchTransactions, deleteTransaction } from './transaction.api.js';
 
 import TransactionList from './TransactionList.jsx'
@@ -36,7 +38,9 @@ function Transactions() {
     <div id="main">
       <h1>Transactions</h1>
       <Link to="/transactions/new">Add a new transaction</Link>
-      <TransactionList transactions={transactions} onDelete={handleDelete}></TransactionList>
+      <div className="transactionListContainer">
+        <TransactionList transactions={transactions} onDelete={handleDelete}></TransactionList>
+      </div>
     </div>
   );
 }

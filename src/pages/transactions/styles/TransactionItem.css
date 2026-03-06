@@ -21,7 +21,7 @@
     color: gray;
 }
 
-.transactionItem .category:hover {
+.transactionItem .category.with-link:hover {
     text-decoration: underline;
     color: rgb(97, 97, 97);
 }
