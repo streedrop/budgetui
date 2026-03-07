@@ -13,6 +13,7 @@ import TransactionForm from './pages/transactions/TransactionForm.jsx'
 import Charts from './pages/charts/Charts.jsx'
 
 import Import from './pages/import/Import.jsx'
+import Keywords from './pages/import/Keywords.jsx'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/transactions/edit/:id" element={<TransactionForm />} />
           <Route path="/charts" element={<Charts />} />
           <Route path="/import" element={<Import />} />
+          <Route path="/import/keywords" element={<Keywords />} />
         </Routes>
       </main>
     </>

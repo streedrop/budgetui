@@ -1,9 +1,11 @@
 import './styles/Import.css'
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { insertTransaction } from '../transactions/transaction.api'
 import { fetchCategories } from '../categories/category.api'
+import { fetchKeywords } from './keyword.api'
 import TransactionList from '../transactions/TransactionList';
 
 import Modal from '../../components/modal/Modal.jsx'
@@ -34,6 +36,8 @@ function Import() {
 
         // Retrieve the categories that are already saved
         const categories = await fetchCategories();
+        // Retrieve the keywords to match with categories
+        const keywords = await fetchKeywords();
 
         // Find indexes for fields we need
         const dateIndex = columns.findIndex((value) => { return value.toLowerCase().includes("date") });
@@ -48,7 +52,16 @@ function Import() {
                 const categoryNameFromMemo = item[memoIndex].split("Category: ")[1];
 
                 // Retrieve the category using the memo
-                const category = categories.find((item) => { return item.name === categoryNameFromMemo });
+                let category = categories.find((category) =>  category.name === categoryNameFromMemo );
+                
+                // If category wasn't found by name, try to find it through set keywords
+                if(!category)
+                {
+                    const keyword = keywords.find((keyword) => keyword.keyword === categoryNameFromMemo);
+
+                    if(keyword)
+                        category = categories.find((category) =>  category.id === keyword.category_id );
+                }
 
                 // Create a transaction and set its attributes accordingly
                 let newItem = {};
@@ -91,6 +104,7 @@ function Import() {
         <div id="main">
             <h1>Import transactions</h1>
             <p>Paste CSV from Tangerine Bank in the area below to import your transactions.</p>
+            <Link to="/import/keywords">Define keywords</Link>
             <div className="import">
                 <form onSubmit={prepareTransactions}>
                     <textarea id="import" name="import"></textarea>
