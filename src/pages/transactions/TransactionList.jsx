@@ -33,6 +33,12 @@ function TransactionList({ transactions, onDelete, editable = true }) {
 
     return (
         <div className="transactionList">
+            <div className="header">
+                <p className="date">Date</p>
+                <p className="transaction">Transaction</p>
+                <p className="amount">Amount</p>
+                <p className="actions">Actions</p>
+            </div>
             {Object.entries(groupedByMonth).map(([month, { sum, transactions }]) => (
                 <div key={month}>
                     <div className="month">

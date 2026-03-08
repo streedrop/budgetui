@@ -6,3 +6,16 @@
     display: flex;
     justify-content: space-between;
 }
+
+.transactionList .header {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 2fr;
+    column-gap: 5px;
+    justify-items: start;
+    align-items: center;
+}
+
+.transactionList .header .amount,
+.transactionList .header .actions {
+    justify-self: end;
+}

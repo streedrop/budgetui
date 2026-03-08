@@ -10,8 +10,22 @@ function TransactionItem({ transaction, onDelete, editable }) {
         navigate(`/transactions/edit/${transaction.id}`);
     }
 
+    const dateObject = new Date(transaction.date);
+
+    const formattedDate = dateObject.toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+    });
+
+    const year = dateObject.toLocaleDateString("en-US", {
+        year: "numeric"
+    });
+
+    const isCurrentYear = new Date().getFullYear() == dateObject.getFullYear();
+
     return (
         <div className="transactionItem" key={transaction.id}>
+            <p className="date">{formattedDate}</p>
             <p className="description"><b>{transaction.description}</b></p>
             <p className="amount">{transaction.is_income ? '+' : '-'}{Number(transaction.amount).toFixed(2)} $</p>
             <div className="actions">
@@ -23,13 +37,17 @@ function TransactionItem({ transaction, onDelete, editable }) {
                     (<button type="button" className="delete" onClick={() => onDelete(transaction.id)}><i className="fa-regular fa-circle-xmark fa-xl"></i></button>)
                 }
             </div>
+            {
+                isCurrentYear ? (<div></div>) : (<p>{year}</p>)
+            }
             {transaction.category_name ? (() => {
                 const p = <p className={`category ${transaction.category_id ? "with-link" : ""}`}><em>{transaction.category_name}</em></p>;
                 return transaction.category_id
                     ? <Link to={`/categories/${transaction.category_id}`}>{p}</Link>
                     : p;
             })() : (<div></div>)}
-            <p className="date">{transaction.date.split("T")[0]}</p>
+            <div></div>
+            <hr />
         </div>
     );
 }

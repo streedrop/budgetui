@@ -9,3 +9,24 @@ nav a {
   font-weight: 500;
   color: #646cff;
 }
+
+/* View mode */
+
+nav .tablet, nav .laptop, nav .desktop {
+  display: none;
+}
+
+@media (min-width: 768px) { 
+  nav .mobile { display: none; }
+  nav .tablet { display: block; } 
+}
+
+@media (min-width: 1024px) {
+  nav .tablet { display: none; }
+  nav .laptop { display: block; } 
+}
+
+@media (min-width: 1280px) {   
+  nav .laptop { display: none; }
+  nav .desktop { display: block; }
+}

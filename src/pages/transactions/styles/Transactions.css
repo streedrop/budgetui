@@ -1,4 +1,8 @@
 .transactionListContainer {
-    width: 50%;
+    width: 80%;
     margin: 0 auto;
 }
+
+@media (min-width: 1280px) { .transactionListContainer {
+    width: 60%;
+} }
