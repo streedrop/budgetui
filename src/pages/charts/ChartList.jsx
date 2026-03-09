@@ -15,12 +15,21 @@ function ChartList({ transactions, categories }) {
     const totalByCategory = transactions
         // Split into their corresponding category, by name
         .reduce((categories, transaction) => {
-            const existing = categories.find(item => item.name === transaction.category_name);
+            // Manipulate data so that transactions with no category show as "Uncategorized"
+            if (!transaction.category_name)
+                transaction.category_name = "Uncategorized";
 
-            if (existing)
+            // Finding a category by category name in array
+            let existing = categories.find(item => item.name === transaction.category_name);
+
+            // If category already existed in array, simply add to the category
+            if (existing) {
                 existing.value += Number(transaction.amount);
-            else
-                categories.push({ name: transaction.category_name, value: Number(transaction.amount) });
+                return categories;
+            }
+
+            // Add the category as new
+            categories.push({ name: transaction.category_name, value: Number(transaction.amount) });
 
             return categories;
         }, []);
@@ -59,8 +68,6 @@ function ChartList({ transactions, categories }) {
 
             if (category)
                 category.actual += Number(transaction.amount);
-            else if (categories.length > 0)
-                console.log(`ERROR: Couldn't find category ${transaction.category_name} in list ${categories}`)
 
             return categories;
         }, categoriesArray);

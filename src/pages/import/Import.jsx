@@ -13,18 +13,40 @@ import Modal from '../../components/modal/Modal.jsx'
 function Import() {
 
     const [modalOpen, setModalOpen] = useState(false);
-    const [transactionsToDisplay, setTransactionsToDisplay] = useState([]);
+    const [transactions, setTransactions] = useState([]);
 
-    const prepareTransactions = async (evt) => {
+    const handleSubmit = async (evt) => {
+
         evt.preventDefault();
-
         const formData = new FormData(evt.target);
 
-        // Split CSV per row
-        const data = Object.fromEntries(formData).import.trim().split('\n');
+        // Files from form
+        const files = formData.getAll('files').filter(f => f.size > 0);
+        const texts = await Promise.all(files.map(f => f.text()));
 
-        // Split CSV per column
-        let formatted = data.map((item) => { return item.split(',') });
+        // Retrieve the categories that are already saved
+        const categories = await fetchCategories();
+        // Retrieve the keywords to match with categories
+        const keywords = await fetchKeywords();
+
+        let entries = [];
+
+        if (texts.length > 0)
+            entries = texts.flatMap(text => prepareTransactions(text, categories, keywords));
+        else
+            entries = prepareTransactions(Object.fromEntries(formData).text, categories, keywords);
+
+        // Give every item an ID for react list keys to work
+        entries = entries.map((entry, index) => ({ ...entry, id: index }));
+
+        setTransactions(entries);
+        setModalOpen(true);
+    }
+
+    const prepareTransactions = (data, categories, keywords) => {
+
+        // Split CSV per row and per column
+        let formatted = data.trim().split('\n').map((item) => { return item.split(',') });
 
         // Remove and save first row of the CSV, as it's the header
         const columns = formatted.shift();
@@ -34,11 +56,6 @@ function Import() {
 
         if (formatted.length == 0) return;
 
-        // Retrieve the categories that are already saved
-        const categories = await fetchCategories();
-        // Retrieve the keywords to match with categories
-        const keywords = await fetchKeywords();
-
         // Find indexes for fields we need
         const dateIndex = columns.findIndex((value) => { return value.toLowerCase().includes("date") });
         const descriptionIndex = columns.findIndex((value) => { return value.toLowerCase().includes("name") });
@@ -47,25 +64,23 @@ function Import() {
 
         // Format entries that will be ready for the display and the database
         const entries = formatted.map(
-            (item, index) => {
+            (item) => {
                 // Tangerine Bank has a memo containing the category
                 const categoryNameFromMemo = item[memoIndex].split("Category: ")[1];
 
                 // Retrieve the category using the memo
-                let category = categories.find((category) =>  category.name === categoryNameFromMemo );
-                
+                let category = categories.find((category) => category.name === categoryNameFromMemo);
+
                 // If category wasn't found by name, try to find it through set keywords
-                if(!category)
-                {
+                if (!category) {
                     const keyword = keywords.find((keyword) => keyword.keyword === categoryNameFromMemo);
 
-                    if(keyword)
-                        category = categories.find((category) =>  category.id === keyword.category_id );
+                    if (keyword)
+                        category = categories.find((category) => category.id === keyword.category_id);
                 }
 
                 // Create a transaction and set its attributes accordingly
                 let newItem = {};
-                newItem.id = index;
                 newItem.amount = Number(item[amountIndex].replace("-", ""));
                 newItem.description = item[descriptionIndex];
                 newItem.date = new Date(item[dateIndex]).toISOString().split("T")[0];
@@ -82,20 +97,19 @@ function Import() {
             }
         )
 
-        setTransactionsToDisplay(entries);
-        setModalOpen(true);
+        return entries;
     }
 
     // Deleting a transaction means it won't be inserted
     const handleDelete = (id) => {
-        setTransactionsToDisplay(prev => prev.filter(transaction => transaction.id !== id));
+        setTransactions(prev => prev.filter(transaction => transaction.id !== id));
     };
 
     // Actually insert the transactions in the database
     const insertTransactions = async () => {
         // Remove id (it's a fake one) and category name (we already have category ID) as those are just for display
-        const transactionsToInsert = transactionsToDisplay.map(({ id, category_name, ...rest }) => rest);
-        await Promise.all(transactionsToInsert.map(transaction => insertTransaction(transaction)));
+        const data = transactions.map(({ id, category_name, ...rest }) => rest);
+        await Promise.all(data.map(transaction => insertTransaction(transaction)));
 
         setModalOpen(false);
     }
@@ -103,18 +117,21 @@ function Import() {
     return (
         <div id="main">
             <h1>Import transactions</h1>
-            <p>Paste CSV from Tangerine Bank in the area below to import your transactions.</p>
+            <p>Import or paste CSV from Tangerine Bank in the area below to import your transactions.</p>
             <Link to="/import/keywords">Define keywords</Link>
             <div className="import">
-                <form onSubmit={prepareTransactions}>
-                    <textarea id="import" name="import"></textarea>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="files">Select file(s):</label>
+                    <input type="file" id="files" name="files" accept=".csv" multiple />
+                    <label htmlFor="text">Or paste below:</label>
+                    <textarea id="text" name="text"></textarea>
                     <button type="submit">Import</button>
                 </form>
             </div>
 
             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                 <p>The following transactions are going to be added:</p>
-                <TransactionList transactions={transactionsToDisplay} onDelete={handleDelete} editable={false}></TransactionList>
+                <TransactionList transactions={transactions} onDelete={handleDelete} editable={false}></TransactionList>
                 <button className="cancel" onClick={() => setModalOpen(false)}>Cancel</button>
                 <button className="save" type="button" onClick={insertTransactions}>Confirm</button>
             </Modal>

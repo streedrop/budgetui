@@ -75,7 +75,7 @@ function TransactionForm() {
                 <input type="text" id="amount" name="amount" defaultValue={data.amount} />
 
                 <label htmlFor="category">Category:</label>
-                <select id="category" name="category" value={data.category_id}
+                <select id="category" name="category_id" value={data.category_id}
                     onChange={(e) =>
                         setFormData({
                             ...data,
