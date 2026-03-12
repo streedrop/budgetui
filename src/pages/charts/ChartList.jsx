@@ -57,6 +57,7 @@ function ChartList({ transactions, categories }) {
     const categoriesArray = categories
         .map((category) => ({
             name: category.name,
+            transactionMonths: [],
             forecast: Number(category.goal),
             actual: 0
         }));
@@ -66,11 +67,23 @@ function ChartList({ transactions, categories }) {
         .reduce((categories, transaction) => {
             const category = categories.find(item => item.name === transaction.category_name);
 
-            if (category)
+            if (category) {
                 category.actual += Number(transaction.amount);
 
+                const dateObject = new Date(transaction.date);
+                const monthString = dateObject.toLocaleDateString("en-US", {
+                    month: "numeric",
+                    year: "numeric"
+                });
+
+                if (!category.transactionMonths.includes(monthString))
+                    category.transactionMonths.push(monthString);
+            }
+
             return categories;
-        }, categoriesArray);
+        }, categoriesArray)
+        // Add forecast based on the amount of months that the transactions cover (1 transaction in a month => month is considered)
+        .map(({ forecast, transactionMonths, ...rest }) => ({ forecast: forecast * transactionMonths.length, ...rest }));
 
     if (transactions.length === 0) return <p>Nothing to display.</p>;
 
