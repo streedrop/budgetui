@@ -55,7 +55,6 @@ function Category() {
                             {category.description && (
                                 <p><em>{category.description}</em></p>
                             )}
-                            <p><em>{category.is_income ? 'Monthly prediction: ' : 'Monthly limit: '}{amountFormatter(category.goal)} / month</em></p>
                             <div className="chart">
                                 <ForecastVsActual transactions={transactions} categories={[category]} budgets={budgets} height={200}></ForecastVsActual>
                             </div>

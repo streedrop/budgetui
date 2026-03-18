@@ -1,4 +1,4 @@
-import { dateToMonth, dateToMonthYear, dateToYear } from './formatters';
+import { dateToMonthYear, dateToYear } from './formatters';
 
 export const groupTransactionsByMonth = (transactions) => {
     return transactions.reduce((acc, transaction) => {
@@ -25,8 +25,8 @@ export const groupTransactionsByMonth = (transactions) => {
 export const groupBudgetsByYear = (budgets) => {
     /* grouped will be an array as such: 
         [
-            ["2025", [{goal1}, {goal2}, ...]],
-            ["2026", [{goal1}, {goal2}, ...]],
+            ["2025", [{entry1}, {entry2}, ...]],
+            ["2026", [{entry1}, {entry3}, ...]],
             ...
         ]
     */
@@ -42,10 +42,10 @@ export const groupBudgetsByYear = (budgets) => {
         return acc;
     }, {}));
 
-        /* normalized will be an array as such: 
+    /* normalized will be an array as such: 
         [
-            ["2025", [{goal1}, {goal2}, ..., {goal12}]],
-            ["2026", [{goal1}, {goal2}, ..., {goal12}]],
+            ["2025", [{entry1}, {entry2}, ..., {entry12}]],
+            ["2026", [{entry1}, {entry2}, ..., {entry12}]],
             ...
         ]
     */

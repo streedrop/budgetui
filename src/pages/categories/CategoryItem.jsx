@@ -2,7 +2,7 @@ import './styles/CategoryItem.css'
 
 import { useNavigate } from 'react-router-dom';
 
-function CategoryItem({ category = { id: null, name: "Uncategorized", description: "", goal: null }, onDelete }) {
+function CategoryItem({ category = { id: null, name: "Uncategorized", description: "" }, onDelete }) {
 
     const navigate = useNavigate();
 
@@ -30,9 +30,6 @@ function CategoryItem({ category = { id: null, name: "Uncategorized", descriptio
                     </>
                 )}
             </div>
-            {category.id && (
-                <p className="goal"><em>{category.goal} $</em></p>
-            )}
         </div>
     );
 }

@@ -14,17 +14,9 @@ function Categories() {
   const [incomeCategories, setIncomeCategories] = useState([]);
   const [expenseCategories, setExpenseCategories] = useState([]);
 
-  const [sum, setSum] = useState(0);
-
   useEffect(() => {
     setIncomeCategories(categories.filter(category => category.is_income == true));
     setExpenseCategories(categories.filter(category => category.is_income == false));
-    setSum(categories.reduce(((sum, category) => {
-      if (category.is_income)
-        return sum + Number(category.goal)
-      else
-        return sum - Number(category.goal)
-    }), 0));
   }, [categories]);
 
   const handleDelete = async (id) => {
@@ -48,7 +40,6 @@ function Categories() {
     <div id="main" className="categoriesOverview">
       <h1>Categories</h1>
       <Link to="/categories/new">Add a new category</Link>
-      <h2>Income - Expenses: {sum} $ / month</h2>
       <div className="categoryList">
         <CategoryItem onDelete={handleDelete}></CategoryItem>
       </div>

@@ -8,7 +8,6 @@ const emptyFormData = {
     name: "",
     description: "",
     is_income: 0,
-    goal: ""
 };
 
 function CategoryForm() {
@@ -69,8 +68,6 @@ function CategoryForm() {
                         <label htmlFor="income">Income</label>
                     </div>
                 </div>
-                <label htmlFor="goal">Monthly Objective: </label>
-                <input type="text" id="goal" name="goal" defaultValue={data.goal} />
                 <button type="button" className="cancel" onClick={handleCancel}>Cancel</button>
                 <button type="submit" className="save">{isEditMode ? 'Save' : 'Add'}</button>
             </form>

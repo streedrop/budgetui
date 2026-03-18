@@ -10,17 +10,8 @@
     height: 75px;
 }
 
-.categoryItem .goal {
-    color: gray;
-}
-
-.categoryItem .description {
-    grid-row: span 2;
-}
-
 .categoryItem .actions {
     display: flex;
     gap: 5px;
     justify-self: end;
-    grid-row: span 2;
 }
