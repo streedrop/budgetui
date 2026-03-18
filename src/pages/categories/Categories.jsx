@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useCategories } from '@/hooks/category.hooks.js';
+import { useCategories } from '@/hooks/useCategories.js';
 import { deleteCategory } from '@/services/category.api.js';
 import { deleteTransactionsByCategory } from '@/services/transaction.api.js';
 

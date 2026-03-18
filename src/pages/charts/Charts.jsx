@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 
-import { useBudgets } from '@/hooks/budget.hooks.js';
-import { useCategories } from '@/hooks/category.hooks.js';
-import { useTransactions } from '@/hooks/transaction.hooks.js';
+import { useBudgets } from '@/hooks/useBudgets.js';
+import { useCategories } from '@/hooks/useCategories.js';
+import { useTransactions } from '@/hooks/useTransactions.js';
 
 import ChartList from './ChartList.jsx';
 

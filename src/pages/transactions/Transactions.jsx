@@ -2,7 +2,7 @@ import './styles/Transactions.css';
 
 import { Link } from 'react-router-dom';
 
-import { useTransactions } from '@/hooks/transaction.hooks.js';
+import { useTransactions } from '@/hooks/useTransactions.js';
 import { deleteTransaction } from '@/services/transaction.api.js';
 
 import TransactionList from './TransactionList.jsx'

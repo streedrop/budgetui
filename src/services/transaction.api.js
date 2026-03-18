@@ -1,5 +1,7 @@
-export async function fetchTransactions() {
-    const res = await fetch("/api/transactions");
+export async function fetchTransactions(id) {
+    const url = id ? `/api/transactions/category/${id}` : '/api/transactions';
+
+    const res = await fetch(url);
 
     if (!res.ok) throw new Error("Failed to fetch transactions");
 
@@ -10,14 +12,6 @@ export async function fetchTransaction(id) {
     const res = await fetch(`/api/transactions/${id}`);
 
     if (!res.ok) throw new Error("Failed to fetch transaction");
-
-    return res.json();
-}
-
-export async function fetchTransactionsByCategory(id) {
-    const res = await fetch(`/api/transactions/category/${id}`);
-
-    if (!res.ok) throw new Error("Failed to fetch transactions for category!");
 
     return res.json();
 }

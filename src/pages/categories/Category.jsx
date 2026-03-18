@@ -3,9 +3,9 @@ import './styles/Category.css';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useCategory } from '@/hooks/category.hooks.js';
-import { useTransactionsByCategory } from '@/hooks/transaction.hooks.js';
-import { useBudgetsByCategory } from '@/hooks/budget.hooks.js';
+import { useCategory } from '@/hooks/useCategory.js';
+import { useTransactions } from '@/hooks/useTransactions.js';
+import { useBudgets } from '@/hooks/useBudgets.js';
 import { deleteTransaction } from '@/services/transaction.api.js';
 import { deleteBudget } from '@/services/budget.api.js';
 import { dateToNumericMonthYear } from '@/utils/formatters.js';
@@ -23,8 +23,8 @@ function Category() {
     const [modalOpen, setModalOpen] = useState(false);
 
     const { category } = useCategory(id);
-    const { budgets, setBudgets } = useBudgetsByCategory(id);
-    const { transactions, setTransactions } = useTransactionsByCategory(id);
+    const { budgets, setBudgets } = useBudgets(id);
+    const { transactions, setTransactions } = useTransactions(id);
 
     const handleDeleteTransaction = async (id) => {
         const res = await deleteTransaction(id);

@@ -3,7 +3,7 @@ import './styles/TransactionForm.css';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useCategories } from '@/hooks/category.hooks.js';
+import { useCategories } from '@/hooks/useCategories.js';
 import { fetchTransaction, insertTransaction, updateTransaction } from '@/services/transaction.api.js';
 
 const emptyFormData = {

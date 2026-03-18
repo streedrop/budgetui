@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
-import { fetchCategory, fetchCategories } from '@/services/category.api';
+import { fetchCategory } from '@/services/category.api';
 
+/**
+ * Uses a specific category from a specific category or no category if the id is "uncategorized".
+ * @param [id] - The category id (optional)
+ * @returns {Array} The fetched category
+ * @returns {Function} Function to set the category if needed
+ */
 export function useCategory(id) {
     const [category, setCategory] = useState([]);
 
@@ -15,18 +21,4 @@ export function useCategory(id) {
     }, []);
 
     return { category, setCategory };
-}
-
-export function useCategories() {
-    const [categories, setCategories] = useState([]);
-
-    useEffect(() => {
-        async function load() {
-            const data = await fetchCategories();
-            setCategories(data);
-        }
-        load();
-    }, []);
-
-    return { categories, setCategories };
 }
