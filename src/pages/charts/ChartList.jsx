@@ -8,9 +8,9 @@ import ExpensesVsIncomePie from './ExpensesVsIncome/ExpensesVsIncomePie.jsx';
 import ExpensesVsIncomeBar from './ExpensesVsIncome/ExpensesVsIncomeBar.jsx';
 import ForecastVsActual from './ForecastVsActual/ForecastVsActual.jsx';
 
-function ChartList({ transactions, categories }) {
+function ChartList({ transactions, categories, budgets }) {
 
-    // GROUP TRANSACTIONS BY CATEGORY
+    // GROUP TRANSACTIONS TOTAL BY CATEGORY
 
     const totalByCategory = transactions
         // Split into their corresponding category, by name
@@ -22,7 +22,7 @@ function ChartList({ transactions, categories }) {
             // Finding a category by category name in array
             let existing = categories.find(item => item.name === transaction.category_name);
 
-            // If category already existed in array, simply add to the category
+            // If category already existed in array, simply add the amount to the category
             if (existing) {
                 existing.value += Number(transaction.amount);
                 return categories;
@@ -38,6 +38,7 @@ function ChartList({ transactions, categories }) {
     const [incomeSum, setIncomeSum] = useState(0);
     const [expenseSum, setExpenseSum] = useState(0);
 
+    // For every transaction, add to income if income, add to expenses if expense
     useEffect(() => {
         const sums = transactions.reduce(((sums, transaction) => {
             if (transaction.is_income)
@@ -53,39 +54,7 @@ function ChartList({ transactions, categories }) {
 
     }, [transactions]);
 
-    // FORECAST VS ACTUAL
-    const categoriesArray = categories
-        .map((category) => ({
-            name: category.name,
-            transactionMonths: [],
-            forecast: Number(category.goal),
-            actual: 0
-        }));
-
-    const forecastVsActual = transactions
-        // Split into their corresponding category, by name
-        .reduce((categories, transaction) => {
-            const category = categories.find(item => item.name === transaction.category_name);
-
-            if (category) {
-                category.actual += Number(transaction.amount);
-
-                const dateObject = new Date(transaction.date);
-                const monthString = dateObject.toLocaleDateString("en-US", {
-                    month: "numeric",
-                    year: "numeric"
-                });
-
-                if (!category.transactionMonths.includes(monthString))
-                    category.transactionMonths.push(monthString);
-            }
-
-            return categories;
-        }, categoriesArray)
-        // Add forecast based on the amount of months that the transactions cover (1 transaction in a month => month is considered)
-        .map(({ forecast, transactionMonths, ...rest }) => ({ forecast: forecast * transactionMonths.length, ...rest }));
-
-    if (transactions.length === 0) return <p>Nothing to display.</p>;
+    if (transactions.length === 0 && budgets.length === 0) return <p>Nothing to display.</p>;
 
     return (
         <div className="chartList">
@@ -107,7 +76,7 @@ function ChartList({ transactions, categories }) {
             </div>
             <div className="chart">
                 <h2>Forecast vs Actual</h2>
-                <ForecastVsActual categories={forecastVsActual}></ForecastVsActual>
+                <ForecastVsActual transactions={transactions} categories={categories} budgets={budgets}></ForecastVsActual>
             </div>
         </div>
     )

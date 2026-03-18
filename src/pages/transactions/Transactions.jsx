@@ -1,28 +1,14 @@
 import './styles/Transactions.css'
 
-import { fetchTransactions, deleteTransaction } from './transaction.api.js';
+import { deleteTransaction } from './transaction.api.js';
+import { useTransactions } from './transaction.hooks.js';
 
 import TransactionList from './TransactionList.jsx'
 
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Transactions() {
-  const [transactions, setTransactions] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetchTransactions()
-      .then(data => {
-        setTransactions(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
+  const { transactions, setTransactions } = useTransactions();
 
   const handleDelete = async (id) => {
     const res = await deleteTransaction(id);
@@ -31,8 +17,8 @@ function Transactions() {
     setTransactions(prev => prev.filter(transaction => transaction.id !== id));
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  //if (loading) return <p>Loading...</p>;
+  //if (error) return <p>Error: {error}</p>;
 
   return (
     <div id="main">

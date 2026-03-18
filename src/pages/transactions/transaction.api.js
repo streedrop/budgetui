@@ -31,7 +31,10 @@ export async function insertTransaction(data) {
         body: JSON.stringify(data)
     });
 
-    if (!res.ok) throw new Error("Failed to insert transaction");
+    if (!res.ok) {
+        const body = await res.json();
+        throw new Error(body.error);
+    }
 
     return res.json();
 }

@@ -1,6 +1,8 @@
 import { PieChart, Pie, Tooltip } from "recharts";
 import { useState, useEffect } from 'react';
 
+import { amountFormatter } from '@/utils/formatters';
+
 function TotalByCategoryPie({ categories }) {
 
     const [data, setData] = useState([]);
@@ -22,7 +24,7 @@ function TotalByCategoryPie({ categories }) {
         <PieChart height={400} width={`100%`}>
             <Pie data={data} nameKey="name" dataKey="value" cx="50%" cy="50%" outerRadius={150}/>
             <Tooltip
-                formatter={(value, name) => [` ${value.toFixed(2)} $`, name]}
+                formatter={(value, name) => [amountFormatter(value), name]}
             />
         </PieChart>
     );

@@ -27,10 +27,10 @@ function App() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/categories/:id" element={<Category />} />
           <Route path="/categories/new" element={<CategoryForm />} />
-          <Route path="/categories/edit/:id" element={<CategoryForm />} />
+          <Route path="/categories/:id/edit" element={<CategoryForm />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/transactions/new" element={<TransactionForm />} />
-          <Route path="/transactions/edit/:id" element={<TransactionForm />} />
+          <Route path="/transactions/:id/edit" element={<TransactionForm />} />
           <Route path="/charts" element={<Charts />} />
           <Route path="/import" element={<Import />} />
           <Route path="/import/keywords" element={<Keywords />} />

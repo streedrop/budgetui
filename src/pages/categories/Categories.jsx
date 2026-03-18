@@ -1,33 +1,20 @@
-import { fetchCategories, deleteCategory } from './category.api.js';
+import { deleteCategory } from './category.api.js';
 import { deleteTransactionsByCategory } from '../transactions/transaction.api.js';
 
 import CategoryList from './CategoryList.jsx'
 
 import { useState, useEffect } from 'react';
+import { useCategories } from './category.hooks.js';
 import { Link } from 'react-router-dom';
 import CategoryItem from './CategoryItem.jsx';
 
 function Categories() {
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { categories, setCategories } = useCategories();
 
   const [incomeCategories, setIncomeCategories] = useState([]);
   const [expenseCategories, setExpenseCategories] = useState([]);
 
   const [sum, setSum] = useState(0);
-
-  useEffect(() => {
-    fetchCategories()
-      .then(data => {
-        setCategories(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
 
   useEffect(() => {
     setIncomeCategories(categories.filter(category => category.is_income == true));
@@ -54,8 +41,8 @@ function Categories() {
     setCategories(prev => prev.filter(category => category.id !== id));
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  //if (loading) return <p>Loading...</p>;
+  //if (error) return <p>Error: {error}</p>;
 
   return (
     <div id="main" className="categoriesOverview">

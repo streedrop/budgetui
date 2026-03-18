@@ -1,6 +1,8 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
 import { useState, useEffect } from 'react';
 
+import { amountFormatter } from '@/utils/formatters';
+
 function TotalByCategoryBar({ categories }) {
 
     const [data, setData] = useState([]);
@@ -30,7 +32,7 @@ function TotalByCategoryBar({ categories }) {
             <Bar dataKey="value" />
             <Tooltip
                 labelFormatter={() => ''}
-                formatter={(value, name, props) => [` ${value.toFixed(2)} $`, props.payload.name]}
+                formatter={(value, name, props) => [amountFormatter(value), props.payload.name]}
             />
         </BarChart>
     );

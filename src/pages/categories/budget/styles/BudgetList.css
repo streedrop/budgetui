@@ -1,0 +1,21 @@
+.budgetList .header,
+.budgetList .year{
+    display: grid;
+    grid-template-columns: 1.5fr repeat(12, 1fr);
+}
+
+.budgetList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.budgetList .month {
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+}
+
+.budgetList .month button {
+    padding: 0;
+    margin: auto 0;
+}

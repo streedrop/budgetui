@@ -1,5 +1,7 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
 
+import { amountFormatter } from '@/utils/formatters';
+
 function ExpensesVsIncomeBar({ income, expense }) {
 
     const data = [
@@ -21,7 +23,7 @@ function ExpensesVsIncomeBar({ income, expense }) {
             <Bar dataKey="value" />
             <Tooltip
                 labelFormatter={() => ''}
-                formatter={(value, name, props) => [` ${value.toFixed(2)} $`, props.payload.name]}
+                formatter={(value, name, props) => [amountFormatter(value), props.payload.name]}
             />
         </BarChart>
     );

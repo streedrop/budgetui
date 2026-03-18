@@ -8,3 +8,8 @@
     width: 50%;
     margin: 0 auto;
 }
+
+.categoryPage section#budget button.setBudget {
+    width: 20%;
+    margin: auto;
+}

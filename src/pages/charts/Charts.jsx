@@ -1,41 +1,47 @@
 import { useState, useEffect } from 'react';
-import { fetchTransactions } from '../transactions/transaction.api.js';
-import { fetchCategories } from '../categories/category.api.js';
 
 import ChartList from './ChartList.jsx';
+import { useBudgets } from '../categories/budget/budget.hooks.js';
+import { useCategories } from '../categories/category.hooks.js';
+import { useTransactions } from '../transactions/transaction.hooks.js';
 
 function Charts() {
 
-    const [transactions, setTransactions] = useState([]);
-    const [filtered, setFiltered] = useState([]);
-    const [categories, setCategories] = useState([]);
+    const { categories } = useCategories();
 
-    // FETCH TRANSACTIONS AND CATEGORIES INITIALLY
+    const { budgets } = useBudgets();
+    const [filteredBudgets, setFilteredBudgets] = useState([]);
+
+    const { transactions } = useTransactions();
+    const [filteredTransactions, setFilteredTransactions] = useState([]);
+
+    // Set filtered transactions and budgets to have them all initially
+
     useEffect(() => {
-        fetchTransactions()
-            .then(data => {
-                setTransactions(data);
-                setFiltered(data);
-            });
+        setFilteredTransactions(transactions);
+    }, [transactions]);
 
-        fetchCategories()
-            .then(data => {
-                setCategories(data);
-            })
-    }, []);
+    useEffect(() => {
+        setFilteredBudgets(budgets);
+    }, [budgets]);
 
-    // FILTER TRANSACTIONS FROM FORM
+    // FILTER TRANSACTIONS AND BUDGETS FROM FORM
 
     const filter = (e) => {
         const form = new FormData(e.target.form);
         const month = Number(form.get("month"));
         const year = Number(form.get("year"));
 
-        setFiltered(
+        setFilteredTransactions(
             transactions.filter(transaction => {
                 const date = new Date(transaction.date);
-                return (month === -1 || date.getMonth() === month) &&
-                    (year === -1 || date.getFullYear() === year);
+                return (month === -1 || date.getMonth() === month) && (year === -1 || date.getFullYear() === year);
+            }));
+
+        setFilteredBudgets(
+            budgets.filter(budget => {
+                const date = new Date(budget.month);
+                return (month === -1 || date.getMonth() === month) && (year === -1 || date.getFullYear() === year);
             }));
     }
 
@@ -66,7 +72,7 @@ function Charts() {
                 </select>
             </form>
 
-            <ChartList transactions={filtered} categories={categories}></ChartList>
+            <ChartList transactions={filteredTransactions} categories={categories} budgets={filteredBudgets}></ChartList>
         </div>
     );
 }

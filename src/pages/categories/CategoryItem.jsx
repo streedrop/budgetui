@@ -14,7 +14,7 @@ function CategoryItem({ category = { id: null, name: "Uncategorized", descriptio
     }
 
     const goToEdit = () => {
-        navigate(`/categories/edit/${category.id}`);
+        navigate(`/categories/${category.id}/edit`);
     }
 
     return (

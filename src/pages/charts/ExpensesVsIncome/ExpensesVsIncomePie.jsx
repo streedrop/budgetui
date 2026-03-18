@@ -1,5 +1,7 @@
 import { PieChart, Pie, Tooltip } from "recharts";
 
+import { amountFormatter } from '@/utils/formatters';
+
 function ExpensesVsIncomePie({ income, expense }) {
 
     const data = [
@@ -11,7 +13,7 @@ function ExpensesVsIncomePie({ income, expense }) {
         <PieChart height={400} width={`100%`}>
             <Pie data={data} nameKey="name" dataKey="value" cx="50%" cy="50%" outerRadius={150} />
             <Tooltip
-                formatter={(value, name) => [` ${value.toFixed(2)} $`, name]}
+                formatter={(value, name) => [amountFormatter(value), name]}
             />
         </PieChart>
     );

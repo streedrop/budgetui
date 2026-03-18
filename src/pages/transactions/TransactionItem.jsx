@@ -2,12 +2,14 @@ import './styles/TransactionItem.css'
 
 import { useNavigate, Link } from 'react-router-dom';
 
+import { amountFormatter } from '@/utils/formatters';
+
 function TransactionItem({ transaction, onDelete, editable }) {
 
     const navigate = useNavigate();
 
     const goToEdit = () => {
-        navigate(`/transactions/edit/${transaction.id}`);
+        navigate(`/transactions/${transaction.id}/edit`);
     }
 
     const dateObject = new Date(transaction.date);
@@ -27,7 +29,7 @@ function TransactionItem({ transaction, onDelete, editable }) {
         <div className="transactionItem" key={transaction.id}>
             <p className="date">{formattedDate}</p>
             <p className="description"><b>{transaction.description}</b></p>
-            <p className="amount">{transaction.is_income ? '+' : '-'}{Number(transaction.amount).toFixed(2)} $</p>
+            <p className="amount">{transaction.is_income ? '+' : '-'}{amountFormatter(transaction.amount)}</p>
             <div className="actions">
                 {editable &&
                     (<button type="button" className="edit" onClick={() => goToEdit()}><i className="fa-regular fa-pen-to-square fa-xl"></i></button>)

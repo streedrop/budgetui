@@ -2,8 +2,8 @@ import './styles/TransactionForm.css'
 
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchCategories } from '../categories/category.api';
 import { fetchTransaction, insertTransaction, updateTransaction } from './transaction.api.js';
+import { useCategories } from '../categories/category.hooks.js';
 
 const emptyFormData = {
     description: "",
@@ -14,20 +14,10 @@ const emptyFormData = {
 function TransactionForm() {
     const { id } = useParams();                         // Current transaction ID
     const isEditMode = Boolean(id);                     // ID = editing, No ID = creating
-    const [categories, setCategories] = useState([]);   // Category list
+    const { categories } = useCategories();
     const [data, setFormData] = useState(emptyFormData);    // Form data
 
     const navigate = useNavigate();
-
-    // Populate category list
-    useEffect(() => {
-        const loadCategories = async () => {
-            const data = await fetchCategories();
-            setCategories(data);
-        };
-
-        loadCategories();
-    });
 
     // Fetch the transaction & pre-fill form
     useEffect(() => {
@@ -48,8 +38,8 @@ function TransactionForm() {
         const formData = new FormData(evt.target);
         const data = Object.fromEntries(formData);
 
-        if(data.category === "")
-            data.category = null;
+        if(data.category_id === "")
+            data.category_id = null;
 
         if (isEditMode)
             await updateTransaction(id, data);
