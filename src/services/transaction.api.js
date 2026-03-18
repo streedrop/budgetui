@@ -54,11 +54,3 @@ export async function deleteTransaction(id) {
 
     return res;
 }
-
-export async function deleteTransactionsByCategory(id) {
-    const res = await fetch(`/api/transactions/category/${id}`, {
-        method: "DELETE",
-    });
-
-    return res;
-}

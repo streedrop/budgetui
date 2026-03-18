@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { useCategories } from '@/hooks/useCategories.js';
 import { deleteCategory } from '@/services/category.api.js';
-import { deleteTransactionsByCategory } from '@/services/transaction.api.js';
 
 import CategoryList from './CategoryList.jsx';
 import CategoryItem from './CategoryItem.jsx';
@@ -23,9 +22,6 @@ function Categories() {
 
     if (!confirm("Are you sure you want to delete this category and all its transactions?"))
       return;
-
-    let res = await deleteTransactionsByCategory(id);
-    if (!res.ok) return;
 
     res = await deleteCategory(id);
     if (!res.ok) return;
