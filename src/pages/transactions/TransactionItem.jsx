@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import { amountFormatter } from '@/utils/formatters';
 
-function TransactionItem({ transaction, onDelete, editable }) {
+function TransactionItem({ transaction, onDelete, onSelect, editable }) {
 
     const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ function TransactionItem({ transaction, onDelete, editable }) {
     const isCurrentYear = new Date().getFullYear() == dateObject.getFullYear();
 
     return (
-        <div className="transactionItem" key={transaction.id}>
+        <div className={`transactionItem ${transaction.ignored ? 'ignored' : ''}`} key={transaction.id}>
             <p className="date">{formattedDate}</p>
             <p className="description"><b>{transaction.description}</b></p>
             <p className="amount">{transaction.is_income ? '+' : '-'}{amountFormatter(transaction.amount)}</p>
@@ -35,9 +35,14 @@ function TransactionItem({ transaction, onDelete, editable }) {
                     (<button type="button" className="edit" onClick={() => goToEdit()}><i className="fa-regular fa-pen-to-square fa-xl"></i></button>)
                 }
 
+                {onSelect &&
+                    (<input type="checkbox" checked={!transaction.ignored} onChange={() => onSelect(transaction.id)} />)
+                }
+
                 {onDelete &&
                     (<button type="button" className="delete" onClick={() => onDelete(transaction.id)}><i className="fa-regular fa-circle-xmark fa-xl"></i></button>)
                 }
+
             </div>
             {
                 isCurrentYear ? (<div></div>) : (<p>{year}</p>)

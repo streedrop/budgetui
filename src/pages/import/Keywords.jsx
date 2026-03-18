@@ -7,6 +7,8 @@ import { fetchKeywords, insertKeyword, deleteKeyword } from '@/services/keyword.
 
 function Keywords() {
 
+    const [action, setAction] = useState("move");
+
     const [categories, setCategories] = useState([]);   // Category list
     const [keywords, setKeywords] = useState([]);   // Keyword list
 
@@ -38,12 +40,12 @@ function Keywords() {
         })
     }
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (source, keyword) => {
 
-        const res = await deleteKeyword(id);
+        const res = await deleteKeyword(source, keyword);
         if (!res.ok) return;
 
-        setKeywords(prev => prev.filter(keyword => keyword.id !== id));
+        setKeywords(prev => prev.filter(item => !(item.source == source && item.keyword == keyword)));
     };
 
     return (
@@ -53,28 +55,60 @@ function Keywords() {
                 It is useful for cases where your bank assign your transactions to
                 categories which are too specific, or have a different name than what
                 you want.</p>
-            <form className="keywords" onSubmit={addKeyword}>
+            <form className="keywordForm" onSubmit={addKeyword}>
+                <label htmlFor="source">Source:</label>
+                <select id="source" name="source">
+                    <option value="description">Transaction description</option>
+                    <option value="category">Transaction category name</option>
+                </select>
                 <label htmlFor="keyword">Keyword:</label>
                 <input type="text" id="keyword" name="keyword" />
-                <label htmlFor="category_id">Category:</label>
-                <select id="category_id" name="category_id">
-                    {categories.map(category => (
-                        <option key={category.id} value={category.id}>
-                            {category.name}
-                        </option>
-                    ))}
+                <label htmlFor="action">Action:</label>
+                <select id="action" name="action" onChange={e => setAction(e.target.value)}>
+                    <option value="move">Move to category</option>
+                    <option value="ignore">Ignore (do not add)</option>
                 </select>
+                {
+                    action == "move" && (
+                        <>
+                            <label htmlFor="category_id">Category:</label>
+                            <select id="category_id" name="category_id">
+                                {categories.map(category => (
+                                    <option key={category.id} value={category.id}>
+                                        {category.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </>
+                    )
+                }
+
                 <button type="submit">Add</button>
             </form>
 
             <h2>Current keywords</h2>
             <div className="keywordList">
-                {keywords.map(keyword => (
+                <div className="keyword">
+                    <h4>Search in</h4>
+                    <h4>Keyword</h4>
+                    <h4>Action</h4>
+                    <h4 className="actions">Actions</h4>
+                </div>
+                {keywords.map((keyword, index) => (
 
-                    <div className="keyword" key={keyword.id}>
-                        <p>{keyword.keyword}</p>
-                        <p>{categories.find(category => keyword.category_id == category.id)?.name}</p>
-                        <button type="button" className="delete" onClick={() => handleDelete(keyword.id)}><i className="fa-regular fa-circle-xmark fa-xl"></i></button>
+                    <div className="keyword" key={index}>
+                        {
+                            keyword.source == "description" ? (<p>Transaction description</p>) : (<p>Transaction category name</p>)
+                        }
+                        <p>"{keyword.keyword}"</p>
+                        {
+                            keyword.action == "ignore" ? (<p>Ignore</p>) :
+                                (<p>Move to {categories.find(category => keyword.category_id == category.id)?.name}</p>)
+                        }
+                        <div className="actions">
+                            <button type="button" className="delete" onClick={() => handleDelete(keyword.source, keyword.keyword)}><i className="fa-regular fa-circle-xmark fa-xl"></i></button>
+                        </div>
+                        <hr />
                     </div>
 
                 ))}

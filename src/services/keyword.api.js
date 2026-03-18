@@ -20,8 +20,8 @@ export async function insertKeyword(data) {
     return res.json();
 }
 
-export async function deleteKeyword(id) {
-    const res = await fetch(`/api/keywords/${id}`, {
+export async function deleteKeyword(source, keyword) {
+    const res = await fetch(`/api/keywords/${source}/${keyword}`, {
         method: "DELETE",
     });
     

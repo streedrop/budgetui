@@ -40,6 +40,7 @@ function Import() {
         entries = entries.map((entry, index) => ({ ...entry, id: index }));
 
         setTransactions(entries);
+
         setModalOpen(true);
     }
 
@@ -63,27 +64,43 @@ function Import() {
         const memoIndex = columns.findIndex((value) => { return value.toLowerCase().includes("memo") });
 
         // Format entries that will be ready for the display and the database
-        const entries = formatted.map(
-            (item) => {
+        const entries = formatted.reduce(
+            ((acc, item) => {
                 // Tangerine Bank has a memo containing the category
                 const categoryNameFromMemo = item[memoIndex].split("Category: ")[1];
 
                 // Retrieve the category using the memo
                 let category = categories.find((category) => category.name === categoryNameFromMemo);
 
-                // If category wasn't found by name, try to find it through set keywords
-                if (!category) {
-                    const keyword = keywords.find((keyword) => keyword.keyword === categoryNameFromMemo);
+                // KEYWORD MANAGEMENT
+                const matchingKeywords = keywords.filter(
+                    (keyword) =>
+                        (keyword.source === "category" && keyword.keyword === categoryNameFromMemo) ||
+                        (keyword.source === "description" && keyword.keyword === item[descriptionIndex])
+                );
 
-                    if (keyword)
-                        category = categories.find((category) => category.id === keyword.category_id);
-                }
+                // Indicator that will show or hide a transaction from the list
+                let ignored = false;
+
+                matchingKeywords.forEach((keyword) => {
+                    switch (keyword.action) {
+                        // Move to another category (overrides one that was already found through basic name matching)
+                        case "move":
+                            category = categories.find((category) => category.id === keyword.category_id);
+                            break;
+                        // If even one matching keyword was found that says "ignore", ignore the current transaction
+                        case "ignore":
+                            ignored = true;
+                            return;
+                    }
+                });
 
                 // Create a transaction and set its attributes accordingly
                 let newItem = {};
                 newItem.amount = Number(item[amountIndex].replace("-", ""));
                 newItem.description = item[descriptionIndex];
                 newItem.date = new Date(item[dateIndex]).toISOString().split("T")[0];
+                newItem.ignored = ignored;
                 if (category) {
                     newItem.category_id = category.id;
                     newItem.category_name = category.name;
@@ -93,22 +110,28 @@ function Import() {
                     newItem.category_name = `Uncategorized (${categoryNameFromMemo ? categoryNameFromMemo : ''})`;
                 }
 
-                return newItem;
-            }
-        )
+                acc.push(newItem);
+                return acc;
+            }), [])
 
         return entries;
     }
 
-    // Deleting a transaction means it won't be inserted
+    // Remove a transaction from the list entirely
     const handleDelete = (id) => {
         setTransactions(prev => prev.filter(transaction => transaction.id !== id));
+    };
+
+    // Dim down a transaction so it won't be added
+    const handleSelect = (id) => {
+        // Toggle the new ignored val
+        setTransactions(prev => prev.map(item => item.id === id ? { ...item, ignored: !item.ignored } : item));
     };
 
     // Actually insert the transactions in the database
     const insertTransactions = async () => {
         // Remove id (it's a fake one) and category name (we already have category ID) as those are just for display
-        const data = transactions.map(({ id, category_name, ...rest }) => rest);
+        const data = transactions.filter((item) => item.ignored = false).map(({ id, category_name, ignored, ...rest }) => rest);
         await Promise.all(data.map(transaction => insertTransaction(transaction)));
 
         setModalOpen(false);
@@ -131,9 +154,11 @@ function Import() {
 
             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                 <p>The following transactions are going to be added:</p>
-                <TransactionList transactions={transactions} onDelete={handleDelete} editable={false}></TransactionList>
-                <button className="cancel" onClick={() => setModalOpen(false)}>Cancel</button>
-                <button className="save" type="button" onClick={insertTransactions}>Confirm</button>
+                <TransactionList transactions={transactions} /*onDelete={handleDelete}*/ onSelect={handleSelect} editable={false}></TransactionList>
+                <div className="importConfirmButtons">
+                    <button className="cancel" onClick={() => setModalOpen(false)}>Cancel</button>
+                    <button className="save" type="button" onClick={insertTransactions}>Confirm</button>
+                </div>
             </Modal>
 
 

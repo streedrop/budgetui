@@ -1,4 +1,4 @@
-.keywords {
+.keywordForm {
     display: grid;
     grid-template-columns: 50% 50%;
     row-gap: 1rem;
@@ -6,7 +6,7 @@
     margin: 0 auto;
 }
 
-.keywords button {
+.keywordForm button {
     grid-column: span 2;
     width: 50%;
     margin: auto;
@@ -19,16 +19,21 @@
 
 .keyword {
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-columns: 2fr 2fr 2fr 1fr;
+    column-gap: 5px;
     justify-items: start;
     align-items: center;
-    border: 2px solid white;
     margin: 10px auto;
-    padding: 10px 20px;
     border-radius: 10px;
-    height: 75px;
 }
 
-.keyword button {
+
+.keyword .actions {
     justify-self: end;
+}
+
+.keyword hr {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-top: 10px;
 }

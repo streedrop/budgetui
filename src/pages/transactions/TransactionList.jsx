@@ -5,7 +5,7 @@ import { groupTransactionsByMonth } from '@/utils/groupers';
 
 import TransactionItem from './TransactionItem';
 
-function TransactionList({ transactions, onDelete, editable = true }) {
+function TransactionList({ transactions, onDelete, onSelect, editable = true }) {
     // group transactions by month for display
     const groupedByMonth = groupTransactionsByMonth(transactions);
 
@@ -32,6 +32,7 @@ function TransactionList({ transactions, onDelete, editable = true }) {
                                 key={transaction.id}
                                 transaction={transaction}
                                 onDelete={onDelete}
+                                onSelect={onSelect}
                                 editable={editable}
                             />
                         ))

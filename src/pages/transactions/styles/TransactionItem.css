@@ -4,8 +4,16 @@
     column-gap: 5px;
     justify-items: start;
     align-items: center;
-    margin: 10px auto;
-    border-radius: 10px;
+    margin: auto;
+    padding-top: 10px;
+}
+
+.transactionItem.ignored p{
+    color: dimgrey;
+
+}
+.transactionItem.ignored{
+    background-color: black;
 }
 
 .transactionItem .amount {
@@ -37,4 +45,18 @@
     grid-column: 1 / -1;
     width: 100%;
     margin-top: 10px;
+}
+
+.transactionItem input[type='checkbox'] {
+    width: 30px;
+    height: 30px;
+    align-self: center;
+}
+
+.transactionItem input[type='checkbox']:checked {
+    accent-color: rgb(0, 61, 153);
+}
+
+.transactionItem input[type='checkbox']:hover {
+    accent-color: rgb(0, 102, 255);
 }
