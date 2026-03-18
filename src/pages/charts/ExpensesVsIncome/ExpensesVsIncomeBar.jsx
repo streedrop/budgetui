@@ -1,4 +1,4 @@
-import { BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 
 import { amountFormatter } from '@/utils/formatters';
 

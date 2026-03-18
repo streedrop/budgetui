@@ -1,4 +1,4 @@
-import './styles/TransactionItem.css'
+import './styles/TransactionItem.css';
 
 import { useNavigate, Link } from 'react-router-dom';
 

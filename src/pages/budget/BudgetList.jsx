@@ -1,6 +1,7 @@
-import './styles/BudgetList.css'
+import './styles/BudgetList.css';
 
 import { useState, useEffect } from 'react';
+
 import { dateToMonth, amountFormatter } from '@/utils/formatters';
 import { groupBudgetsByYear } from '@/utils/groupers';
 

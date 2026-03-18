@@ -1,4 +1,4 @@
-import { PieChart, Pie, Tooltip } from "recharts";
+import { PieChart, Pie, Tooltip } from 'recharts';
 import { useState, useEffect } from 'react';
 
 import { amountFormatter } from '@/utils/formatters';

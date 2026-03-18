@@ -1,8 +1,9 @@
+import './styles/TransactionList.css';
+
 import { amountFormatter } from '@/utils/formatters';
 import { groupTransactionsByMonth } from '@/utils/groupers';
-import './styles/TransactionList.css'
 
-import TransactionItem from './TransactionItem'
+import TransactionItem from './TransactionItem';
 
 function TransactionList({ transactions, onDelete, editable = true }) {
     // group transactions by month for display

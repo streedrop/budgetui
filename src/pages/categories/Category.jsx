@@ -1,21 +1,20 @@
-import './styles/Category.css'
+import './styles/Category.css';
 
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-import TransactionList from '../transactions/TransactionList.jsx'
-import BudgetList from './budget/BudgetList.jsx';
+import { useCategory } from '@/hooks/category.hooks.js';
+import { useTransactionsByCategory } from '@/hooks/transaction.hooks.js';
+import { useBudgetsByCategory } from '@/hooks/budget.hooks.js';
+import { deleteTransaction } from '@/services/transaction.api.js';
+import { deleteBudget } from '@/services/budget.api.js';
+import { dateToNumericMonthYear } from '@/utils/formatters.js';
 
-import { useCategory } from './category.hooks.js';
-import { useTransactionsByCategory } from '../transactions/transaction.hooks.js';
-import { deleteTransaction } from "../transactions/transaction.api";
-import { useBudgetsByCategory } from './budget/budget.hooks.js';
-import { deleteBudget } from "./budget/budget.api.js";
-
-import ForecastVsActual from "../charts/ForecastVsActual/ForecastVsActual.jsx";
-import BudgetForm from './budget/BudgetForm.jsx';
-import Modal from "@/components/modal/Modal.jsx";
-import { dateToNumericMonthYear, amountFormatter } from "@/utils/formatters.js";
+import Modal from '@/components/modal/Modal.jsx';
+import ForecastVsActual from '@/pages/charts/ForecastVsActual/ForecastVsActual.jsx';
+import BudgetList from '@/pages/budget/BudgetList.jsx';
+import BudgetForm from '@/pages/budget/BudgetForm.jsx';
+import TransactionList from '@/pages/transactions/TransactionList.jsx';
 
 function Category() {
     const { id } = useParams();

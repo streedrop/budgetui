@@ -1,4 +1,4 @@
-import { PieChart, Pie, Tooltip } from "recharts";
+import { PieChart, Pie, Tooltip } from 'recharts';
 
 import { amountFormatter } from '@/utils/formatters';
 

@@ -1,11 +1,11 @@
-import { deleteCategory } from './category.api.js';
-import { deleteTransactionsByCategory } from '../transactions/transaction.api.js';
-
-import CategoryList from './CategoryList.jsx'
-
 import { useState, useEffect } from 'react';
-import { useCategories } from './category.hooks.js';
 import { Link } from 'react-router-dom';
+
+import { useCategories } from '@/hooks/category.hooks.js';
+import { deleteCategory } from '@/services/category.api.js';
+import { deleteTransactionsByCategory } from '@/services/transaction.api.js';
+
+import CategoryList from './CategoryList.jsx';
 import CategoryItem from './CategoryItem.jsx';
 
 function Categories() {

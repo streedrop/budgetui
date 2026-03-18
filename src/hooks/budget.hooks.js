@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { fetchBudgets } from "./budget.api";
+import { useEffect, useState } from 'react';
+import { fetchBudgets } from '@/services/budget.api';
 
 export function useBudgets() {
     const [budgets, setBudgets] = useState([]);

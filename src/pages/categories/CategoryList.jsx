@@ -1,4 +1,4 @@
-import './styles/CategoryList.css'
+import './styles/CategoryList.css';
 
 import CategoryItem from './CategoryItem.jsx';
 

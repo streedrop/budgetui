@@ -1,7 +1,8 @@
-import './styles/BudgetForm.css'
+import './styles/BudgetForm.css';
 
 import { useParams } from 'react-router-dom';
-import { upsertBudget, deleteBudget } from './budget.api';
+
+import { upsertBudget, deleteBudget } from '@/services/budget.api';
 import { incrementMonth } from '@/utils/dateString';
 
 function BudgetForm({ onCancel, onSuccess }) {

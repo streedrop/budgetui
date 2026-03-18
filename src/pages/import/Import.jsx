@@ -1,14 +1,14 @@
-import './styles/Import.css'
+import './styles/Import.css';
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { insertTransaction } from '../transactions/transaction.api'
-import { fetchCategories } from '../categories/category.api'
-import { fetchKeywords } from './keyword.api'
-import TransactionList from '../transactions/TransactionList';
+import { insertTransaction } from '@/services/transaction.api';
+import { fetchCategories } from '@/services/category.api';
+import { fetchKeywords } from '@/services/keyword.api';
 
-import Modal from '../../components/modal/Modal.jsx'
+import Modal from '@/components/modal/Modal.jsx';
+import TransactionList from '@/pages/transactions/TransactionList';
 
 function Import() {
 

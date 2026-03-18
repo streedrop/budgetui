@@ -1,8 +1,8 @@
-import './styles/CategoryForm.css'
+import './styles/CategoryForm.css';
 
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchCategory, insertCategory, updateCategory } from './category.api';
+import { fetchCategory, insertCategory, updateCategory } from '@/services/category.api';
 
 const emptyFormData = {
     name: "",

@@ -1,9 +1,10 @@
-import './styles/TransactionForm.css'
+import './styles/TransactionForm.css';
 
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchTransaction, insertTransaction, updateTransaction } from './transaction.api.js';
-import { useCategories } from '../categories/category.hooks.js';
+
+import { useCategories } from '@/hooks/category.hooks.js';
+import { fetchTransaction, insertTransaction, updateTransaction } from '@/services/transaction.api.js';
 
 const emptyFormData = {
     description: "",

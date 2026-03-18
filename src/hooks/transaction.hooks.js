@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { fetchTransactions, fetchTransactionsByCategory } from "./transaction.api";
+import { useEffect, useState } from 'react';
+import { fetchTransactions, fetchTransactionsByCategory } from '@/services/transaction.api';
 
 export function useTransactions() {
     const [transactions, setTransactions] = useState([]);

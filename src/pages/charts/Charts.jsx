@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 
+import { useBudgets } from '@/hooks/budget.hooks.js';
+import { useCategories } from '@/hooks/category.hooks.js';
+import { useTransactions } from '@/hooks/transaction.hooks.js';
+
 import ChartList from './ChartList.jsx';
-import { useBudgets } from '../categories/budget/budget.hooks.js';
-import { useCategories } from '../categories/category.hooks.js';
-import { useTransactions } from '../transactions/transaction.hooks.js';
 
 function Charts() {
 

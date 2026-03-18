@@ -1,8 +1,9 @@
-import './styles/Keywords.css'
+import './styles/Keywords.css';
 
 import { useState, useEffect } from 'react';
-import { fetchCategories } from '../categories/category.api';
-import { fetchKeywords, insertKeyword, deleteKeyword } from './keyword.api';
+
+import { fetchCategories } from '@/services/category.api';
+import { fetchKeywords, insertKeyword, deleteKeyword } from '@/services/keyword.api';
 
 function Keywords() {
 

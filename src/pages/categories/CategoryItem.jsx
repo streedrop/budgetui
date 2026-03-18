@@ -1,4 +1,4 @@
-import './styles/CategoryItem.css'
+import './styles/CategoryItem.css';
 
 import { useNavigate } from 'react-router-dom';
 

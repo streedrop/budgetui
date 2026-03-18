@@ -1,11 +1,11 @@
-import './styles/Transactions.css'
-
-import { deleteTransaction } from './transaction.api.js';
-import { useTransactions } from './transaction.hooks.js';
-
-import TransactionList from './TransactionList.jsx'
+import './styles/Transactions.css';
 
 import { Link } from 'react-router-dom';
+
+import { useTransactions } from '@/hooks/transaction.hooks.js';
+import { deleteTransaction } from '@/services/transaction.api.js';
+
+import TransactionList from './TransactionList.jsx'
 
 function Transactions() {
   const { transactions, setTransactions } = useTransactions();
