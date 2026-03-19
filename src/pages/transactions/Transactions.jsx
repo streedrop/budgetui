@@ -3,12 +3,15 @@ import './styles/Transactions.css';
 import { Link } from 'react-router-dom';
 
 import { useTransactions } from '@/hooks/useTransactions.js';
+import { useTransactionFilters } from '@/hooks/useTransactionFilters.js';
 import { deleteTransaction } from '@/services/transaction.api.js';
 
+import Filter from '@/components/filter/Filter.jsx';
 import TransactionList from './TransactionList.jsx'
 
 function Transactions() {
   const { transactions, setTransactions } = useTransactions();
+  const { filtered, filters, setFilters } = useTransactionFilters(transactions);
 
   const handleDelete = async (id) => {
     const res = await deleteTransaction(id);
@@ -24,8 +27,9 @@ function Transactions() {
     <div id="main">
       <h1>Transactions</h1>
       <Link to="/transactions/new">Add a new transaction</Link>
+      <Filter filters={filters} setFilters={setFilters} />
       <div className="transactionListContainer">
-        <TransactionList transactions={transactions} onDelete={handleDelete}></TransactionList>
+        <TransactionList transactions={filtered} onDelete={handleDelete} />
       </div>
     </div>
   );

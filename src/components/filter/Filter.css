@@ -1,0 +1,42 @@
+div.filters {
+    width: 45%;
+    margin: auto;
+}
+
+div.filters form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5%;
+}
+
+div.filters form.cols-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+div.filters form.cols-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5%;
+}
+
+div.filters form fieldset {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 20px;
+    padding: 20px;
+}
+
+div.filters form fieldset label {
+    justify-self: start;
+}
+
+div.filters form fieldset#amount div {
+    display: inline-flex;
+    gap: 5px;
+}
+
+div.filters form input[type="number"] {
+    width: 100%;
+    min-width: 0;
+}
