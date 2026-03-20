@@ -16,6 +16,8 @@ import Charts from './pages/charts/Charts.jsx'
 import Import from './pages/import/Import.jsx'
 import Keywords from './pages/import/Keywords.jsx'
 
+import Dev from './pages/devtools/Dev.jsx'
+
 function App() {
 
   const [collapsed, setCollapsed] = useState(false);
@@ -36,6 +38,7 @@ function App() {
           <Route path="/charts" element={<Charts />} />
           <Route path="/import" element={<Import />} />
           <Route path="/import/keywords" element={<Keywords />} />
+          <Route path="/dev" element={<Dev />} />
         </Routes>
       </main>
     </>

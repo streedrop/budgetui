@@ -1,0 +1,14 @@
+.dev .color {
+    width: 40px;
+    height: 40px;
+    background-color: green;
+    border: 2px solid white;
+}
+
+.dev .colorPicker {
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: 20px 20px;
+    gap: 5px;
+    margin: auto;
+}
