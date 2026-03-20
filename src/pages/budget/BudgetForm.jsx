@@ -1,4 +1,4 @@
-import './styles/BudgetForm.css';
+import styles from './styles/BudgetForm.module.css';
 
 import { useParams } from 'react-router-dom';
 
@@ -29,25 +29,25 @@ function BudgetForm({ onCancel, onSuccess }) {
     }
 
     return (
-        <div className="budgetForm">
-        <h2>Manage budget</h2>
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="from">From: </label>
-            <input type="month" id="from" name="from" />
-            <label htmlFor="to">To: </label>
-            <input
-                type="month"
-                id="to"
-                name="to"
-                min="2020-01"
-                max={`${new Date().getFullYear()}-12`}
-            />
-            <label htmlFor="budget">Monthly Budget: </label>
-            <input type="text" id="budget" name="budget" />
-            <button type="button" className="cancel" onClick={onCancel}>Cancel</button>
-            <button type="submit" className="save">Save</button>
-        </form>
-        </div>
+        <>
+            <h2 className={styles.title}>Manage budget</h2>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <label htmlFor="from">From: </label>
+                <input type="month" id="from" name="from" />
+                <label htmlFor="to">To: </label>
+                <input
+                    type="month"
+                    id="to"
+                    name="to"
+                    min="2020-01"
+                    max={`${new Date().getFullYear()}-12`}
+                />
+                <label htmlFor="budget">Monthly Budget: </label>
+                <input type="text" id="budget" name="budget" />
+                <button type="button" className="cancel" onClick={onCancel}>Cancel</button>
+                <button type="submit" className="save">Save</button>
+            </form>
+        </>
     );
 }
 

@@ -1,4 +1,4 @@
-.categoryItem {
+.item {
     display: grid;
     grid-template-columns: 2fr 4fr 2fr;
     justify-items: start;
@@ -8,9 +8,15 @@
     padding: 10px 20px;
     border-radius: 10px;
     height: 75px;
+
 }
 
-.categoryItem .actions {
+.item:hover {
+    box-shadow: 5px 5px 10px grey;
+    cursor: pointer;
+}
+
+.item .actions {
     display: flex;
     gap: 5px;
     justify-self: end;

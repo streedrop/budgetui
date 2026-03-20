@@ -1,4 +1,4 @@
-import './styles/Import.css';
+import styles from './styles/Import.module.css';
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -142,8 +142,8 @@ function Import() {
             <h1>Import transactions</h1>
             <p>Import or paste CSV from Tangerine Bank in the area below to import your transactions.</p>
             <Link to="/import/keywords">Define keywords</Link>
-            <div className="import">
-                <form onSubmit={handleSubmit}>
+            <div>
+                <form className={styles.import} onSubmit={handleSubmit}>
                     <label htmlFor="files">Select file(s):</label>
                     <input type="file" id="files" name="files" accept=".csv" multiple />
                     <label htmlFor="text">Or paste below:</label>
@@ -155,7 +155,7 @@ function Import() {
             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                 <p>The following transactions are going to be added:</p>
                 <TransactionList transactions={transactions} /*onDelete={handleDelete}*/ onSelect={handleSelect} editable={false}></TransactionList>
-                <div className="importConfirmButtons">
+                <div className={styles.buttons}>
                     <button className="cancel" onClick={() => setModalOpen(false)}>Cancel</button>
                     <button className="save" type="button" onClick={insertTransactions}>Confirm</button>
                 </div>

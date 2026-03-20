@@ -1,4 +1,4 @@
-.import form{
+.import {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -6,19 +6,19 @@
     margin: auto;
 }
 
-.import form button{
+.import button{
     width: 50%;
     margin: auto;
 }
 
-.import form textarea{
+.import textarea{
     height: 200px;
     width: 100%;
     margin: auto;
     resize: none;
 }
 
-.importConfirmButtons {
+.buttons {
     display: flex;
     gap: 20px;
     margin: 20px auto 0 auto;

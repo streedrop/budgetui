@@ -1,4 +1,4 @@
-import './styles/TransactionForm.css';
+import styles from './styles/TransactionForm.module.css';
 
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -58,7 +58,7 @@ function TransactionForm() {
     return (
         <div id="main">
             <h1>{isEditMode ? 'Edit transaction' : 'New transaction'}</h1>
-            <form className="transactionForm" onSubmit={handleSubmit}>
+            <form className={styles.form} onSubmit={handleSubmit}>
                 <label htmlFor="description">Description: </label>
                 <input type="text" id="description" name="description" defaultValue={data.description} />
 

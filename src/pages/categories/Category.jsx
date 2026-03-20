@@ -1,4 +1,4 @@
-import './styles/Category.css';
+import styles from './styles/Category.module.css';
 
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -43,7 +43,7 @@ function Category() {
     if ((isUncategorized && !transactions) || (!isUncategorized && !category)) return <div>Loading...</div>;
 
     return (
-        <div id="main" className="categoryPage">
+        <>
             {
                 isUncategorized ?
                     (<h1>Uncategorized</h1>)
@@ -54,13 +54,13 @@ function Category() {
                             {category.description && (
                                 <p><em>{category.description}</em></p>
                             )}
-                            <div className="chart">
+                            <section className={styles.chart}>
                                 <ForecastVsActual transactions={transactions} categories={[category]} budgets={budgets} height={200}></ForecastVsActual>
-                            </div>
-                            <section id="budget">
+                            </section>
+                            <section className={styles.budget}>
                                 <h2>Monthly budget</h2>
                                 <BudgetList budgets={budgets} onDelete={handleDeleteBudget}></BudgetList>
-                                <button className="setBudget" type="button" onClick={() => setModalOpen(true)}>Set budget</button>
+                                <button className={styles.set} type="button" onClick={() => setModalOpen(true)}>Set budget</button>
                             </section>
                             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                                 <BudgetForm onCancel={() => setModalOpen(false)} onSuccess={() => { loadBudgets(); setModalOpen(false) }}></BudgetForm>
@@ -68,14 +68,14 @@ function Category() {
                         </>
                     )
             }
-            <section id="transactions">
+            <section className={styles.transactions}>
                 <h2>Transactions</h2>
-                <div className="transactionListContainer">
+                <div className={styles.container}>
                     <TransactionList transactions={transactions} onDelete={handleDeleteTransaction}></TransactionList>
                 </div>
             </section>
 
-        </div>
+        </>
     );
 }
 

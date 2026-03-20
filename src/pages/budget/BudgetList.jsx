@@ -1,4 +1,4 @@
-import './styles/BudgetList.css';
+import styles from './styles/BudgetList.module.css';
 
 import { useState, useEffect } from 'react';
 
@@ -20,8 +20,8 @@ function BudgetList({ budgets, onDelete }) {
         return (<p>No budget to display.</p>);
 
     return (
-        <div className="budgetList">
-            <div className="header">
+        <div className={styles.list}>
+            <div className={styles.header}>
                 <div></div>
                 {
                     Array.from({ length: 12 }, (_, i) =>
@@ -31,10 +31,10 @@ function BudgetList({ budgets, onDelete }) {
             </div>
             {
                 grouped.map(([year, budgets]) => (
-                    <div key={year} className="year">
+                    <div key={year} className={styles.year}>
                         <h3>{year}</h3>
                         {budgets.map(budget => (
-                            <div className="month" key={dateToMonth(budget.month)}>
+                            <div className={styles.month} key={dateToMonth(budget.month)}>
                                 {budget.amount !== null
                                     ? <>
                                         <p>{amountFormatter(budget.amount)}</p>

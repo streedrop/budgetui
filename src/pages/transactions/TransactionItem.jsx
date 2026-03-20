@@ -1,8 +1,8 @@
-import './styles/TransactionItem.css';
+import styles from './styles/TransactionItem.module.css';
 
 import { useNavigate, Link } from 'react-router-dom';
 
-import { amountFormatter } from '@/utils/formatters';
+import { dateToMonthDay, dateToYear, amountFormatter } from '@/utils/formatters';
 
 function TransactionItem({ transaction, onDelete, onSelect, editable }) {
 
@@ -12,25 +12,14 @@ function TransactionItem({ transaction, onDelete, onSelect, editable }) {
         navigate(`/transactions/${transaction.id}/edit`);
     }
 
-    const dateObject = new Date(transaction.date);
-
-    const formattedDate = dateObject.toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-    });
-
-    const year = dateObject.toLocaleDateString("en-US", {
-        year: "numeric"
-    });
-
-    const isCurrentYear = new Date().getFullYear() == dateObject.getFullYear();
+    const isCurrentYear = new Date().getFullYear() == new Date(transaction.date).getFullYear();
 
     return (
-        <div className={`transactionItem ${transaction.ignored ? 'ignored' : ''}`} key={transaction.id}>
-            <p className="date">{formattedDate}</p>
-            <p className="description"><b>{transaction.description}</b></p>
-            <p className="amount">{transaction.is_income ? '+' : '-'}{amountFormatter(transaction.amount)}</p>
-            <div className="actions">
+        <div className={`${styles.item} ${transaction.ignored ? styles.ignored : ''}`} key={transaction.id}>
+            <p className={styles.date}>{dateToMonthDay(transaction.date)}</p>
+            <p className={styles.description}><b>{transaction.description}</b></p>
+            <p className={styles.amount}>{transaction.is_income ? '+' : '-'}{amountFormatter(transaction.amount)}</p>
+            <div className={styles.actions}>
                 {editable &&
                     (<button type="button" className="edit" onClick={() => goToEdit()}><i className="fa-regular fa-pen-to-square fa-xl"></i></button>)
                 }
@@ -45,10 +34,10 @@ function TransactionItem({ transaction, onDelete, onSelect, editable }) {
 
             </div>
             {
-                isCurrentYear ? (<div></div>) : (<p>{year}</p>)
+                isCurrentYear ? (<div></div>) : (<p>{dateToYear(transaction.date)}</p>)
             }
             {transaction.category_name ? (() => {
-                const p = <p className={`category ${transaction.category_id ? "with-link" : ""}`}><em>{transaction.category_name}</em></p>;
+                const p = <p className={`${styles.category} ${transaction.category_id ? styles['with-link'] : ""}`}><em>{transaction.category_name}</em></p>;
                 return transaction.category_id
                     ? <Link to={`/categories/${transaction.category_id}`}>{p}</Link>
                     : p;

@@ -1,4 +1,4 @@
-import './Filter.css'
+import styles from './Filter.module.css'
 
 function Filter({ filters, setFilters, date = true, amount = true }) {
 
@@ -9,11 +9,11 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
         return;
 
     return (
-        <div className="filters">
+        <div className={styles.filters}>
             <h3>Filters</h3>
-            <form className={`cols-${nb}`}>
+            <form className={`${styles.form} ${styles[`cols-${nb}`]}`}>
                 {date && (
-                    <fieldset id="date">
+                    <fieldset className={styles.date}>
                         <legend>Date range</legend>
                         <label htmlFor="after">From: </label>
                         <input id="after" type="date" value={filters.after} onChange={evt => setFilters(prev => ({ ...prev, after: evt.target.value }))} />
@@ -22,7 +22,7 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
                     </fieldset>
                 )}
                 {amount && (
-                    <fieldset id="amount">
+                    <fieldset className={styles.amount}>
                         <legend>Amount</legend>
                         <label htmlFor="minAmount">From: </label>
                         <div>

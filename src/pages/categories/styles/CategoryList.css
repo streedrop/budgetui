@@ -1,9 +1,0 @@
-.categoryList {
-    width: 50%;
-    margin: 0 auto;
-}
-
-.categoryList .section {
-    display: flex;
-    justify-content: space-between;
-}

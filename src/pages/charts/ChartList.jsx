@@ -1,4 +1,4 @@
-import './styles/ChartList.css';
+import styles from './styles/ChartList.module.css';
 
 import { useState, useEffect } from 'react';
 
@@ -57,24 +57,24 @@ function ChartList({ transactions, categories, budgets }) {
     if (transactions.length === 0 && budgets.length === 0) return <p>Nothing to display.</p>;
 
     return (
-        <div className="chartList">
-            <div className="chart">
+        <div className={styles.list}>
+            <div className={styles.chart}>
                 <h2>Total by category</h2>
                 <TotalByCategoryPie categories={totalByCategory}></TotalByCategoryPie>
             </div>
-            <div className="chart">
+            <div className={styles.chart}>
                 <h2>Total by category</h2>
                 <TotalByCategoryBar categories={totalByCategory}></TotalByCategoryBar>
             </div>
-            <div className="chart">
+            <div className={styles.chart}>
                 <h2>Expenses vs Income</h2>
                 <ExpensesVsIncomePie income={incomeSum} expense={expenseSum}></ExpensesVsIncomePie>
             </div>
-            <div className="chart">
+            <div className={styles.chart}>
                 <h2>Expenses vs Income</h2>
                 <ExpensesVsIncomeBar income={incomeSum} expense={expenseSum}></ExpensesVsIncomeBar>
             </div>
-            <div className="chart">
+            <div className={styles.chart}>
                 <h2>Forecast vs Actual</h2>
                 <ForecastVsActual transactions={transactions} categories={categories} budgets={budgets}></ForecastVsActual>
             </div>

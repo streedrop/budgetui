@@ -2,14 +2,14 @@
     font-weight: bold;
 }
 
-.chart {
+.list .chart {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 500px;
 }
 
-.chartList {
+.list {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }

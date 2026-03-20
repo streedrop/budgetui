@@ -1,13 +1,13 @@
-.transactionList {
+.list {
     margin: 0 auto;
 }
 
-.transactionList .month {
+.month {
     display: flex;
     justify-content: space-between;
 }
 
-.transactionList .header {
+.header {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr 2fr;
     column-gap: 5px;
@@ -15,7 +15,6 @@
     align-items: center;
 }
 
-.transactionList .header .amount,
-.transactionList .header .actions {
+.amount, .actions {
     justify-self: end;
 }

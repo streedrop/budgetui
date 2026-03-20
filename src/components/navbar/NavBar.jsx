@@ -1,12 +1,14 @@
-import './NavBar.css';
+import styles from './NavBar.module.css';
 
 import { NavLink } from 'react-router-dom';
 
 function NavBar({ collapsed, setCollapsed }) {
 
+  const navClass = ({ isActive }) => isActive ? styles.active : ''
+
   return (
-    <nav className={collapsed ? 'collapsed' : ''}>
-      <div className="logo">
+    <nav className={collapsed ? styles.collapsed : ''}>
+      <div className={styles.logo}>
         <h2>Budget.</h2>
         <div onClick={() => setCollapsed(!collapsed)}>
           <i className="fa-solid fa-bars"></i>
@@ -14,31 +16,31 @@ function NavBar({ collapsed, setCollapsed }) {
       </div>
       <hr />
 
-      <div className="links">
-        <NavLink to="/">
+      <div className={styles.links}>
+        <NavLink to="/" className={navClass}>
           <i className="fa-regular fa-house"></i>
           <span>Home</span>
         </NavLink>
-        <NavLink to="/categories">
+        <NavLink to="/categories" className={navClass}>
           <i className="fa-regular fa-folder"></i>
           <span>Categories</span>
         </NavLink>
-        <NavLink to="/transactions">
+        <NavLink to="/transactions" className={navClass}>
           <i className="fa-solid fa-list"></i>
           <span>Transactions</span>
         </NavLink>
-        <NavLink to="/charts">
+        <NavLink to="/charts" className={navClass}>
           <i className="fa-regular fa-chart-bar"></i>
           <span>Charts</span>
         </NavLink>
 
         <hr />
 
-        <NavLink to="/import">
+        <NavLink to="/import" className={navClass}>
           <i className="fa-regular fa-file"></i>
           <span>Import</span>
         </NavLink>
-        <NavLink to="/dev">
+        <NavLink to="/dev" className={navClass}>
           <i className="fa-regular fa-file-code"></i>
           <span>Dev Tools</span>
         </NavLink>
@@ -46,12 +48,12 @@ function NavBar({ collapsed, setCollapsed }) {
 
       <hr />
 
-      <div className="viewmode">
+      <div className={styles.viewmode}>
         <p>Current view mode: </p>
-        <p className="mobile">Mobile</p>
-        <p className="tablet">Tablet</p>
-        <p className="laptop">Laptop</p>
-        <p className="desktop">Desktop</p>
+        <p className={styles.mobile}>Mobile</p>
+        <p className={styles.tablet}>Tablet</p>
+        <p className={styles.laptop}>Laptop</p>
+        <p className={styles.desktop}>Desktop</p>
       </div>
     </nav>
   );

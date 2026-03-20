@@ -1,4 +1,4 @@
-.categoryForm {
+.form {
     display: grid;
     grid-template-columns: 50% 50%;
     row-gap: 1rem;
@@ -6,11 +6,11 @@
     margin: 0 auto;
 }
 
-.categoryForm .type {
+.form .type {
     display: flex;
     justify-content: space-evenly;
 }
 
-.categoryForm .type input{
+.form .type input{
     margin-right: 10px;
 }

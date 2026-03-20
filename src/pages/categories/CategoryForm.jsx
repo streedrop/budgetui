@@ -1,4 +1,4 @@
-import './styles/CategoryForm.css';
+import styles from './styles/CategoryForm.module.css';
 
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -52,13 +52,13 @@ function CategoryForm() {
     return (
         <div id="main">
             <h1>{isEditMode ? 'Edit category' : 'New category'}</h1>
-            <form className="categoryForm" onSubmit={handleSubmit}>
+            <form className={styles.form} onSubmit={handleSubmit}>
                 <label htmlFor="name">Name: </label>
                 <input type="text" id="name" name="name" defaultValue={data.name} />
                 <label htmlFor="description">Description: </label>
                 <input type="text" id="description" name="description" defaultValue={data.description} />
                 <label>Type: </label>
-                <div className="type">
+                <div className={styles.type}>
                     <div>
                         <input type="radio" id="expense" name="is_income" value="0" defaultChecked={!data.is_income} />
                         <label htmlFor="expense">Expenses</label>

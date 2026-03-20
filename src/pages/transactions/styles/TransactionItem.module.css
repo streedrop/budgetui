@@ -1,4 +1,4 @@
-.transactionItem {
+.item {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr 2fr;
     column-gap: 5px;
@@ -8,55 +8,55 @@
     padding-top: 10px;
 }
 
-.transactionItem.ignored p{
+.item.ignored p{
     color: dimgrey;
 
 }
-.transactionItem.ignored{
+.item.ignored{
     background-color: black;
 }
 
-.transactionItem .amount {
+.amount {
     justify-self: end;
 }
 
-.transactionItem .category {
+.category {
     color: gray;
 }
 
-.transactionItem .category.with-link:hover {
+.category.with-link:hover {
     text-decoration: underline;
     color: rgb(97, 97, 97);
 }
 
-.transactionItem .actions {
+.actions {
     display: flex;
     gap: 5px;
     grid-row: span 2;
     justify-self: end;
 }
 
-.transactionItem button {
+.item button {
     grid-row: span 2;
     justify-self: end;
 }
 
-.transactionItem hr {
+.item hr {
     grid-column: 1 / -1;
     width: 100%;
     margin-top: 10px;
 }
 
-.transactionItem input[type='checkbox'] {
+.item input[type='checkbox'] {
     width: 30px;
     height: 30px;
     align-self: center;
 }
 
-.transactionItem input[type='checkbox']:checked {
+.item input[type='checkbox']:checked {
     accent-color: rgb(0, 61, 153);
 }
 
-.transactionItem input[type='checkbox']:hover {
+.item input[type='checkbox']:hover {
     accent-color: rgb(0, 102, 255);
 }

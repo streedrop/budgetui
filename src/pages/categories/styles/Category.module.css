@@ -1,15 +1,15 @@
-.categoryPage .chart {
+.chart {
     width: 70%;
     height: 100px;
     margin: auto;
 }
 
-.transactionListContainer {
+.transactions .container {
     width: 50%;
     margin: 0 auto;
 }
 
-.categoryPage section#budget button.setBudget {
+.budget .set {
     width: 20%;
     margin: auto;
 }

@@ -1,4 +1,4 @@
-import './styles/TransactionList.css';
+import styles from './styles/TransactionList.module.css';
 
 import { amountFormatter } from '@/utils/formatters';
 import { groupTransactionsByMonth } from '@/utils/groupers';
@@ -12,18 +12,18 @@ function TransactionList({ transactions, onDelete, onSelect, editable = true }) 
     if (transactions.length == 0) return <div>No transactions to display.</div>;
 
     return (
-        <div className="transactionList">
+        <div className={styles.list}>
             {Object.entries(groupedByMonth).map(([month, { sum, transactions }]) => (
                 <div key={month}>
-                    <div className="month">
+                    <div className={styles.month}>
                         <h2>{month}</h2>
                         <h2>{amountFormatter(sum)}</h2>
                     </div>
-                    <div className="header">
-                        <h4 className="date">Date</h4>
-                        <h4 className="transaction">Transaction</h4>
-                        <h4 className="amount">Amount</h4>
-                        <h4 className="actions">Actions</h4>
+                    <div className={styles.header}>
+                        <h4 className={styles.date}>Date</h4>
+                        <h4 className={styles.transaction}>Transaction</h4>
+                        <h4 className={styles.amount}>Amount</h4>
+                        <h4 className={styles.actions}>Actions</h4>
                     </div>
                     {
                         transactions.map(transaction => (

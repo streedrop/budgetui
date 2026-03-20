@@ -1,4 +1,4 @@
-import './styles/Keywords.css';
+import styles from './styles/Keywords.module.css';
 
 import { useState, useEffect } from 'react';
 
@@ -55,7 +55,7 @@ function Keywords() {
                 It is useful for cases where your bank assign your transactions to
                 categories which are too specific, or have a different name than what
                 you want.</p>
-            <form className="keywordForm" onSubmit={addKeyword}>
+            <form className={styles.form} onSubmit={addKeyword}>
                 <label htmlFor="source">Source:</label>
                 <select id="source" name="source">
                     <option value="description">Transaction description</option>
@@ -87,16 +87,16 @@ function Keywords() {
             </form>
 
             <h2>Current keywords</h2>
-            <div className="keywordList">
-                <div className="keyword">
+            <div className={styles.list}>
+                <div className={styles.header}>
                     <h4>Search in</h4>
                     <h4>Keyword</h4>
                     <h4>Action</h4>
-                    <h4 className="actions">Actions</h4>
+                    <h4 className={styles.actions}>Actions</h4>
                 </div>
                 {keywords.map((keyword, index) => (
 
-                    <div className="keyword" key={index}>
+                    <div className={styles.item} key={index}>
                         {
                             keyword.source == "description" ? (<p>Transaction description</p>) : (<p>Transaction category name</p>)
                         }
@@ -105,7 +105,7 @@ function Keywords() {
                             keyword.action == "ignore" ? (<p>Ignore</p>) :
                                 (<p>Move to {categories.find(category => keyword.category_id == category.id)?.name}</p>)
                         }
-                        <div className="actions">
+                        <div className={styles.actions}>
                             <button type="button" className="delete" onClick={() => handleDelete(keyword.source, keyword.keyword)}><i className="fa-regular fa-circle-xmark fa-xl"></i></button>
                         </div>
                         <hr />
