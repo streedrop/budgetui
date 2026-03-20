@@ -1,32 +1,166 @@
+/* The sidebar menu */
 nav {
-  display: flex;
-  gap: 2rem;
+  /*transition: width 1s 0.5s;*/
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
   background-color: #2d2d2d;
-  padding: 1.5rem 2rem;
+  overflow-x: hidden;
+  text-align: left;
 }
 
-nav a {
-  font-weight: 500;
-  color: #646cff;
+nav.collapsed {
+  /*transition: width 1s 0.5s;*/
+  width: 60px;
 }
 
-/* View mode */
+nav hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
-nav .tablet, nav .laptop, nav .desktop {
+nav i {
+  display: block;
+}
+
+/* Logo */
+
+nav .logo {
+  padding: 10px 10px 0 10px;
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /*transition: padding 0.5s 0.5s;*/
+}
+
+nav .logo div {
+  padding: 10px;
+  margin: 10px;
+
+  display: flex;
+  align-items: center;
+}
+
+nav .logo div:hover {
+  border-radius: 10px;
+  background-color: rgb(73, 73, 73);
+}
+
+nav.collapsed .logo {
+  padding: 10px 0 0 0;
+  /*transition-property: padding;
+  transition-delay: 0.5s;*/
+}
+
+nav.collapsed .logo div {
+  margin: 10px auto;
+}
+
+/*nav .logo h2,
+nav .links span {
+  transition: opacity 0.5s 1s;
+  opacity: 1;
+}
+
+nav.collapsed .logo h2,
+nav.collapsed .links span {
+  animation: hideAfter 0.5s forwards;
+  transition: opacity 0.5s;
+  opacity: 0;
+}
+
+@keyframes hideAfter {
+  to {
+    display: none;
+  }
+}*/
+
+/* REMOVE if I add the animations back */
+nav.collapsed .logo h2,
+nav.collapsed .links span {
   display: none;
 }
 
-@media (min-width: 768px) { 
-  nav .mobile { display: none; }
-  nav .tablet { display: block; } 
+/* Links */
+
+nav a {
+  padding: 10px 8px;
+  margin: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.2em;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: rgb(185, 185, 185);
+}
+
+nav a:hover {
+  background-color: rgba(0, 128, 0, 0.5);
+  color: white;
+  border-radius: 10px;
+}
+
+/* Current page link */
+nav a.active {
+  background-color: rgb(0, 128, 0);
+  color: white;
+  border-radius: 10px;
+}
+
+nav a.active:hover {
+  background-color: rgb(0, 128, 0);
+}
+
+
+/* View mode */
+
+nav .viewmode {
+  padding-top: 10px;
+  text-align: center;
+}
+
+nav.collapsed .viewmode {
+  display: none;
+}
+
+nav .tablet,
+nav .laptop,
+nav .desktop {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  nav .mobile {
+    display: none;
+  }
+
+  nav .tablet {
+    display: block;
+  }
 }
 
 @media (min-width: 1024px) {
-  nav .tablet { display: none; }
-  nav .laptop { display: block; } 
+  nav .tablet {
+    display: none;
+  }
+
+  nav .laptop {
+    display: block;
+  }
 }
 
-@media (min-width: 1280px) {   
-  nav .laptop { display: none; }
-  nav .desktop { display: block; }
+@media (min-width: 1280px) {
+  nav .laptop {
+    display: none;
+  }
+
+  nav .desktop {
+    display: block;
+  }
 }

@@ -1,4 +1,5 @@
 import './App.css'
+import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import NavBar from './components/navbar/NavBar.jsx'
@@ -16,12 +17,13 @@ import Import from './pages/import/Import.jsx'
 import Keywords from './pages/import/Keywords.jsx'
 
 function App() {
+
+  const [collapsed, setCollapsed] = useState(false);
+
   return (
     <>
-      <header>
-        <NavBar />
-      </header>
-      <main>
+      <NavBar collapsed={collapsed} setCollapsed={setCollapsed} />
+      <main className={collapsed ? 'collapsed' : ''}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/categories" element={<Categories />} />

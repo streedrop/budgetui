@@ -13,19 +13,18 @@ function TransactionList({ transactions, onDelete, onSelect, editable = true }) 
 
     return (
         <div className="transactionList">
-            <div className="header">
-                <p className="date">Date</p>
-                <p className="transaction">Transaction</p>
-                <p className="amount">Amount</p>
-                <p className="actions">Actions</p>
-            </div>
             {Object.entries(groupedByMonth).map(([month, { sum, transactions }]) => (
                 <div key={month}>
                     <div className="month">
                         <h2>{month}</h2>
                         <h2>{amountFormatter(sum)}</h2>
                     </div>
-
+                    <div className="header">
+                        <h4 className="date">Date</h4>
+                        <h4 className="transaction">Transaction</h4>
+                        <h4 className="amount">Amount</h4>
+                        <h4 className="actions">Actions</h4>
+                    </div>
                     {
                         transactions.map(transaction => (
                             <TransactionItem
