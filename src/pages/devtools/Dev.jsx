@@ -1,4 +1,4 @@
-import './styles/Dev.css';
+import styles from './styles/Dev.module.css';
 
 import { useState, useEffect } from 'react';
 
@@ -79,31 +79,31 @@ function Dev() {
     }
 
     return (
-        <div id="main" className="dev">
+        <>
             <p>Pick a color:</p>
-            <div className="colorPicker">
-                {colors.map((color) => (<div className="color" style={{ backgroundColor: color }}></div>))}
+            <div className={styles.colorPicker}>
+                {colors.map((color) => (<div className={styles.color} style={{ backgroundColor: color }}></div>))}
             </div>
-            <div className="colorPicker">
-                {colors1.map((color) => (<div className="color" style={{ backgroundColor: color }}></div>))}
+            <div className={styles.colorPicker}>
+                {colors1.map((color) => (<div className={styles.color} style={{ backgroundColor: color }}></div>))}
             </div>
-            <div className="colorPicker">
-                {colors2.map((color) => (<div className="color" style={{ backgroundColor: color }}></div>))}
+            <div className={styles.colorPicker}>
+                {colors2.map((color) => (<div className={styles.color} style={{ backgroundColor: color }}></div>))}
             </div>
-            <div className="colorPicker">
-                {colors3.map((color) => (<div className="color" style={{ backgroundColor: color }}></div>))}
+            <div className={styles.colorPicker}>
+                {colors3.map((color) => (<div className={styles.color} style={{ backgroundColor: color }}></div>))}
             </div>
-            <div className="colorPicker">
-                {colors4.map((color) => (<div className="color" style={{ backgroundColor: color }}></div>))}
-                <div className="color" style={{ backgroundColor: 'gray' }}></div>
-                <div className="color" style={{ backgroundColor: 'brown' }}></div>
+            <div className={styles.colorPicker}>
+                {colors4.map((color) => (<div className={styles.color} style={{ backgroundColor: color }}></div>))}
+                <div className={styles.color} style={{ backgroundColor: 'gray' }}></div>
+                <div className={styles.color} style={{ backgroundColor: 'brown' }}></div>
             </div>
 
             <div>
                 <button type="button" onClick={extractSql}>Extract transactions as SQL</button>
             </div>
 
-        </div>
+        </>
     )
 }
 

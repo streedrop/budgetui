@@ -138,7 +138,7 @@ function Import() {
     }
 
     return (
-        <div id="main">
+        <>
             <h1>Import transactions</h1>
             <p>Import or paste CSV from Tangerine Bank in the area below to import your transactions.</p>
             <Link to="/import/keywords">Define keywords</Link>
@@ -162,7 +162,7 @@ function Import() {
             </Modal>
 
 
-        </div>
+        </>
     )
 }
 

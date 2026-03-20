@@ -56,7 +56,7 @@ function TransactionForm() {
     }
 
     return (
-        <div id="main">
+        <>
             <h1>{isEditMode ? 'Edit transaction' : 'New transaction'}</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <label htmlFor="description">Description: </label>
@@ -85,7 +85,7 @@ function TransactionForm() {
                 <button type="button" className="cancel" onClick={handleCancel}>Cancel</button>
                 <button className="save" type="submit">{isEditMode ? 'Save' : 'Add'}</button>
             </form>
-        </div>
+        </>
     )
 }
 

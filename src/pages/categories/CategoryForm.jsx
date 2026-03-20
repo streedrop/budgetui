@@ -50,7 +50,7 @@ function CategoryForm() {
     }
 
     return (
-        <div id="main">
+        <>
             <h1>{isEditMode ? 'Edit category' : 'New category'}</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <label htmlFor="name">Name: </label>
@@ -71,7 +71,7 @@ function CategoryForm() {
                 <button type="button" className="cancel" onClick={handleCancel}>Cancel</button>
                 <button type="submit" className="save">{isEditMode ? 'Save' : 'Add'}</button>
             </form>
-        </div>
+        </>
     );
 }
 

@@ -24,14 +24,14 @@ function Transactions() {
   //if (error) return <p>Error: {error}</p>;
 
   return (
-    <div id="main">
+    <>
       <h1>Transactions</h1>
       <Link to="/transactions/new">Add a new transaction</Link>
       <Filter filters={filters} setFilters={setFilters} />
       <div className={styles.container}>
         <TransactionList transactions={filtered} onDelete={handleDelete} />
       </div>
-    </div>
+    </>
   );
 }
 

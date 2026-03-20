@@ -35,7 +35,7 @@ function Categories() {
   //if (error) return <p>Error: {error}</p>;
 
   return (
-    <div id="main">
+    <>
       <h1>Categories</h1>
       <Link to="/categories/new">Add a new category</Link>
       <div className={listStyles.list}>
@@ -43,7 +43,7 @@ function Categories() {
       </div>
       <CategoryList categories={incomeCategories} is_income={true} onDelete={handleDelete}></CategoryList>
       <CategoryList categories={expenseCategories} is_income={false} onDelete={handleDelete}></CategoryList>
-    </div>
+    </>
   );
 }
 

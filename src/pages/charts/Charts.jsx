@@ -23,11 +23,11 @@ function Charts() {
     }
 
     return (
-        <div id="main">
+        <>
             <h1>Charts</h1>
             <Filter filters={filters} setFilters={handleFilterChange} amount={false} />
             <ChartList transactions={filteredTransactions} categories={categories} budgets={filteredBudgets} />
-        </div>
+        </>
     );
 }
 

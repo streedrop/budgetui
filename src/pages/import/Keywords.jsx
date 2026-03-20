@@ -49,7 +49,7 @@ function Keywords() {
     };
 
     return (
-        <div id="main">
+        <>
             <h1>Keywords</h1>
             <p>Keywords allow you to define links between imports and your categories.
                 It is useful for cases where your bank assign your transactions to
@@ -113,7 +113,7 @@ function Keywords() {
 
                 ))}
             </div>
-        </div>
+        </>
     )
 }
 
