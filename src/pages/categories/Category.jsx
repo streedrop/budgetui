@@ -11,6 +11,7 @@ import { deleteBudget } from '@/services/budget.api.js';
 import { dateToNumericMonthYear } from '@/utils/formatters.js';
 
 import Modal from '@/components/modal/Modal.jsx';
+import Button from '@/components/buttons/Button';
 import ForecastVsActual from '@/pages/charts/ForecastVsActual/ForecastVsActual.jsx';
 import BudgetList from '@/pages/budget/BudgetList.jsx';
 import BudgetForm from '@/pages/budget/BudgetForm.jsx';
@@ -60,7 +61,7 @@ function Category() {
                             <section className={styles.budget}>
                                 <h2>Monthly budget</h2>
                                 <BudgetList budgets={budgets} onDelete={handleDeleteBudget}></BudgetList>
-                                <button className={styles.set} type="button" onClick={() => setModalOpen(true)}>Set budget</button>
+                                <Button className={styles.set} action={() => setModalOpen(true)}>Set budget</Button>
                             </section>
                             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                                 <BudgetForm onCancel={() => setModalOpen(false)} onSuccess={() => { loadBudgets(); setModalOpen(false) }}></BudgetForm>
@@ -70,9 +71,7 @@ function Category() {
             }
             <section className={styles.transactions}>
                 <h2>Transactions</h2>
-                <div className={styles.container}>
-                    <TransactionList transactions={transactions} onDelete={handleDeleteTransaction}></TransactionList>
-                </div>
+                <TransactionList transactions={transactions} onDelete={handleDeleteTransaction}></TransactionList>
             </section>
 
         </>

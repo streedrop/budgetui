@@ -3,6 +3,9 @@ import styles from './styles/CategoryForm.module.css';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchCategory, insertCategory, updateCategory } from '@/services/category.api';
+import CancelButton from '@/components/buttons/CancelButton';
+import SaveButton from '@/components/buttons/SaveButton';
+import AddButton from '@/components/buttons/AddButton';
 
 const emptyFormData = {
     name: "",
@@ -68,8 +71,8 @@ function CategoryForm() {
                         <label htmlFor="income">Income</label>
                     </div>
                 </div>
-                <button type="button" className="cancel" onClick={handleCancel}>Cancel</button>
-                <button type="submit" className="save">{isEditMode ? 'Save' : 'Add'}</button>
+                <CancelButton action={handleCancel} />
+                { isEditMode ? (<SaveButton />) : (<AddButton />) }
             </form>
         </>
     );

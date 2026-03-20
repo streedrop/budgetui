@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 
 import { fetchTransactions } from '@/services/transaction.api';
 
+import Button from '@/components/buttons/Button';
+
 function Dev() {
 
     const [count, setCount] = useState(12);
@@ -73,13 +75,13 @@ function Dev() {
                 acc += `(${Number(item.amount)}, '${item.description}', ${item.category_id}, '${item.date.split("T")[0]}'),\n`;
                 return acc;
             }), string)
-            console.log(string.slice(0, -2) + ';');
             navigator.clipboard.writeText(string.slice(0, -2) + ';');
         })
     }
 
     return (
         <>
+            <h1>Dev Tools</h1>
             <p>Pick a color:</p>
             <div className={styles.colorPicker}>
                 {colors.map((color) => (<div className={styles.color} style={{ backgroundColor: color }}></div>))}
@@ -100,7 +102,7 @@ function Dev() {
             </div>
 
             <div>
-                <button type="button" onClick={extractSql}>Extract transactions as SQL</button>
+                <Button onClick={extractSql}>Extract transactions as SQL</Button>
             </div>
 
         </>

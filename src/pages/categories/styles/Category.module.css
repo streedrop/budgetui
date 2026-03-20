@@ -4,12 +4,7 @@
     margin: auto;
 }
 
-.transactions .container {
-    width: 50%;
-    margin: 0 auto;
-}
-
-.budget .set {
+.budget button {
     width: 20%;
     margin: auto;
 }

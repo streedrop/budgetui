@@ -1,15 +1,12 @@
 #root {
   min-width: 100%;
   min-height: 100%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
 }
 
-main, section{
+main {
   /*transition: margin 1s 0.5s;*/
-  margin: 0 0 0 250px;
-  padding: 2rem 0;
+  margin-left: 250px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -17,5 +14,12 @@ main, section{
 
 main.collapsed {
   /*transition: margin 1s 0.5s;*/
-  margin: 0 0 0 60px;
+  margin-left: 60px;
+}
+
+section {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

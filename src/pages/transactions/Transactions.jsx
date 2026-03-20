@@ -1,5 +1,3 @@
-import styles from './styles/Transactions.module.css';
-
 import { Link } from 'react-router-dom';
 
 import { useTransactions } from '@/hooks/useTransactions.js';
@@ -28,9 +26,7 @@ function Transactions() {
       <h1>Transactions</h1>
       <Link to="/transactions/new">Add a new transaction</Link>
       <Filter filters={filters} setFilters={setFilters} />
-      <div className={styles.container}>
-        <TransactionList transactions={filtered} onDelete={handleDelete} />
-      </div>
+      <TransactionList transactions={filtered} onDelete={handleDelete} />
     </>
   );
 }

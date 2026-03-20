@@ -5,6 +5,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useCategories } from '@/hooks/useCategories.js';
 import { fetchTransaction, insertTransaction, updateTransaction } from '@/services/transaction.api.js';
+import CancelButton from '@/components/buttons/CancelButton';
+import SaveButton from '@/components/buttons/SaveButton';
+import AddButton from '@/components/buttons/AddButton';
 
 const emptyFormData = {
     description: "",
@@ -82,8 +85,8 @@ function TransactionForm() {
                 </select>
                 <label htmlFor="date">Date:</label>
                 <input type="date" id="date" name="date" defaultValue={data.date ? data.date.split("T")[0] : ""}></input>
-                <button type="button" className="cancel" onClick={handleCancel}>Cancel</button>
-                <button className="save" type="submit">{isEditMode ? 'Save' : 'Add'}</button>
+                <CancelButton action={handleCancel} />
+                { isEditMode ? (<SaveButton />) : (<AddButton />) }
             </form>
         </>
     )

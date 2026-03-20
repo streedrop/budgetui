@@ -5,6 +5,9 @@ import { useState, useEffect } from 'react';
 import { fetchCategories } from '@/services/category.api';
 import { fetchKeywords, insertKeyword, deleteKeyword } from '@/services/keyword.api';
 
+import AddButton from '@/components/buttons/AddButton';
+import DeleteButton from '@/components/buttons/DeleteButton';
+
 function Keywords() {
 
     const [action, setAction] = useState("move");
@@ -83,7 +86,7 @@ function Keywords() {
                     )
                 }
 
-                <button type="submit">Add</button>
+                <AddButton/>
             </form>
 
             <h2>Current keywords</h2>
@@ -106,7 +109,7 @@ function Keywords() {
                                 (<p>Move to {categories.find(category => keyword.category_id == category.id)?.name}</p>)
                         }
                         <div className={styles.actions}>
-                            <button type="button" className="delete" onClick={() => handleDelete(keyword.source, keyword.keyword)}><i className="fa-regular fa-circle-xmark fa-xl"></i></button>
+                            <DeleteButton action={() => handleDelete(keyword.source, keyword.keyword)}/>
                         </div>
                         <hr />
                     </div>

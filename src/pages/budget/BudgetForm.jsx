@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 
 import { upsertBudget, deleteBudget } from '@/services/budget.api';
 import { incrementMonth } from '@/utils/dateString';
+import CancelButton from '../../components/buttons/CancelButton';
+import SaveButton from '../../components/buttons/SaveButton';
 
 function BudgetForm({ onCancel, onSuccess }) {
     const { id } = useParams(); // Current category ID
@@ -44,8 +46,8 @@ function BudgetForm({ onCancel, onSuccess }) {
                 />
                 <label htmlFor="budget">Monthly Budget: </label>
                 <input type="text" id="budget" name="budget" />
-                <button type="button" className="cancel" onClick={onCancel}>Cancel</button>
-                <button type="submit" className="save">Save</button>
+                <CancelButton action={onCancel} />
+                <SaveButton />
             </form>
         </>
     );

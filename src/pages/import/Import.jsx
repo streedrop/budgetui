@@ -8,7 +8,12 @@ import { fetchCategories } from '@/services/category.api';
 import { fetchKeywords } from '@/services/keyword.api';
 
 import Modal from '@/components/modal/Modal.jsx';
+
+import Button from '@/components/buttons/Button';
+import CancelButton from '@/components/buttons/CancelButton';
+import ConfirmButton from '@/components/buttons/ConfirmButton';
 import TransactionList from '@/pages/transactions/TransactionList';
+
 
 function Import() {
 
@@ -148,7 +153,7 @@ function Import() {
                     <input type="file" id="files" name="files" accept=".csv" multiple />
                     <label htmlFor="text">Or paste below:</label>
                     <textarea id="text" name="text"></textarea>
-                    <button type="submit">Import</button>
+                    <Button type="submit">Import</Button>
                 </form>
             </div>
 
@@ -156,8 +161,8 @@ function Import() {
                 <p>The following transactions are going to be added:</p>
                 <TransactionList transactions={transactions} /*onDelete={handleDelete}*/ onSelect={handleSelect} editable={false}></TransactionList>
                 <div className={styles.buttons}>
-                    <button className="cancel" onClick={() => setModalOpen(false)}>Cancel</button>
-                    <button className="save" type="button" onClick={insertTransactions}>Confirm</button>
+                    <CancelButton action={() => setModalOpen(false)} />
+                    <ConfirmButton action={insertTransactions} />
                 </div>
             </Modal>
 

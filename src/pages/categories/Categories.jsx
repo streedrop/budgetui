@@ -1,5 +1,3 @@
-import listStyles from './styles/CategoryList.module.css'
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -38,7 +36,7 @@ function Categories() {
     <>
       <h1>Categories</h1>
       <Link to="/categories/new">Add a new category</Link>
-      <div className={listStyles.list}>
+      <div>
         <CategoryItem onDelete={handleDelete}></CategoryItem>
       </div>
       <CategoryList categories={incomeCategories} is_income={true} onDelete={handleDelete}></CategoryList>

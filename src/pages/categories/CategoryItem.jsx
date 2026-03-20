@@ -2,6 +2,9 @@ import styles from './styles/CategoryItem.module.css';
 
 import { useNavigate } from 'react-router-dom';
 
+import DeleteButton from '@/components/buttons/DeleteButton';
+import EditButton from '@/components/buttons/EditButton';
+
 function CategoryItem({ category = { id: null, name: "Uncategorized", description: "" }, onDelete }) {
 
     const navigate = useNavigate();
@@ -24,8 +27,8 @@ function CategoryItem({ category = { id: null, name: "Uncategorized", descriptio
             <div className={styles.actions}>
                 {category.id && (
                     <>
-                        <button type="button" className="edit" onClick={() => goToEdit()}><i className="fa-regular fa-pen-to-square fa-xl"></i></button>
-                        <button type="button" className="delete" onClick={() => onDelete(category.id)}><i className="fa-regular fa-circle-xmark fa-xl"></i></button>
+                        <EditButton action={goToEdit} />
+                        <DeleteButton action={() => onDelete(transaction.id)} />
                     </>
                 )}
             </div>

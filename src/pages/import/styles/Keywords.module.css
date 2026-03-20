@@ -12,11 +12,6 @@
     margin: auto;
 }
 
-.list {
-    width: 50%;
-    margin: 0 auto;
-}
-
 .header, .item {
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 1fr;

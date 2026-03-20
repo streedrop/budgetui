@@ -13,6 +13,30 @@ function TransactionList({ transactions, onDelete, onSelect, editable = true }) 
 
     return (
         <div className={styles.list}>
+            <div className={styles.header}>
+                <h4 className={styles.date}>Date</h4>
+                <h4 className={styles.transaction}>Transaction</h4>
+                <h4 className={styles.category}>Category</h4>
+                <h4 className={styles.amount}>Amount</h4>
+                <h4 className={styles.actions}>Actions</h4>
+            </div>
+            {
+                transactions.map(transaction => (
+                    <TransactionItem
+                        key={transaction.id}
+                        transaction={transaction}
+                        onDelete={onDelete}
+                        onSelect={onSelect}
+                        editable={editable}
+                    />
+                ))
+            }
+        </div>
+    );
+
+    // Ordered by month:
+    /*return (
+        <div className={styles.list}>
             {Object.entries(groupedByMonth).map(([month, { sum, transactions }]) => (
                 <div key={month}>
                     <div className={styles.month}>
@@ -39,7 +63,7 @@ function TransactionList({ transactions, onDelete, onSelect, editable = true }) 
                 </div>
             ))}
         </div>
-    );
+    );*/
 }
 
 export default TransactionList

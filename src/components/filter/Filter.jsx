@@ -10,7 +10,7 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
 
     return (
         <div className={styles.filters}>
-            <h3>Filters</h3>
+            <h2>Filters</h2>
             <form className={`${styles.form} ${styles[`cols-${nb}`]}`}>
                 {date && (
                     <fieldset className={styles.date}>
