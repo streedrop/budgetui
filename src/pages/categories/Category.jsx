@@ -44,36 +44,31 @@ function Category() {
     if ((isUncategorized && !transactions) || (!isUncategorized && !category)) return <div>Loading...</div>;
 
     return (
-        <>
-            {
-                isUncategorized ?
-                    (<h1>Uncategorized</h1>)
-                    :
-                    (
-                        <>
-                            <h1>{category.name}</h1>
-                            {category.description && (
-                                <p><em>{category.description}</em></p>
-                            )}
-                            <section className={styles.chart}>
-                                <ForecastVsActual transactions={transactions} categories={[category]} budgets={budgets} height={200}></ForecastVsActual>
-                            </section>
-                            <section className={styles.budget}>
-                                <h2>Monthly budget</h2>
-                                <BudgetList budgets={budgets} onDelete={handleDeleteBudget}></BudgetList>
-                                <Button className={styles.set} action={() => setModalOpen(true)}>Set budget</Button>
-                            </section>
-                            <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-                                <BudgetForm onCancel={() => setModalOpen(false)} onSuccess={() => { loadBudgets(); setModalOpen(false) }}></BudgetForm>
-                            </Modal>
-                        </>
-                    )
-            }
+        <> {isUncategorized ?
+            (<h1>Uncategorized</h1>)
+            :
+            (<>
+                <h1>{category.name}</h1>
+                {category.description && (
+                    <p><em>{category.description}</em></p>
+                )}
+                <section className={styles.chart}>
+                    <ForecastVsActual transactions={transactions} categories={[category]} budgets={budgets} height={200}></ForecastVsActual>
+                </section>
+                <section className={styles.budget}>
+                    <h2>Monthly budget</h2>
+                    <BudgetList budgets={budgets} onDelete={handleDeleteBudget}></BudgetList>
+                    <Button className={styles.set} action={() => setModalOpen(true)}>Set budget</Button>
+                </section>
+                <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+                    <BudgetForm onCancel={() => setModalOpen(false)} onSuccess={() => { loadBudgets(); setModalOpen(false) }}></BudgetForm>
+                </Modal>
+            </>)}
+
             <section className={styles.transactions}>
                 <h2>Transactions</h2>
                 <TransactionList transactions={transactions} onDelete={handleDeleteTransaction}></TransactionList>
             </section>
-
         </>
     );
 }

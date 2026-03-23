@@ -13,7 +13,7 @@ export function useTransactions(id) {
     useEffect(() => {
         async function load() {
             if (id === "uncategorized")
-                id = null;
+                id = 'null';
             const data = await fetchTransactions(id);
             setTransactions(data);
         }

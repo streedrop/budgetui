@@ -1,23 +1,35 @@
 .item {
     display: grid;
-    grid-template-columns: 2fr 4fr 2fr;
+    grid-template-columns: 0.5fr 2fr 4fr 2fr;
     justify-items: start;
     align-items: center;
-    border: 2px solid white;
     margin: 10px auto;
-    padding: 10px 20px;
+    padding: 10px 0;
     border-radius: 10px;
     height: 75px;
-
+    background-color: #333333;
+    border: 1px solid transparent;
 }
 
 .item:hover {
-    box-shadow: 5px 5px 10px grey;
     cursor: pointer;
+    border: 1px solid grey;
 }
 
-.item .actions {
+.icon {
+    grid-row: span 2;
+    font-size: x-large;
+    justify-self: center;
+}
+
+.description {
+    grid-row: span 2;
+}
+
+.actions {
     display: flex;
     gap: 5px;
     justify-self: end;
+    margin-right: 20px;
+    grid-row: span 2;
 }
