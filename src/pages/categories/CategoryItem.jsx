@@ -18,8 +18,14 @@ function CategoryItem({ category, onDelete }) {
         navigate(`/categories/${category.id}`);
     }
 
-    const goToEdit = () => {
+    const goToEdit = (evt) => {
+        evt.stopPropagation();
         navigate(`/categories/${category.id}/edit`);
+    }
+
+    const deleteFunc = (evt) => {
+        evt.stopPropagation();
+        onDelete(category.id);
     }
 
     return (
@@ -31,7 +37,7 @@ function CategoryItem({ category, onDelete }) {
                 {category.id && (
                     <>
                         <EditButton action={goToEdit} />
-                        <DeleteButton action={() => onDelete(transaction.id)} />
+                        <DeleteButton action={deleteFunc} />
                     </>
                 )}
             </div>

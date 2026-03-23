@@ -71,6 +71,7 @@ function CategoryForm() {
                         <label htmlFor="income">Income</label>
                     </div>
                 </div>
+                <input hidden value="0" name="icon"></input>
                 <CancelButton action={handleCancel} />
                 { isEditMode ? (<SaveButton />) : (<AddButton />) }
             </form>

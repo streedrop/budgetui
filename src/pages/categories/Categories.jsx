@@ -15,7 +15,7 @@ function Categories() {
     if (!confirm("Are you sure you want to delete this category and all its transactions?"))
       return;
 
-    res = await deleteCategory(id);
+    const res = await deleteCategory(id);
     if (!res.ok) return;
 
     setCategories(prev => prev.filter(category => category.id !== id));
