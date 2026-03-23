@@ -28,7 +28,7 @@ function TransactionItem({ transaction, onDelete, onSelect, editable }) {
                     return transaction.category_id
                         ? <Link className={styles.category} to={`/categories/${transaction.category_id}`}>{p}</Link>
                         : p;
-                })() : (<div></div>)}
+                })() : (<p>-</p>)}
 
                 <p className={styles.amount}>{transaction.is_income ? '+' : '-'}{amountFormatter(transaction.amount)}</p>
                 <div className={styles.actions}>
@@ -49,7 +49,6 @@ function TransactionItem({ transaction, onDelete, onSelect, editable }) {
                     isCurrentYear ? (<div></div>) : (<p>{dateToYear(transaction.date)}</p>)
                 }
             </div>
-            <hr />
         </>
     );
 }

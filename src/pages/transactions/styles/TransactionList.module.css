@@ -1,7 +1,19 @@
-.month {
+.list {
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+.title {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin: 20px;
 }
+
+/*.month {
+    display: flex;
+    justify-content: space-between;
+}*/
 
 .header {
     display: grid;
@@ -9,6 +21,11 @@
     column-gap: 5px;
     justify-items: start;
     align-items: center;
+    padding: 10px 20px;
+    border: 1px solid grey;
+    border-left: hidden;
+    border-right: hidden;
+    background-color: #333333;
 }
 
 .amount, .actions {

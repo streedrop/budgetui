@@ -1,18 +1,29 @@
 import styles from './styles/TransactionList.module.css';
 
-import { amountFormatter } from '@/utils/formatters';
+import { useNavigate } from 'react-router-dom';
+
+/*import { amountFormatter } from '@/utils/formatters';*/
 import { groupTransactionsByMonth } from '@/utils/groupers';
 
+import AddButton from '@/components/buttons/AddButton';
 import TransactionItem from './TransactionItem';
 
 function TransactionList({ transactions, onDelete, onSelect, editable = true }) {
     // group transactions by month for display
-    const groupedByMonth = groupTransactionsByMonth(transactions);
+    /*const groupedByMonth = groupTransactionsByMonth(transactions);*/
+
+    const navigate = useNavigate();
 
     if (transactions.length == 0) return <div>No transactions to display.</div>;
 
     return (
         <div className={styles.list}>
+            <div className={styles.title}>
+                <h2>Transaction List</h2>
+                {editable && (
+                    <AddButton action={() => navigate('/transactions/new')} />
+                )}
+            </div>
             <div className={styles.header}>
                 <h4 className={styles.date}>Date</h4>
                 <h4 className={styles.transaction}>Transaction</h4>
