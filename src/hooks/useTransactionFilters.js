@@ -1,12 +1,9 @@
 import { useState } from 'react';
 
+import emptyFilters from '@/constants/EmptyFilters'
+
 export function useTransactionFilters(transactions) {
-  const [filters, setFilters] = useState({
-    after: '',
-    before: '',
-    minAmount: '',
-    maxAmount: ''
-  });
+  const [filters, setFilters] = useState(emptyFilters);
 
   const filtered = transactions
     .filter(t => filters.before === '' || t.date <= filters.before)

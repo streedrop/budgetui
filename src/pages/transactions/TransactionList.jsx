@@ -2,45 +2,61 @@ import styles from './styles/TransactionList.module.css';
 
 import { useNavigate } from 'react-router-dom';
 
-/*import { amountFormatter } from '@/utils/formatters';*/
-import { groupTransactionsByMonth } from '@/utils/groupers';
+/*import { amountFormatter } from '@/utils/formatters';
+import { groupTransactionsByMonth } from '@/utils/groupers';*/
 
 import AddButton from '@/components/buttons/AddButton';
+import FilterButton from '@/components/buttons/FilterButton';
 import TransactionItem from './TransactionItem';
 
-function TransactionList({ transactions, onDelete, onSelect, editable = true }) {
+function TransactionList({ transactions, onDelete, onSelect, editable = true, openFilters }) {
     // group transactions by month for display
     /*const groupedByMonth = groupTransactionsByMonth(transactions);*/
 
     const navigate = useNavigate();
 
-    if (transactions.length == 0) return <div>No transactions to display.</div>;
-
     return (
         <div className={styles.list}>
             <div className={styles.title}>
                 <h2>Transaction List</h2>
-                {editable && (
-                    <AddButton action={() => navigate('/transactions/new')} />
-                )}
-            </div>
-            <div className={styles.header}>
-                <h4 className={styles.date}>Date</h4>
-                <h4 className={styles.transaction}>Transaction</h4>
-                <h4 className={styles.category}>Category</h4>
-                <h4 className={styles.amount}>Amount</h4>
-                <h4 className={styles.actions}>Actions</h4>
+                <div className={styles.actions}>
+                    {openFilters && (
+                        <FilterButton action={() => { openFilters(true) }} />
+                    )}
+                    {editable && (
+                        <AddButton action={() => navigate('/transactions/new')} />
+                    )}
+                </div>
             </div>
             {
-                transactions.map(transaction => (
-                    <TransactionItem
-                        key={transaction.id}
-                        transaction={transaction}
-                        onDelete={onDelete}
-                        onSelect={onSelect}
-                        editable={editable}
-                    />
-                ))
+                transactions.length > 0 ?
+                    (
+                        <>
+                            <div className={styles.header}>
+                                <h4 className={styles.date}>Date</h4>
+                                <h4 className={styles.transaction}>Transaction</h4>
+                                <h4 className={styles.category}>Category</h4>
+                                <h4 className={styles.amount}>Amount</h4>
+                                <h4 className={styles.actions}>Actions</h4>
+                            </div>
+                            {
+                                transactions.map(transaction => (
+                                    <TransactionItem
+                                        key={transaction.id}
+                                        transaction={transaction}
+                                        onDelete={onDelete}
+                                        onSelect={onSelect}
+                                        editable={editable}
+                                    />
+                                ))}
+                        </>
+                    )
+                    :
+                    <div className={styles.noTransactions}>
+                        <i className="fa-regular fa-rectangle-xmark"></i>
+                        <h3>No transactions to display</h3>
+                        <p>Try clearing your filters or adding more transactions.</p>
+                    </div>
             }
         </div>
     );

@@ -1,16 +1,19 @@
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 import { useTransactions } from '@/hooks/useTransactions.js';
 import { useTransactionFilters } from '@/hooks/useTransactionFilters.js';
 import { deleteTransaction } from '@/services/transaction.api.js';
 
 import AddButton from '@/components/buttons/AddButton.jsx';
-import Filter from '@/components/filter/Filter.jsx';
 import TransactionList from './TransactionList.jsx'
+import FilterOverlay from '../../components/filter/FilterOverlay.jsx';
 
 function Transactions() {
   const { transactions, setTransactions } = useTransactions();
   const { filtered, filters, setFilters } = useTransactionFilters(transactions);
+
+  const [openFilters, setOpenFilters] = useState(false);
 
   const handleDelete = async (id) => {
     const res = await deleteTransaction(id);
@@ -31,8 +34,9 @@ function Transactions() {
         <p>Every transaction you add should be categorized to see it's data and interpret results better.</p>
         <AddButton action={() => navigate('/transactions/new')}>Add transaction</AddButton>
       </section>
-      <Filter filters={filters} setFilters={setFilters} />
-      <TransactionList transactions={filtered} onDelete={handleDelete} />
+      <FilterOverlay isOpen={openFilters} onClose={() => setOpenFilters(false)} filters={filters} setFilters={setFilters}  />
+      {/* <Filter filters={filters} setFilters={setFilters} /> */}
+      <TransactionList transactions={filtered} onDelete={handleDelete} openFilters={setOpenFilters} />
     </>
   );
 }

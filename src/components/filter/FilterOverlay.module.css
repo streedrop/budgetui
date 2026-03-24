@@ -1,0 +1,18 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+}
+
+.modal {
+    position: absolute;
+    right: 155px;
+    top: 270px;
+    width: 300px;
+    background: #242424;
+    border: 1px solid grey;
+    border-radius: 8px;
+    /*min-width: 300px;*/
+    max-height: 80vh;
+    overflow-y: auto;
+}

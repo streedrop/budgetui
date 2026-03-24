@@ -28,6 +28,24 @@
     background-color: #333333;
 }
 
+.actions {
+    display: flex;
+    gap: 5px;
+}
+
 .amount, .actions {
     justify-self: end;
+}
+
+.noTransactions {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.noTransactions i {
+    color:gray;
+    font-size: 5em;
 }
