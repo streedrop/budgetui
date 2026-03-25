@@ -1,33 +1,103 @@
 import styles from './Filter.module.css'
 
-import emptyFilters from '@/constants/EmptyFilters'
+import { useState, useEffect } from 'react';
 
+import emptyFilters from '@/constants/EmptyFilters'
+import { dateToMonthYear } from '@/utils/formatters';
+
+import { useTransactions } from '@/hooks/rq/useTransactions.js';
 import Button from '@/components/buttons/Button';
 
 function Filter({ filters, setFilters, date = true, amount = true }) {
+    const { data: transactions = [], isLoading, error } = useTransactions();
+    const [dateRange, setDateRange] = useState("0");
+    const [selectedYear, setSelectedYear] = useState(null);
+    const [selectedMonth, setSelectedMonth] = useState(null);
+
+    const years = [...new Set(transactions.map(t => t.date.slice(0, 4)))];
+    const months = [...new Set(transactions.map(t => t.date.slice(0, 7)))];
 
     // The amount of filters shown
-    const nb = [date, amount].filter(Boolean).length;
+    const nbFilters = [date, amount].filter(Boolean).length;
 
-    if (nb == 0)
+    // First initialisation for selectedYear and selectedMonth
+    useEffect(() => {
+        // Return if selectedYear or selectedMonth already had values
+        if (selectedYear || selectedMonth) return;
+        setSelectedYear(years[0]);
+        setSelectedMonth(months[0]);
+    }, [transactions]);
+
+    // Called when we need to apply new filters for year
+    useEffect(() => {
+        // Return if selectedYear is still null or if dateRange is not set to 'Yearly'
+        if (!selectedYear || dateRange != '1') return;
+        // First day of the year
+        const from = `${selectedYear}-01-01`;
+        // Last day of the year
+        const to = `${selectedYear}-12-31`;
+
+        setFilters(prev => ({ ...prev, after: from, before: to }));
+    }, [selectedYear, dateRange]);
+
+    // Called when we need to apply new filters for month
+    useEffect(() => {
+        // Return if selectedMonth is still null or if dateRange is not set to 'Monthly'
+        if (!selectedMonth || dateRange != '2')
+            return;
+        // First day of the month
+        const from = `${selectedMonth}-01`;
+        // Last day of the month
+        const to = `${selectedMonth}-${new Date(selectedMonth.slice(0, 4), Number(selectedMonth.slice(5, 7)), 0).getDate()}`;
+
+        setFilters(prev => ({ ...prev, after: from, before: to }));
+    }, [selectedMonth, dateRange]);
+
+    // Return nothing if there are no filters to display
+    if (nbFilters == 0)
         return;
+
+    const resetFilters = () => {
+        setFilters(emptyFilters);
+        setDateRange('0');
+    }
 
     return (
         <div className={styles.filters}>
             <h3 className={styles.title}>Filters</h3>
-            <form className={`${styles.form} ${styles[`cols-${nb}`]}`}>
+            <form className={`${styles.form}`}>
                 {date && (
                     <div className={`${styles.filter} ${styles.date}`}>
                         <h4>Date range</h4>
-                        <div className={styles.subForm}>
-                            <div>
-                                <input type="radio" id="yearly" name="dateType" value="1" />
-                                <label for="yearly">Yearly</label>
-                                <input type="radio" id="monthly" name="dateType" value="2" />
-                                <label for="monthly">Monthly</label>
-                                <input type="radio" id="custom" name="dateType" value="3" />
-                                <label for="custom">Custom</label>
-                            </div>
+                        <div className={styles.rangeSelector}>
+                            <input type="radio" id="yearly" name="dateRange" value="1" checked={dateRange === '1'} onChange={evt => setDateRange(evt.target.value)} />
+                            <label htmlFor="yearly">Yearly</label>
+                            <input type="radio" id="monthly" name="dateRange" value="2" checked={dateRange === '2'} onChange={evt => setDateRange(evt.target.value)} />
+                            <label htmlFor="monthly">Monthly</label>
+                            <input type="radio" id="custom" name="dateRange" value="3" checked={dateRange === '3'} onChange={evt => setDateRange(evt.target.value)} />
+                            <label htmlFor="custom">Custom</label>
+                        </div>
+                        <div className={`${styles.periodSelector} ${dateRange != "1" ? styles.hidden : ''}`}>
+                            <label htmlFor="year">Select year: </label>
+                            <select name="year" id="year" onChange={evt => setSelectedYear(evt.target.value)}>
+                                {
+                                    years.map(year =>
+                                        <option key={year} value={year}>{year}</option>
+                                    )
+                                }
+                            </select>
+                        </div>
+                        <div className={`${styles.periodSelector} ${dateRange != "2" ? styles.hidden : ''}`}>
+                            <label htmlFor="month">Select month: </label>
+                            <select name="month" id="month" onChange={evt => setSelectedMonth(evt.target.value)}>
+                                {
+                                    months.map(month =>
+                                        <option key={month} value={month}>{dateToMonthYear(month)}</option>
+                                    )
+                                }
+                            </select>
+                        </div>
+                        <div className={`${styles.subForm} ${dateRange != "3" ? styles.hidden : ''}`}>
                             <div>
                                 <label htmlFor="after">From: </label>
                                 <input id="after" type="date" value={filters.after} onChange={evt => setFilters(prev => ({ ...prev, after: evt.target.value }))} />
@@ -58,11 +128,10 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
                     </div>
                 )}
                 <div className={`${styles.filter}`}>
-                    <Button action={() => setFilters(emptyFilters)}>Reset</Button>
+                    <Button action={resetFilters}>Reset</Button>
                 </div>
             </form>
         </div>
-
     );
 }
 

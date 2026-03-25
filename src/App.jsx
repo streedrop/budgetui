@@ -1,6 +1,8 @@
 import './App.css'
 import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import NavBar from './components/navbar/NavBar.jsx'
 
@@ -18,29 +20,34 @@ import Keywords from './pages/import/Keywords.jsx'
 
 import Dev from './pages/devtools/Dev.jsx'
 
+const queryClient = new QueryClient();
+
 function App() {
 
   const [collapsed, setCollapsed] = useState(false);
 
   return (
     <>
-      <NavBar collapsed={collapsed} setCollapsed={setCollapsed} />
-      <main className={collapsed ? 'collapsed' : ''}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/categories" element={<Categories />} />
-          <Route path="/categories/:id" element={<Category />} />
-          <Route path="/categories/new" element={<CategoryForm />} />
-          <Route path="/categories/:id/edit" element={<CategoryForm />} />
-          <Route path="/transactions" element={<Transactions />} />
-          <Route path="/transactions/new" element={<TransactionForm />} />
-          <Route path="/transactions/:id/edit" element={<TransactionForm />} />
-          <Route path="/charts" element={<Charts />} />
-          <Route path="/import" element={<Import />} />
-          <Route path="/import/keywords" element={<Keywords />} />
-          <Route path="/dev" element={<Dev />} />
-        </Routes>
-      </main>
+      <QueryClientProvider client={queryClient}>
+        <NavBar collapsed={collapsed} setCollapsed={setCollapsed} />
+        <main className={collapsed ? 'collapsed' : ''}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/categories/:id" element={<Category />} />
+            <Route path="/categories/new" element={<CategoryForm />} />
+            <Route path="/categories/:id/edit" element={<CategoryForm />} />
+            <Route path="/transactions" element={<Transactions />} />
+            <Route path="/transactions/new" element={<TransactionForm />} />
+            <Route path="/transactions/:id/edit" element={<TransactionForm />} />
+            <Route path="/charts" element={<Charts />} />
+            <Route path="/import" element={<Import />} />
+            <Route path="/import/keywords" element={<Keywords />} />
+            <Route path="/dev" element={<Dev />} />
+          </Routes>
+        </main>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </>
   )
 }

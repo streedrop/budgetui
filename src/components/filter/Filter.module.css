@@ -16,14 +16,13 @@
 
 .filter {
     border-top: 1px solid grey;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .title, .filter {
     padding: 15px 10px;
-}
-
-.filter h4 {
-    margin-bottom: 10px;
 }
 
 .subForm {
@@ -39,18 +38,28 @@
     font-size: small;
 }
 
-.filter input {
+.filter input, .filter select {
     padding: 5px;
     border-radius: 5px;
 }
 
-.date .subForm div:first-of-type {
+.rangeSelector {
     grid-column: span 2;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr;
 }
 
+.periodSelector {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .amount input[type="number"] {
     width: 90%;
     margin-right: 4px;
+}
+
+.hidden {
+    display: none;
 }

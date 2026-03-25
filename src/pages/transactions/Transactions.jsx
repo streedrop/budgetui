@@ -1,31 +1,25 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import { useTransactions } from '@/hooks/useTransactions.js';
+import { useTransactions } from '@/hooks/rq/useTransactions.js';
+import { useDeleteTransaction } from '@/hooks/rq/useDeleteTransaction.js';
 import { useTransactionFilters } from '@/hooks/useTransactionFilters.js';
-import { deleteTransaction } from '@/services/transaction.api.js';
 
 import AddButton from '@/components/buttons/AddButton.jsx';
+import FilterOverlay from '@/components/filter/FilterOverlay.jsx';
 import TransactionList from './TransactionList.jsx'
-import FilterOverlay from '../../components/filter/FilterOverlay.jsx';
 
 function Transactions() {
-  const { transactions, setTransactions } = useTransactions();
+  const { data : transactions = [], isLoading, error } = useTransactions();
   const { filtered, filters, setFilters } = useTransactionFilters(transactions);
+  const { mutate: deleteTransaction } = useDeleteTransaction();
 
   const [openFilters, setOpenFilters] = useState(false);
 
-  const handleDelete = async (id) => {
-    const res = await deleteTransaction(id);
-    if (!res.ok) return;
-
-    setTransactions(prev => prev.filter(transaction => transaction.id !== id));
-  };
-
   const navigate = useNavigate();
 
-  //if (loading) return <p>Loading...</p>;
-  //if (error) return <p>Error: {error}</p>;
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <>
@@ -36,7 +30,7 @@ function Transactions() {
       </section>
       <FilterOverlay isOpen={openFilters} onClose={() => setOpenFilters(false)} filters={filters} setFilters={setFilters}  />
       {/* <Filter filters={filters} setFilters={setFilters} /> */}
-      <TransactionList transactions={filtered} onDelete={handleDelete} openFilters={setOpenFilters} />
+      <TransactionList transactions={filtered} onDelete={deleteTransaction} openFilters={setOpenFilters} />
     </>
   );
 }

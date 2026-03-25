@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 /*import { amountFormatter } from '@/utils/formatters';
 import { groupTransactionsByMonth } from '@/utils/groupers';*/
+import { useDeleteTransaction } from '@/hooks/rq/useDeleteTransaction.js';
 
 import AddButton from '@/components/buttons/AddButton';
 import FilterButton from '@/components/buttons/FilterButton';
@@ -12,6 +13,7 @@ import TransactionItem from './TransactionItem';
 function TransactionList({ transactions, onDelete, onSelect, editable = true, openFilters }) {
     // group transactions by month for display
     /*const groupedByMonth = groupTransactionsByMonth(transactions);*/
+    const { mutate } = useDeleteTransaction();
 
     const navigate = useNavigate();
 

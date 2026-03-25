@@ -4,7 +4,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useCategories } from '@/hooks/useCategories.js';
-import { fetchTransaction, insertTransaction, updateTransaction } from '@/services/transaction.api.js';
+import { useCreateTransaction } from '@/hooks/rq/useCreateTransaction.js';
+import { useEditTransaction } from '@/hooks/rq/useEditTransaction.js';
+import { useTransaction } from '@/hooks/rq/useTransaction.js';
+import { fetchTransaction } from '@/services/transaction.api.js';
 import CancelButton from '@/components/buttons/CancelButton';
 import SaveButton from '@/components/buttons/SaveButton';
 import AddButton from '@/components/buttons/AddButton';
@@ -20,35 +23,32 @@ function TransactionForm() {
     const isEditMode = Boolean(id);                     // ID = editing, No ID = creating
     const { categories } = useCategories();
     const [data, setFormData] = useState(emptyFormData);    // Form data
+    const { mutate: createTransaction } = useCreateTransaction();
+    const { mutate: editTransaction } = useEditTransaction();
+    const { data: transaction = [], isLoading, error } = useTransaction(id);
 
     const navigate = useNavigate();
 
-    // Fetch the transaction & pre-fill form
+    // Pre-fill form
     useEffect(() => {
-        if (!isEditMode) return;
-
-        async function loadTransaction() {
-            const data = await fetchTransaction(id);
-            setFormData(data);
-        }
-
-        loadTransaction();
-    }, [id]);
+        if (transaction)
+            setFormData(transaction);
+    }, [transaction]);
 
     // Add / Save button
-    async function handleSubmit(evt) {
+    function handleSubmit(evt) {
         evt.preventDefault();
 
         const formData = new FormData(evt.target);
         const data = Object.fromEntries(formData);
 
-        if(data.category_id === "")
+        if (data.category_id === "")
             data.category_id = null;
 
         if (isEditMode)
-            await updateTransaction(id, data);
+            editTransaction({ id, data });
         else
-            await insertTransaction(data);
+            createTransaction(data);
 
         navigate('/transactions');
     };
@@ -86,7 +86,7 @@ function TransactionForm() {
                 <label htmlFor="date">Date:</label>
                 <input type="date" id="date" name="date" defaultValue={data.date ? data.date.split("T")[0] : ""}></input>
                 <CancelButton action={handleCancel} />
-                { isEditMode ? (<SaveButton />) : (<AddButton />) }
+                {isEditMode ? (<SaveButton />) : (<AddButton />)}
             </form>
         </>
     )
