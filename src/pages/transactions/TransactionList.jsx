@@ -10,7 +10,7 @@ import AddButton from '@/components/buttons/AddButton';
 import FilterButton from '@/components/buttons/FilterButton';
 import TransactionItem from './TransactionItem';
 
-function TransactionList({ transactions, onDelete, onSelect, editable = true, openFilters }) {
+function TransactionList({ transactions, deletable = true, onSelect, editable = true, openFilters }) {
     // group transactions by month for display
     /*const groupedByMonth = groupTransactionsByMonth(transactions);*/
     const { mutate } = useDeleteTransaction();
@@ -46,7 +46,7 @@ function TransactionList({ transactions, onDelete, onSelect, editable = true, op
                                     <TransactionItem
                                         key={transaction.id}
                                         transaction={transaction}
-                                        onDelete={onDelete}
+                                        deletable={deletable}
                                         onSelect={onSelect}
                                         editable={editable}
                                     />

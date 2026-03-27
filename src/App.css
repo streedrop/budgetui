@@ -24,3 +24,13 @@ section {
   gap: 20px;
   align-items: flex-start;
 }
+
+input, select {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.amount-input input[type="number"] {
+    width: 90%;
+    margin-right: 4px;
+}

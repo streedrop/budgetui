@@ -159,7 +159,7 @@ function Import() {
 
             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                 <p>The following transactions are going to be added:</p>
-                <TransactionList transactions={transactions} /*onDelete={handleDelete}*/ onSelect={handleSelect} editable={false}></TransactionList>
+                <TransactionList transactions={transactions} deletable={false} onSelect={handleSelect} editable={false}></TransactionList>
                 <div className={styles.buttons}>
                     <CancelButton action={() => setModalOpen(false)} />
                     <ConfirmButton action={insertTransactions} />

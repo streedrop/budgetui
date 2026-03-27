@@ -3,17 +3,19 @@ import styles from './styles/TransactionItem.module.css';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { dateToMonthDay, dateToYear, amountFormatter } from '@/utils/formatters';
+import { useDeleteTransaction } from '@/hooks/rq/useDeleteTransaction.js';
 
 import DeleteButton from '@/components/buttons/DeleteButton';
 import EditButton from '@/components/buttons/EditButton';
 
-function TransactionItem({ transaction, onDelete, onSelect, editable }) {
+function TransactionItem({ transaction, deletable, onSelect, editable }) {
 
     const navigate = useNavigate();
 
     const goToEdit = () => {
         navigate(`/transactions/${transaction.id}/edit`);
     }
+    const { mutate: deleteTransaction } = useDeleteTransaction();
 
     const isCurrentYear = new Date().getFullYear() == new Date(transaction.date).getFullYear();
 
@@ -40,8 +42,8 @@ function TransactionItem({ transaction, onDelete, onSelect, editable }) {
                         (<input type="checkbox" checked={!transaction.ignored} onChange={() => onSelect(transaction.id)} />)
                     }
 
-                    {onDelete &&
-                        (<DeleteButton action={() => onDelete(transaction.id)} />)
+                    {deletable &&
+                        (<DeleteButton action={() => deleteTransaction(transaction.id)} />)
                     }
 
                 </div>

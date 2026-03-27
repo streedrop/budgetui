@@ -6,7 +6,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import NavBar from './components/navbar/NavBar.jsx'
 
-import Home from './pages/home/home.jsx'
+import Dashboard from './pages/dashboard/Dashboard.jsx'
 import Categories from './pages/categories/Categories.jsx'
 import Category from './pages/categories/Category.jsx'
 import CategoryForm from './pages/categories/CategoryForm.jsx'
@@ -32,14 +32,14 @@ function App() {
         <NavBar collapsed={collapsed} setCollapsed={setCollapsed} />
         <main className={collapsed ? 'collapsed' : ''}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/transactions" element={<Transactions />} />
+            <Route path="/transactions/new" element={<TransactionForm />} />
+            <Route path="/transactions/:id/edit" element={<TransactionForm />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/categories/:id" element={<Category />} />
             <Route path="/categories/new" element={<CategoryForm />} />
             <Route path="/categories/:id/edit" element={<CategoryForm />} />
-            <Route path="/transactions" element={<Transactions />} />
-            <Route path="/transactions/new" element={<TransactionForm />} />
-            <Route path="/transactions/:id/edit" element={<TransactionForm />} />
             <Route path="/charts" element={<Charts />} />
             <Route path="/import" element={<Import />} />
             <Route path="/import/keywords" element={<Keywords />} />

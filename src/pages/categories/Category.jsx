@@ -4,9 +4,8 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useCategory } from '@/hooks/useCategory.js';
-import { useTransactions } from '@/hooks/useTransactions.js';
+import { useTransactions } from '@/hooks/rq/useTransactions.js';
 import { useBudgets } from '@/hooks/useBudgets.js';
-import { deleteTransaction } from '@/services/transaction.api.js';
 import { deleteBudget } from '@/services/budget.api.js';
 import { dateToNumericMonthYear } from '@/utils/formatters.js';
 
@@ -25,14 +24,7 @@ function Category() {
 
     const { category } = useCategory(id);
     const { budgets, setBudgets } = useBudgets(id);
-    const { transactions, setTransactions } = useTransactions(id);
-
-    const handleDeleteTransaction = async (id) => {
-        const res = await deleteTransaction(id);
-        if (!res.ok) return;
-
-        setTransactions(prev => prev.filter(transaction => transaction.id !== id));
-    };
+    const { data : transactions = [], isLoading, error } = useTransactions(id);
 
     const handleDeleteBudget = async (month) => {
         const res = await deleteBudget(id, dateToNumericMonthYear(month));
@@ -67,7 +59,7 @@ function Category() {
 
             <section className={styles.transactions}>
                 <h2>Transactions</h2>
-                <TransactionList transactions={transactions} onDelete={handleDeleteTransaction}></TransactionList>
+                <TransactionList transactions={transactions}></TransactionList>
             </section>
         </>
     );

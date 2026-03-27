@@ -115,13 +115,13 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
                         <div className={styles.subForm}>
                             <div>
                                 <label htmlFor="minAmount">From: </label>
-                                <span>
+                                <span className='amount-input'>
                                     <input id="minAmount" type="number" step="any" min="0" value={filters.minAmount} onChange={evt => setFilters(prev => ({ ...prev, minAmount: evt.target.value }))} />
                                     $</span>
                             </div>
                             <div>
                                 <label htmlFor="maxAmount">To: </label>
-                                <span><input id="maxAmount" type="number" step="any" min="0" value={filters.maxAmount} onChange={evt => setFilters(prev => ({ ...prev, maxAmount: evt.target.value }))} />
+                                <span className='amount-input'><input id="maxAmount" type="number" step="any" min="0" value={filters.maxAmount} onChange={evt => setFilters(prev => ({ ...prev, maxAmount: evt.target.value }))} />
                                     $</span>
                             </div>
                         </div>

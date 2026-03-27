@@ -19,15 +19,15 @@ function NavBar({ collapsed, setCollapsed }) {
       <div className={styles.links}>
         <NavLink to="/" className={navClass}>
           <i className="fa-regular fa-house"></i>
-          <span>Home</span>
-        </NavLink>
-        <NavLink to="/categories" className={navClass}>
-          <i className="fa-regular fa-folder"></i>
-          <span>Categories</span>
+          <span>Dashboard</span>
         </NavLink>
         <NavLink to="/transactions" className={navClass}>
           <i className="fa-solid fa-list"></i>
           <span>Transactions</span>
+        </NavLink>
+        <NavLink to="/categories" className={navClass}>
+          <i className="fa-regular fa-folder"></i>
+          <span>Categories</span>
         </NavLink>
         <NavLink to="/charts" className={navClass}>
           <i className="fa-regular fa-chart-bar"></i>

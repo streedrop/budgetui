@@ -34,18 +34,25 @@ function BudgetForm({ onCancel, onSuccess }) {
         <>
             <h2 className={styles.title}>Manage budget</h2>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <label htmlFor="from">From: </label>
-                <input type="month" id="from" name="from" />
-                <label htmlFor="to">To: </label>
-                <input
-                    type="month"
-                    id="to"
-                    name="to"
-                    min="2020-01"
-                    max={`${new Date().getFullYear()}-12`}
-                />
-                <label htmlFor="budget">Monthly Budget: </label>
-                <input type="text" id="budget" name="budget" />
+                <div className={styles.dateRange}>
+                    <p>Month range:</p>
+                    <div >
+                        <label htmlFor="from">From: </label>
+                        <input type="month" id="from" name="from" />
+                    </div>
+                    <div>
+                        <label htmlFor="to">To: </label>
+                        <input
+                            type="month"
+                            id="to"
+                            name="to"
+                            min="2020-01"
+                            max={`${new Date().getFullYear()}-12`}
+                        />
+                    </div>
+                </div>
+                <label className={styles.budget} htmlFor="budget">Monthly Budget: </label>
+                <span className='amount-input'><input type="number" id="budget" name="budget" />$</span>
                 <CancelButton action={onCancel} />
                 <SaveButton />
             </form>

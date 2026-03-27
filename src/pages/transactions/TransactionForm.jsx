@@ -7,7 +7,6 @@ import { useCategories } from '@/hooks/useCategories.js';
 import { useCreateTransaction } from '@/hooks/rq/useCreateTransaction.js';
 import { useEditTransaction } from '@/hooks/rq/useEditTransaction.js';
 import { useTransaction } from '@/hooks/rq/useTransaction.js';
-import { fetchTransaction } from '@/services/transaction.api.js';
 import CancelButton from '@/components/buttons/CancelButton';
 import SaveButton from '@/components/buttons/SaveButton';
 import AddButton from '@/components/buttons/AddButton';

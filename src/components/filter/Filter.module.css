@@ -38,11 +38,6 @@
     font-size: small;
 }
 
-.filter input, .filter select {
-    padding: 5px;
-    border-radius: 5px;
-}
-
 .rangeSelector {
     grid-column: span 2;
     display: grid;
@@ -53,11 +48,6 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-}
-
-.amount input[type="number"] {
-    width: 90%;
-    margin-right: 4px;
 }
 
 .hidden {
