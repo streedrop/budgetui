@@ -3,20 +3,28 @@ import styles from './styles/CategoryForm.module.css';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchCategory, insertCategory, updateCategory } from '@/services/category.api';
+
+import Modal from '@/components/modal/Modal';
+import Button from '@/components/buttons/Button';
 import CancelButton from '@/components/buttons/CancelButton';
 import SaveButton from '@/components/buttons/SaveButton';
 import AddButton from '@/components/buttons/AddButton';
+import IconPicker from '@/components/IconPicker/IconPicker';
 
 const emptyFormData = {
     name: "",
     description: "",
     is_income: 0,
+    icon: 0
 };
 
 function CategoryForm() {
     const { id } = useParams();                         // Current transaction ID
     const isEditMode = Boolean(id);                     // ID = editing, No ID = creating
     const [data, setFormData] = useState(emptyFormData);    // Form data
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const [icon, setIcon] = useState(0);
 
     const navigate = useNavigate();
 
@@ -27,6 +35,7 @@ function CategoryForm() {
         async function loadCategory() {
             const data = await fetchCategory(id);
             setFormData(data);
+            setIcon(data.icon);
         }
 
         loadCategory();
@@ -58,6 +67,12 @@ function CategoryForm() {
             <form className={styles.form} onSubmit={handleSubmit}>
                 <label htmlFor="name">Name: </label>
                 <input type="text" id="name" name="name" defaultValue={data.name} />
+                <label htmlFor="icon">Icon: </label>
+                <Button action={() => setModalOpen(true)}>Select icon...</Button>
+                <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+                    <IconPicker selected={icon} setIcon={setIcon} />
+                </Modal>
+                <input type="hidden" id="icon" name="icon" value={icon} readOnly />
                 <label htmlFor="description">Description: </label>
                 <input type="text" id="description" name="description" defaultValue={data.description} />
                 <label>Type: </label>
@@ -71,9 +86,8 @@ function CategoryForm() {
                         <label htmlFor="income">Income</label>
                     </div>
                 </div>
-                <input hidden value="0" name="icon"></input>
                 <CancelButton action={handleCancel} />
-                { isEditMode ? (<SaveButton />) : (<AddButton />) }
+                {isEditMode ? (<SaveButton />) : (<AddButton />)}
             </form>
         </>
     );

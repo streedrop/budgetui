@@ -72,7 +72,7 @@ function TransactionForm() {
                     onChange={(e) =>
                         setFormData({
                             ...data,
-                            category_id: Number(e.target.value)
+                            category_id: e.target.value
                         })
                     }>
                     <option value="">Uncategorized</option>

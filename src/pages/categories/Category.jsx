@@ -3,6 +3,8 @@ import styles from './styles/Category.module.css';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import icons from '@/constants/CategoryIcons';
+
 import { useCategory } from '@/hooks/useCategory.js';
 import { useTransactions } from '@/hooks/rq/useTransactions.js';
 import { useBudgets } from '@/hooks/useBudgets.js';
@@ -24,7 +26,7 @@ function Category() {
 
     const { category } = useCategory(id);
     const { budgets, setBudgets } = useBudgets(id);
-    const { data : transactions = [], isLoading, error } = useTransactions(id);
+    const { data: transactions = [], isLoading, error } = useTransactions(id);
 
     const handleDeleteBudget = async (month) => {
         const res = await deleteBudget(id, dateToNumericMonthYear(month));
@@ -40,7 +42,11 @@ function Category() {
             (<h1>Uncategorized</h1>)
             :
             (<>
-                <h1>{category.name}</h1>
+                <header className={styles.title}>
+                    <i className={`${styles.icon} ${icons[category.icon]}`}></i>
+                    <h1>{category.name}</h1>
+                </header>
+
                 {category.description && (
                     <p><em>{category.description}</em></p>
                 )}

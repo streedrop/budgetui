@@ -1,3 +1,15 @@
+.title {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.icon {
+    grid-row: span 2;
+    font-size: x-large;
+    justify-self: center;
+}
+
 .chart {
     width: 70%;
     height: 100px;
