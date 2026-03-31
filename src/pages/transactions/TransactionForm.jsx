@@ -30,7 +30,7 @@ function TransactionForm() {
 
     // Pre-fill form
     useEffect(() => {
-        if (transaction)
+        if (transaction && isEditMode)
             setFormData(transaction);
     }, [transaction]);
 

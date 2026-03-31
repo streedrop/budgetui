@@ -1,15 +1,13 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 
 import { amountFormatter } from '@/utils/formatters';
+import { useData } from './useData';
 
-function ExpensesVsIncomeBar({ income, expense }) {
+function ExpensesVsIncomeBar({ transactions }) {
 
-    const data = [
-        { name: "Income", value: income, fill: `hsl(180, 70%, 55%)` },
-        { name: "Expenses", value: expense, fill: `hsl(0, 70%, 55%)` }
-    ];
+    const { data } = useData(transactions);
 
-    if (income === 0 && expense === 0) return <p>Nothing to display.</p>;
+    if (transactions.length === 0) return <p>Nothing to display.</p>;
 
     return (
         <BarChart

@@ -1,13 +1,11 @@
 import { PieChart, Pie, Tooltip } from 'recharts';
 
 import { amountFormatter } from '@/utils/formatters';
+import { useData } from './useData';
 
-function ExpensesVsIncomePie({ income, expense }) {
+function ExpensesVsIncomePie({ transactions }) {
 
-    const data = [
-        { name: "Income", value: income, fill: `hsl(180, 70%, 55%)` },
-        { name: "Expenses", value: expense, fill: `hsl(0, 70%, 55%)` }
-    ];
+    const { data } = useData(transactions);
 
     return (
         <PieChart height={400} width={`100%`}>

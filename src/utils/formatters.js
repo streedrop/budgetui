@@ -16,12 +16,10 @@ export const dateToMonth = (string) => {
     });
 }
 
-// Returns 0
+// Returns 01 for January, 02 for February, etc.
 export const dateToMonthIndex = (string) => {
-    const dateObj = new Date(string);
-    return new Date(dateObj.getUTCFullYear(), dateObj.getUTCMonth(), 1).toLocaleDateString("en-US", {
-        month: "numeric"
-    });
+    const date = new Date(string);
+    return String(date.getUTCMonth() + 1).padStart(2, '0');
 }
 
 // Returns "January 2026"

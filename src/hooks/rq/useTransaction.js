@@ -5,7 +5,9 @@ export function useTransaction(id) {
     return useQuery({
         queryKey: ['transaction', id],
         queryFn: () => {
-            return fetchTransaction(id);
+            if(id) return fetchTransaction(id);
+            
+            return null;
         },
     });
 }

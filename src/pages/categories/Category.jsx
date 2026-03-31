@@ -13,7 +13,6 @@ import { dateToNumericMonthYear } from '@/utils/formatters.js';
 
 import Modal from '@/components/modal/Modal.jsx';
 import Button from '@/components/buttons/Button';
-import ForecastVsActual from '@/pages/charts/ForecastVsActual/ForecastVsActual.jsx';
 import BudgetList from '@/pages/budget/BudgetList.jsx';
 import BudgetForm from '@/pages/budget/BudgetForm.jsx';
 import TransactionList from '@/pages/transactions/TransactionList.jsx';
@@ -50,8 +49,7 @@ function Category() {
                 {category.description && (
                     <p><em>{category.description}</em></p>
                 )}
-                <section className={styles.chart}>
-                    <ForecastVsActual transactions={transactions} categories={[category]} budgets={budgets} height={200}></ForecastVsActual>
+                <section className={`${styles.hidden} ${styles.chart}`}>
                 </section>
                 <section className={styles.budget}>
                     <h2>Monthly budget</h2>
@@ -59,7 +57,7 @@ function Category() {
                     <Button className={styles.set} action={() => setModalOpen(true)}>Set budget</Button>
                 </section>
                 <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-                    <BudgetForm onCancel={() => setModalOpen(false)} onSuccess={() => { loadBudgets(); setModalOpen(false) }}></BudgetForm>
+                    <BudgetForm onCancel={() => setModalOpen(false)} onSuccess={() => { setModalOpen(false) }}></BudgetForm>
                 </Modal>
             </>)}
 
