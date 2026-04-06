@@ -79,9 +79,14 @@ function Import() {
 
                 // KEYWORD MANAGEMENT
                 const matchingKeywords = keywords.filter(
-                    (keyword) =>
-                        (keyword.source === "category" && keyword.keyword === categoryNameFromMemo) ||
-                        (keyword.source === "description" && keyword.keyword === item[descriptionIndex])
+                    (keyword) => {
+                        if (keyword.match_type === "contains")
+                            return (keyword.source === "category" && categoryNameFromMemo.includes(keyword.keyword)) ||
+                                (keyword.source === "description" && item[descriptionIndex].includes(keyword.keyword))
+                        else
+                            return (keyword.source === "category" && keyword.keyword === categoryNameFromMemo) ||
+                                (keyword.source === "description" && keyword.keyword === item[descriptionIndex])
+                    }
                 );
 
                 // Indicator that will show or hide a transaction from the list
@@ -97,6 +102,9 @@ function Import() {
                         case "ignore":
                             ignored = true;
                             return;
+                        case "rename":
+                            item[descriptionIndex] = keyword.new_name;
+                            break;
                     }
                 });
 

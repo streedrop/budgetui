@@ -64,12 +64,18 @@ function Keywords() {
                     <option value="description">Transaction description</option>
                     <option value="category">Transaction category name</option>
                 </select>
+                <label htmlFor="match_type">Condition:</label>
+                <select id="match_type" name="match_type">
+                    <option value="contains">Must contain keyword</option>
+                    <option value="equals">Must fully match keyword</option>
+                </select>
                 <label htmlFor="keyword">Keyword:</label>
                 <input type="text" id="keyword" name="keyword" />
                 <label htmlFor="action">Action:</label>
                 <select id="action" name="action" onChange={e => setAction(e.target.value)}>
                     <option value="move">Move to category</option>
                     <option value="ignore">Ignore (do not add)</option>
+                    <option value="rename">Rename transaction description</option>
                 </select>
                 {
                     action == "move" && (
@@ -83,16 +89,25 @@ function Keywords() {
                                 ))}
                             </select>
                         </>
+                    )}
+                {
+
+                    action == "rename" && (
+                        <>
+                            <label htmlFor="new_name">New name:</label>
+                            <input type="text" name="new_name" id="new_name" />
+                        </>
                     )
                 }
 
-                <AddButton/>
+                <AddButton />
             </form>
 
             <h2>Current keywords</h2>
             <div className={styles.list}>
                 <div className={styles.header}>
                     <h4>Search in</h4>
+                    <h4>Condition</h4>
                     <h4>Keyword</h4>
                     <h4>Action</h4>
                     <h4 className={styles.actions}>Actions</h4>
@@ -100,16 +115,15 @@ function Keywords() {
                 {keywords.map((keyword, index) => (
 
                     <div className={styles.item} key={index}>
-                        {
-                            keyword.source == "description" ? (<p>Transaction description</p>) : (<p>Transaction category name</p>)
-                        }
+                        {keyword.source == "description" ? (<p>Transaction description</p>) : (<p>Transaction category name</p>)}
+                        {keyword.match_type == "contains" ? "contains" : "is equal to"}
                         <p>"{keyword.keyword}"</p>
-                        {
-                            keyword.action == "ignore" ? (<p>Ignore</p>) :
-                                (<p>Move to {categories.find(category => keyword.category_id == category.id)?.name}</p>)
-                        }
+                        {keyword.action == "ignore" && <p>Ignore</p>}
+                        {keyword.action == "move" && <p>Move to {categories.find(category => keyword.category_id == category.id)?.name}</p>}
+                        {keyword.action == "rename" && <p>Rename to "{keyword.new_name}"</p>}
+
                         <div className={styles.actions}>
-                            <DeleteButton action={() => handleDelete(keyword.source, keyword.keyword)}/>
+                            <DeleteButton action={() => handleDelete(keyword.source, keyword.keyword)} />
                         </div>
                         <hr />
                     </div>

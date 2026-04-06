@@ -14,7 +14,7 @@
 
 .header, .item {
     display: grid;
-    grid-template-columns: 2fr 2fr 2fr 1fr;
+    grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
     column-gap: 5px;
     justify-items: start;
     align-items: center;
