@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 
 import { amountFormatter } from '@/utils/formatters';
 import { totalExpensesAndIncome } from '@/utils/calculators';
-import ExpensesVsIncomeBarOneYear from '@/pages/charts/ByMonth/ExpensesVsIncome/OneYear/ExpensesVsIncome';
-import ExpensesVsIncomeBarAllTime from '@/pages/charts/ByMonth/ExpensesVsIncome/AllMonths/ExpensesVsIncome';
+import ExpensesVsIncomeBarOneYear from '@/charts/ByMonth/ExpensesVsIncome/OneYear/ExpensesVsIncome';
+import ExpensesVsIncomeBarAllTime from '@/charts/ByMonth/ExpensesVsIncome/AllMonths/ExpensesVsIncome';
 
 function DataSection({ transactions, type }) {
 
