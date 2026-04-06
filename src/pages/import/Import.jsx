@@ -136,7 +136,7 @@ function Import() {
     // Actually insert the transactions in the database
     const insertTransactions = async () => {
         // Remove id (it's a fake one) and category name (we already have category ID) as those are just for display
-        const data = transactions.filter((item) => item.ignored = false).map(({ id, category_name, ignored, ...rest }) => rest);
+        const data = transactions.filter((item) => item.ignored == false).map(({ id, category_name, ignored, ...rest }) => rest);
         await Promise.all(data.map(transaction => insertTransaction(transaction)));
 
         setModalOpen(false);

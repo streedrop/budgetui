@@ -36,7 +36,7 @@ function Categories() {
         <p>Arrange your transactions into categories to set goals, see graphs and notice what could be improved.</p>
         <AddButton action={() => navigate('/categories/new')}>Add category</AddButton>
       </section>
-      {categories.find(c => c.is_income == null).is_income == 0 && (
+      {categories.find(c => c.is_income == null) && (
         <div>
           <CategoryItem category={categories.find(c => c.is_income == null)} onDelete={handleDelete}></CategoryItem>
         </div>
