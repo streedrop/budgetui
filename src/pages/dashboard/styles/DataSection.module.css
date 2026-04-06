@@ -1,0 +1,41 @@
+.stats {
+  width: 100%;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.statRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  height: 80px;
+  gap: 20px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px;
+
+  border-radius: 10px;
+  border: 1px solid grey;
+  width: 200px;
+  height: 100%;
+}
+
+.label {
+  color: grey;
+}
+
+.data {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.chart {
+    margin-top: 20px;
+}

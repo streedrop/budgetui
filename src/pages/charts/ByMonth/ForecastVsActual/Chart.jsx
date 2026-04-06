@@ -2,20 +2,11 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recha
 import { RechartsDevtools } from '@recharts/devtools';
 
 import { amountFormatter } from '@/utils/formatters';
+import { getCustomBar, capitalize } from '@/utils/charts';
 
 function Chart({ data, height }) {
 
     if (data.length === 0) return <p>Nothing to display.</p>;
-
-    const customColorForecast = (props) => {
-        const { x, y, width, height } = props;
-        return <rect x={x} y={y} width={width} height={height} fill={props.payload.colorForecast} />
-    };
-
-    const customColorActual = (props) => {
-        const { x, y, width, height } = props;
-        return <rect x={x} y={y} width={width} height={height} fill={props.payload.colorActual} />
-    };
 
     return (
         <ResponsiveContainer width="100%" height={height}>
@@ -25,12 +16,12 @@ function Chart({ data, height }) {
             >
                 <XAxis type="category" dataKey="month" />
                 <YAxis type="number" />
-                <Bar dataKey="forecast" maxBarSize={60} shape={customColorForecast} />
-                <Bar dataKey="actual" maxBarSize={60} shape={customColorActual} />
+                <Bar dataKey="forecast" maxBarSize={60} shape={getCustomBar("colorForecast")} />
+                <Bar dataKey="actual" maxBarSize={60} shape={getCustomBar("colorActual")} />
 
                 <Tooltip
                     labelFormatter={() => ''}
-                    formatter={(value, name) => [amountFormatter(value), name.charAt(0).toUpperCase() + name.slice(1)]}
+                    formatter={(value, name) => [amountFormatter(value), capitalize(name)]}
                     itemSorter={(item) => item.name === 'forecast' ? -1 : 1}
                 />
             </BarChart>

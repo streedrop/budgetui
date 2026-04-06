@@ -8,3 +8,7 @@ export const incrementMonth = (monthStr) => {
     }
     return `${year}-${String(month).padStart(2, '0')}`;
 }
+
+export const allMonthsFromYear = (year) => {
+    return Array.from({ length: 12 }, (_, i) => `${year}-${String(i + 1).padStart(2, '0')}`);
+}

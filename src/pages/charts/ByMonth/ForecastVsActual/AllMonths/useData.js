@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
-import { dateToNumericMonthYear } from '@/utils/formatters'
+import { dateToNumericMonthYear } from '@/utils/formatters';
+import { getMonths } from '@/utils/charts';
 
 export function useData(transactions, budgets) {
     const [data, setData] = useState([]);
@@ -8,15 +9,7 @@ export function useData(transactions, budgets) {
         useEffect(() => {
 
             // 1) Define every month that we will need
-            let months = [
-                // New set from array to remove duplicate months
-                ...new Set(
-                    [
-                        ...transactions.map((transaction) => dateToNumericMonthYear(transaction.date)),
-                        ...budgets.map((budget) => dateToNumericMonthYear(budget.month))
-                    ]
-                )
-            ].sort();
+            const months = getMonths(transactions, budgets);
 
             // 2) Create the initial data object with colors
             let data = months.map((month) => ({

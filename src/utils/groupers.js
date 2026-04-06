@@ -1,5 +1,11 @@
 import { dateToMonthYear, dateToYear } from './formatters';
 
+
+/**
+ * Regroup transactions by month and adds the sum to every month entry
+ * @param {*} transactions The transactions to group
+ * @returns An object containing arrays for every month, the transactions for that month and the differential for that month 
+ */
 export const groupTransactionsByMonth = (transactions) => {
     return transactions.reduce((acc, transaction) => {
         const monthKey = dateToMonthYear(transaction.date);

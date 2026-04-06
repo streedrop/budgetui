@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
-import { dateToNumericMonthYear } from '@/utils/formatters'
+import { dateToNumericMonthYear } from '@/utils/formatters';
+import { allMonthsFromYear } from '@/utils/dateString';
 
 export function useData(transactions, budgets, year) {
     const [data, setData] = useState([]);
@@ -8,20 +9,7 @@ export function useData(transactions, budgets, year) {
         useEffect(() => {
 
             // 1) Define every month that we will need
-            let months = [
-                `${year}-01`,
-                `${year}-02`,
-                `${year}-03`,
-                `${year}-04`,
-                `${year}-05`,
-                `${year}-06`,
-                `${year}-07`,
-                `${year}-08`,
-                `${year}-09`,
-                `${year}-10`,
-                `${year}-11`,
-                `${year}-12`
-            ];
+            const months = allMonthsFromYear(year);
 
             // 2) Create the initial data object with colors
             let data = months.map((month) => ({

@@ -4,7 +4,6 @@ export function useData(transactions) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-
         const sums = transactions.reduce(((sums, transaction) => {
             if (transaction.is_income)
                 sums[0] += Number(transaction.amount);

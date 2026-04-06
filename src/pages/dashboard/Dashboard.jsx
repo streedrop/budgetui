@@ -1,30 +1,26 @@
-import styles from './Dashboard.module.css';
+import styles from './styles/Dashboard.module.css';
 
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useTransactions } from '@/hooks/rq/useTransactions.js';
-import { useCategories } from '@/hooks/useCategories.js';
 
-import { amountFormatter } from '@/utils/formatters';
-import { totalExpensesAndIncome } from '@/utils/calculators';
-import { transactionsFromThisMonth } from '@/utils/filters';
+import { transactionsFromThisMonth, transactionsFromThisYear } from '@/utils/filters';
+
+import DataSection from './DataSection';
 
 function Home() {
   const { data: transactions = null, isLoading, error } = useTransactions();
-  const { categories, setCategories } = useCategories();
 
-  // CALCULATE INCOME AND EXPENSE SUMS
-  const [allTime, setAllTime] = useState({ income: 0, expenses: 0 });
-  const [thisMonth, setThisMonth] = useState({ income: 0, expenses: 0 });
+  const [thisMonth, setThisMonth] = useState([]);
+  const [yearToDate, setYearToDate] = useState([]);
 
-  // For every transaction, add to income if income, add to expenses if expense
   useEffect(() => {
     if (!transactions)
       return;
 
-    setAllTime(totalExpensesAndIncome(transactions));
-    setThisMonth(totalExpensesAndIncome(transactionsFromThisMonth(transactions)));
+    setThisMonth(transactionsFromThisMonth(transactions));
+    setYearToDate(transactionsFromThisYear(transactions));
 
   }, [transactions]);
 
@@ -36,50 +32,9 @@ function Home() {
       <h1>Dashboard</h1>
       <p>Welcome! We missed you.</p>
       <section className={styles.stats}>
-        <div>
-          <h2>All Time</h2>
-          <div className={styles.statRow}>
-            <div className={styles.stat}>
-              <p className={styles.label}>Transactions</p>
-              <p className={styles.data}>{transactions.length}</p>
-            </div>
-            <div className={styles.stat}>
-              <p className={styles.label}>Categories</p>
-              <p className={styles.data}>{categories.length}</p>
-            </div>
-            <div className={styles.stat}>
-              <p className={styles.label}>Total revenue</p>
-              <p className={styles.data}>{amountFormatter(allTime.income)}</p>
-            </div>
-            <div className={styles.stat}>
-              <p className={styles.label}>Total expenses</p>
-              <p className={styles.data}>{amountFormatter(allTime.expenses)}</p>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <h2>This Month</h2>
-          <div className={styles.statRow}>
-            <div className={styles.stat}>
-              <p className={styles.label}>Transactions</p>
-              <p className={styles.data}>{transactionsFromThisMonth(transactions).length}</p>
-            </div>
-            <div className={styles.stat}>
-              <p className={styles.label}>Categories</p>
-              <p className={styles.data}>{categories.length}</p>
-            </div>
-            <div className={styles.stat}>
-              <p className={styles.label}>Total revenue</p>
-              <p className={styles.data}>{amountFormatter(thisMonth.income)}</p>
-            </div>
-            <div className={styles.stat}>
-              <p className={styles.label}>Total expenses</p>
-              <p className={styles.data}>{amountFormatter(thisMonth.expenses)}</p>
-            </div>
-          </div>
-        </div>
-
+        <DataSection transactions={transactions} type={0} />
+        <DataSection transactions={yearToDate} type={1} />
+        <DataSection transactions={thisMonth} type={2} />
       </section>
       <section>
         <h2>Budgeting App</h2>
