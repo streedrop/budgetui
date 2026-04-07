@@ -82,13 +82,15 @@ function Import() {
                 const matchingKeywords = keywords.filter(
                     (keyword) => {
                         if (keyword.match_type === "contains")
-                            return (keyword.source === "category" && categoryNameFromMemo.includes(keyword.keyword)) ||
-                                (keyword.source === "description" && item[descriptionIndex].includes(keyword.keyword))
+                            return (keyword.source === "category" && categoryNameFromMemo?.toLowerCase().includes(keyword.keyword.toLowerCase())) ||
+                                (keyword.source === "description" && item[descriptionIndex].toLowerCase().includes(keyword.keyword.toLowerCase()))
                         else
-                            return (keyword.source === "category" && keyword.keyword === categoryNameFromMemo) ||
-                                (keyword.source === "description" && keyword.keyword === item[descriptionIndex])
+                            return (keyword.source === "category" && keyword.keyword.toLowerCase() === categoryNameFromMemo?.toLowerCase()) ||
+                                (keyword.source === "description" && keyword.keyword.toLowerCase() === item[descriptionIndex].toLowerCase())
                     }
                 );
+
+                item[descriptionIndex] = item[descriptionIndex].split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
 
                 // Indicator that will show or hide a transaction from the list
                 let ignored = false;
@@ -104,7 +106,10 @@ function Import() {
                             ignored = true;
                             return;
                         case "rename":
-                            item[descriptionIndex] = keyword.new_name;
+                            item[descriptionIndex] = keyword.new_string;
+                            break;
+                        case "replace":
+                            item[descriptionIndex] = item[descriptionIndex].replaceAll(keyword.keyword, keyword.new_string);
                             break;
                     }
                 });
@@ -112,7 +117,7 @@ function Import() {
                 // Create a transaction and set its attributes accordingly
                 let newItem = {};
                 newItem.amount = Number(item[amountIndex].replace("-", ""));
-                newItem.description = item[descriptionIndex];
+                newItem.description = item[descriptionIndex].trim();
                 newItem.date = new Date(item[dateIndex]).toISOString().split("T")[0];
                 newItem.ignored = ignored;
                 if (category) {

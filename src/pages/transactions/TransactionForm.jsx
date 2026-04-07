@@ -49,12 +49,12 @@ function TransactionForm() {
         else
             createTransaction(data);
 
-        navigate('/transactions');
+        navigate(-1);
     };
 
     // Cancel button
     const handleCancel = () => {
-        navigate('/transactions');
+        navigate(-1);
     }
 
     return (

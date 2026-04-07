@@ -74,9 +74,14 @@ function Keywords() {
                     <input type="text" id="keyword" name="keyword" placeholder="Keyword..." />
                     <label htmlFor="action">Action:</label>
                     <select id="action" name="action" onChange={e => setAction(e.target.value)}>
-                        <option value="move">Move to category</option>
-                        <option value="ignore">Ignore (do not add)</option>
-                        <option value="rename">Rename transaction to</option>
+                        <optgroup label="Categorization">
+                            <option value="move">Move to category</option>
+                            <option value="ignore">Ignore (do not add)</option>
+                        </optgroup>
+                        <optgroup label="Name change">
+                            <option value="rename">Rename transaction to</option>
+                            <option value="replace">Replace keyword by</option>
+                        </optgroup>
                     </select>
                     {action == "move" && (
                         <>
@@ -93,34 +98,36 @@ function Keywords() {
                         <div />
                     )}
                     {action == "rename" && (
-                        <>
-                            <input type="text" name="new_name" id="new_name" placeholder="New name..." />
-                        </>
+                        <input type="text" name="new_string" id="new_string" placeholder="New name..." />
                     )}
-
+                    {action == "replace" && (
+                        <input type="text" name="new_string" id="new_string" placeholder="Replace By..." />
+                    )}
                     <AddButton />
                 </form>
             </Modal>
 
             <h2>Current keywords</h2>
-            <AddButton className={styles.openModal} action={() => setModalOpen(true)}/>
+            <AddButton className={styles.openModal} action={() => setModalOpen(true)} />
             <div className={styles.list}>
                 <div className={styles.header}>
-                    <h4>Search in</h4>
                     <h4>Condition</h4>
-                    <h4>Keyword</h4>
                     <h4>Action</h4>
                     <h4 className={styles.actions}>Actions</h4>
                 </div>
                 {keywords.map((keyword, index) => (
 
                     <div className={styles.item} key={index}>
-                        {keyword.source == "description" ? (<p>Transaction description</p>) : (<p>Transaction category name</p>)}
-                        {keyword.match_type == "contains" ? "contains" : "is equal to"}
-                        <p>"{keyword.keyword}"</p>
+                        {`${keyword.source == "description" ? "Description" : "Category name"}
+                            ${keyword.match_type == "contains" ? "contains" : "is equal to"}
+                            "${keyword.keyword}"
+                        `}
                         {keyword.action == "ignore" && <p>Ignore</p>}
                         {keyword.action == "move" && <p>Move to {categories.find(category => keyword.category_id == category.id)?.name}</p>}
-                        {keyword.action == "rename" && <p>Rename to "{keyword.new_name}"</p>}
+                        {keyword.action == "rename" && <p>Rename to "{keyword.new_string}"</p>}
+                        {keyword.action == "replace" && (
+                            keyword.new_string == '' ? <p>Remove "{keyword.keyword}" from name</p> : <p>Replace "{keyword.keyword}" by "{keyword.new_string}"</p>
+                        )}
 
                         <div className={styles.actions}>
                             <DeleteButton action={() => handleDelete(keyword.id)} />

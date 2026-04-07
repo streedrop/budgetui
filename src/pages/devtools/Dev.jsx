@@ -1,6 +1,6 @@
 import styles from './styles/Dev.module.css';
 
-import { fetchTransactions } from '@/services/transaction.api';
+import { useTransactions } from '@/hooks/rq/useTransactions.js';
 
 import ColorPicker from '@/components/ColorPicker/ColorPicker';
 import IconPicker from '@/components/IconPicker/IconPicker';
@@ -8,16 +8,16 @@ import Button from '@/components/buttons/Button';
 
 function Dev() {
 
+    const { data: transactions = [] } = useTransactions();
+
     const extractSql = () => {
-        fetchTransactions().then(data => {
-            let string = 'INSERT INTO transactions (amount, description, category_id, date) VALUES\n';
-            string = data.reduce(((acc, item) => {
-                item.description = item.description.replaceAll("'", "''");
-                acc += `(${Number(item.amount)}, '${item.description}', ${item.category_id}, '${item.date.split("T")[0]}'),\n`;
-                return acc;
-            }), string)
-            navigator.clipboard.writeText(string.slice(0, -2) + ';');
-        })
+        let string = 'INSERT INTO transactions (amount, description, category_id, date) VALUES\n';
+        string = transactions.reduce(((acc, item) => {
+            item.description = item.description.replaceAll("'", "''");
+            acc += `(${Number(item.amount)}, '${item.description.trim()}', ${item.category_id}, '${item.date.split("T")[0]}'),\n`;
+            return acc;
+        }), string)
+        navigator.clipboard.writeText(string.slice(0, -2) + ';');
     }
 
     return (
@@ -27,7 +27,7 @@ function Dev() {
             <IconPicker />
 
             <div>
-                <Button onClick={extractSql}>Extract transactions as SQL</Button>
+                <Button action={extractSql}>Extract transactions as SQL</Button>
             </div>
 
         </>
