@@ -46,12 +46,12 @@ function Keywords() {
         })
     }
 
-    const handleDelete = async (source, keyword) => {
+    const handleDelete = async (id) => {
 
-        const res = await deleteKeyword(source, keyword);
+        const res = await deleteKeyword(id);
         if (!res.ok) return;
 
-        setKeywords(prev => prev.filter(item => !(item.source == source && item.keyword == keyword)));
+        setKeywords(prev => prev.filter(item => !(item.id == id)));
     };
 
     return (
@@ -123,7 +123,7 @@ function Keywords() {
                         {keyword.action == "rename" && <p>Rename to "{keyword.new_name}"</p>}
 
                         <div className={styles.actions}>
-                            <DeleteButton action={() => handleDelete(keyword.source, keyword.keyword)} />
+                            <DeleteButton action={() => handleDelete(keyword.id)} />
                         </div>
                         <hr />
                     </div>
