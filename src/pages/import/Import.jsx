@@ -1,7 +1,7 @@
 import styles from './styles/Import.module.css';
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { insertTransaction } from '@/services/transaction.api';
 import { fetchCategories } from '@/services/category.api';
@@ -19,6 +19,7 @@ function Import() {
 
     const [modalOpen, setModalOpen] = useState(false);
     const [transactions, setTransactions] = useState([]);
+    const navigate = useNavigate();
 
     const handleSubmit = async (evt) => {
 
@@ -154,7 +155,7 @@ function Import() {
         <>
             <h1>Import transactions</h1>
             <p>Import or paste CSV from Tangerine Bank in the area below to import your transactions.</p>
-            <Link to="/import/keywords">Define keywords</Link>
+            <Button className={styles.keywords} action={() => navigate('/import/keywords')}>Manage rules / automations</Button>
             <div>
                 <form className={styles.import} onSubmit={handleSubmit}>
                     <label htmlFor="files">Select file(s):</label>

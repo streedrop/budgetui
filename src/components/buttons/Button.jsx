@@ -1,6 +1,6 @@
 import styles from './Button.module.css';
 
-function Button({ children, type = "button", action }) {
+function Button({ children, type = "button", action, className = "" }) {
 
     if (type == "submit")
         return (
@@ -10,7 +10,7 @@ function Button({ children, type = "button", action }) {
         );
 
     return (
-        <button type="button" onClick={action}>
+        <button type="button" onClick={action} className={className}>
             <p>{children}</p>
         </button>
     );

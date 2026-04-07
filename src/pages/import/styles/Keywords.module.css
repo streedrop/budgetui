@@ -1,13 +1,18 @@
+.openModal {
+    width: 20%;
+}
+
 .form {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr 1fr;
     row-gap: 1rem;
-    width: 50%;
-    margin: 0 auto;
+    column-gap: 10px;
+    margin: 20px auto 0 auto;
+    align-items: center;
 }
 
 .form button {
-    grid-column: span 2;
+    grid-column: span 3;
     width: 50%;
     margin: auto;
 }
@@ -21,7 +26,6 @@
     margin: 10px auto;
     border-radius: 10px;
 }
-
 
 .actions {
     justify-self: end;

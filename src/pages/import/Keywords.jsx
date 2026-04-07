@@ -5,10 +5,13 @@ import { useState, useEffect } from 'react';
 import { fetchCategories } from '@/services/category.api';
 import { fetchKeywords, insertKeyword, deleteKeyword } from '@/services/keyword.api';
 
+import Modal from '@/components/modal/Modal.jsx';
 import AddButton from '@/components/buttons/AddButton';
 import DeleteButton from '@/components/buttons/DeleteButton';
 
 function Keywords() {
+
+    const [modalOpen, setModalOpen] = useState(false);
 
     const [action, setAction] = useState("move");
 
@@ -53,34 +56,30 @@ function Keywords() {
 
     return (
         <>
-            <h1>Keywords</h1>
-            <p>Keywords allow you to define links between imports and your categories.
-                It is useful for cases where your bank assign your transactions to
-                categories which are too specific, or have a different name than what
-                you want.</p>
-            <form className={styles.form} onSubmit={addKeyword}>
-                <label htmlFor="source">Source:</label>
-                <select id="source" name="source">
-                    <option value="description">Transaction description</option>
-                    <option value="category">Transaction category name</option>
-                </select>
-                <label htmlFor="match_type">Condition:</label>
-                <select id="match_type" name="match_type">
-                    <option value="contains">Must contain keyword</option>
-                    <option value="equals">Must fully match keyword</option>
-                </select>
-                <label htmlFor="keyword">Keyword:</label>
-                <input type="text" id="keyword" name="keyword" />
-                <label htmlFor="action">Action:</label>
-                <select id="action" name="action" onChange={e => setAction(e.target.value)}>
-                    <option value="move">Move to category</option>
-                    <option value="ignore">Ignore (do not add)</option>
-                    <option value="rename">Rename transaction description</option>
-                </select>
-                {
-                    action == "move" && (
+            <h1>Rules / Automations</h1>
+            <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+                <h2>Add a rule</h2>
+                <form className={styles.form} onSubmit={addKeyword}>
+                    <label htmlFor="source">Source:</label>
+                    <select id="source" name="source">
+                        <option value="description">Transaction description</option>
+                        <option value="category">Transaction category name</option>
+                    </select>
+                    <div />
+                    <label htmlFor="match_type">Condition:</label>
+                    <select id="match_type" name="match_type">
+                        <option value="contains">Contains text</option>
+                        <option value="equals">Must fully match</option>
+                    </select>
+                    <input type="text" id="keyword" name="keyword" placeholder="Keyword..." />
+                    <label htmlFor="action">Action:</label>
+                    <select id="action" name="action" onChange={e => setAction(e.target.value)}>
+                        <option value="move">Move to category</option>
+                        <option value="ignore">Ignore (do not add)</option>
+                        <option value="rename">Rename transaction to</option>
+                    </select>
+                    {action == "move" && (
                         <>
-                            <label htmlFor="category_id">Category:</label>
                             <select id="category_id" name="category_id">
                                 {categories.map(category => (
                                     <option key={category.id} value={category.id}>
@@ -90,20 +89,21 @@ function Keywords() {
                             </select>
                         </>
                     )}
-                {
-
-                    action == "rename" && (
+                    {action == "ignore" && (
+                        <div />
+                    )}
+                    {action == "rename" && (
                         <>
-                            <label htmlFor="new_name">New name:</label>
-                            <input type="text" name="new_name" id="new_name" />
+                            <input type="text" name="new_name" id="new_name" placeholder="New name..." />
                         </>
-                    )
-                }
+                    )}
 
-                <AddButton />
-            </form>
+                    <AddButton />
+                </form>
+            </Modal>
 
             <h2>Current keywords</h2>
+            <AddButton className={styles.openModal} action={() => setModalOpen(true)}/>
             <div className={styles.list}>
                 <div className={styles.header}>
                     <h4>Search in</h4>

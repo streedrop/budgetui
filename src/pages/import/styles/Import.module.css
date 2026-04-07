@@ -1,3 +1,7 @@
+.keywords {
+    width: fit-content;
+}
+
 .import {
     display: flex;
     flex-direction: column;
