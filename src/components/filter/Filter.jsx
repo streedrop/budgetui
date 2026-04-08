@@ -37,7 +37,7 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
         // Last day of the year
         const to = `${selectedYear}-12-31`;
 
-        setFilters(prev => ({ ...prev, after: from, before: to }));
+        setFilters(prev => ({ ...prev, from: from, to: to }));
     }, [selectedYear, dateRange]);
 
     // Called when we need to apply new filters for month
@@ -50,7 +50,7 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
         // Last day of the month
         const to = `${selectedMonth}-${new Date(selectedMonth.slice(0, 4), Number(selectedMonth.slice(5, 7)), 0).getDate()}`;
 
-        setFilters(prev => ({ ...prev, after: from, before: to }));
+        setFilters(prev => ({ ...prev, from: from, to: to }));
     }, [selectedMonth, dateRange]);
 
     // Return nothing if there are no filters to display
@@ -99,12 +99,12 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
                         </div>
                         <div className={`${styles.subForm} ${dateRange != "3" ? styles.hidden : ''}`}>
                             <div>
-                                <label htmlFor="after">From: </label>
-                                <input id="after" type="date" value={filters.after} onChange={evt => setFilters(prev => ({ ...prev, after: evt.target.value }))} />
+                                <label htmlFor="from">From: </label>
+                                <input id="from" type="date" value={filters.from} onChange={evt => setFilters(prev => ({ ...prev, from: evt.target.value }))} />
                             </div>
                             <div>
-                                <label htmlFor="before">To: </label>
-                                <input id="before" type="date" value={filters.before} onChange={evt => setFilters(prev => ({ ...prev, before: evt.target.value }))} />
+                                <label htmlFor="to">To: </label>
+                                <input id="to" type="date" value={filters.to} onChange={evt => setFilters(prev => ({ ...prev, to: evt.target.value }))} />
                             </div>
                         </div>
                     </div>

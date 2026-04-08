@@ -1,6 +1,6 @@
 const emptyFilters = {
-    after: '',
-    before: '',
+    from: '',
+    to: '',
     minAmount: '',
     maxAmount: ''
 }

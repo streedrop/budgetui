@@ -1,16 +1,13 @@
 import { useState } from 'react';
 
+import emptyFilters from '@/constants/EmptyFilters'
+
 export function useBudgetFilters(budgets) {
-  const [filters, setFilters] = useState({
-    after: '',
-    before: '',
-    minAmount: '',
-    maxAmount: ''
-  });
+  const [filters, setFilters] = useState(emptyFilters);
 
   const filtered = budgets
-    .filter(b => filters.before === '' || b.month <= filters.before.substring(0, 7))
-    .filter(b => filters.after === '' || b.month >= filters.after.substring(0, 7))
+    .filter(b => filters.to === '' || b.month <= filters.to.substring(0, 7))
+    .filter(b => filters.from === '' || b.month >= filters.from.substring(0, 7))
 
   return { filtered, filters, setFilters };
 }

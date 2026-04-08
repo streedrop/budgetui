@@ -49,6 +49,15 @@ export const dateToMonthDay = (string) => {
     });
 }
 
+// Returns "2026-01-23"
+export const dateToYearMonthDay = (string) => {
+    const dateObj = new Date(string);
+    const year = dateObj.getUTCFullYear();
+    const month = String(dateObj.getUTCMonth() + 1).padStart(2, '0');
+    const day = dateObj.getUTCDate();
+    return `${year}-${month}-${day}`;
+}
+
 // "12.4" => "12.40 $"
 export const amountFormatter = (string) => {
     return `${Number(string).toFixed(2)} $`
