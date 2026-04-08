@@ -28,7 +28,7 @@ function CategoryForm() {
 
     const { mutate: createCategory } = useCreateCategory();
     const { mutate: editCategory } = useEditCategory();
-    const { data: category = [], isLoading, error } = useCategory(id);
+    const { data: category = null, isLoading, error } = useCategory(id);
 
     const [icon, setIcon] = useState(0);
 
@@ -62,6 +62,9 @@ function CategoryForm() {
         navigate(-1);
     }
 
+    if(isLoading && isEditMode)
+        return <p>Loading...</p>
+
     return (
         <>
             <h1>{isEditMode ? 'Edit category' : 'New category'}</h1>
@@ -79,11 +82,11 @@ function CategoryForm() {
                 <label>Type: </label>
                 <div className={styles.type}>
                     <div>
-                        <input type="radio" id="expense" name="is_income" value="0" defaultChecked={!data.is_income} />
+                        <input type="radio" id="expense" name="is_income" value="0" checked={data.is_income == 0} onChange={() => setFormData({ ...data, is_income: 0 })} />
                         <label htmlFor="expense">Expenses</label>
                     </div>
                     <div>
-                        <input type="radio" id="income" name="is_income" value="1" defaultChecked={data.is_income} />
+                        <input type="radio" id="income" name="is_income" value="1" checked={data.is_income == 1} onChange={() => setFormData({ ...data, is_income: 1 })} />
                         <label htmlFor="income">Income</label>
                     </div>
                 </div>
