@@ -24,13 +24,14 @@ function Categories() {
         <p>Arrange your transactions into categories to set goals, see graphs and notice what could be improved.</p>
         <AddButton action={() => navigate('/categories/new')}>Add category</AddButton>
       </section>
+      <CategoryList categories={categories.filter(c => c.is_income == true)} is_income={true}></CategoryList>
+      <CategoryList categories={categories.filter(c => c.is_income == false)} is_income={false}></CategoryList>
       {categories.find(c => c.is_income == null) && (
         <div>
+          <h2>Uncategorized</h2>
           <CategoryItem category={categories.find(c => c.is_income == null)}></CategoryItem>
         </div>
       )}
-      <CategoryList categories={categories.filter(c => c.is_income == true)} is_income={true}></CategoryList>
-      <CategoryList categories={categories.filter(c => c.is_income == false)} is_income={false}></CategoryList>
     </>
   );
 }
