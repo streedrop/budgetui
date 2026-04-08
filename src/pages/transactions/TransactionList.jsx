@@ -10,12 +10,19 @@ import AddButton from '@/components/buttons/AddButton';
 import FilterButton from '@/components/buttons/FilterButton';
 import TransactionItem from './TransactionItem';
 
-function TransactionList({ transactions, deletable = true, onSelect, editable = true, openFilters }) {
+function TransactionList({ transactions, deletable = true, onSelect, editable = true, openFilters, category_id }) {
     // group transactions by month for display
     /*const groupedByMonth = groupTransactionsByMonth(transactions);*/
     const { mutate } = useDeleteTransaction();
 
     const navigate = useNavigate();
+
+    const goToAdd = () => {
+        if(category_id)
+            navigate(`/transactions/new?category=${category_id}`);
+        else
+            navigate('/transactions/new');
+    }
 
     return (
         <div className={styles.list}>
@@ -26,7 +33,7 @@ function TransactionList({ transactions, deletable = true, onSelect, editable = 
                         <FilterButton action={() => { openFilters(true) }} />
                     )}
                     {editable && (
-                        <AddButton action={() => navigate('/transactions/new')} />
+                        <AddButton action={goToAdd} />
                     )}
                 </div>
             </div>

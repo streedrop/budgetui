@@ -1,7 +1,7 @@
 import styles from './styles/TransactionForm.module.css';
 
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import { useCategories } from '@/hooks/useCategories.js';
 import { useCreateTransaction } from '@/hooks/rq/useCreateTransaction.js';
@@ -18,7 +18,8 @@ const emptyFormData = {
 };
 
 function TransactionForm() {
-    const { id } = useParams();                         // Current transaction ID
+    const { id } = useParams();               // Current transaction ID
+    const [searchParams] = useSearchParams();
     const isEditMode = Boolean(id);                     // ID = editing, No ID = creating
     const { categories } = useCategories();
     const [data, setFormData] = useState(emptyFormData);    // Form data
@@ -27,6 +28,16 @@ function TransactionForm() {
     const { data: transaction = [], isLoading, error } = useTransaction(id);
 
     const navigate = useNavigate();
+
+    // Pre-fill form
+    useEffect(() => {
+        const category = searchParams.get("category");
+
+        if (category)
+            emptyFormData.category_id = category;
+
+        setFormData(emptyFormData);
+    }, [searchParams]);
 
     // Pre-fill form
     useEffect(() => {

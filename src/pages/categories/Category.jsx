@@ -63,7 +63,7 @@ function Category() {
 
             <section className={styles.transactions}>
                 <h2>Transactions</h2>
-                <TransactionList transactions={transactions}></TransactionList>
+                <TransactionList transactions={transactions} category_id={id}></TransactionList>
             </section>
         </>
     );
