@@ -49,6 +49,12 @@ export const dateToMonthDay = (string) => {
     });
 }
 
+// "12.4" => "12.40 $"
 export const amountFormatter = (string) => {
     return `${Number(string).toFixed(2)} $`
+}
+
+// "EPICERIE MAGOG  " => "Epicerie Magog"
+export const transactionNameFormatter = (string) => {
+    return string.split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ').trim()
 }

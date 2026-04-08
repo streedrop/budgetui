@@ -13,7 +13,7 @@ function Keywords() {
 
     const [modalOpen, setModalOpen] = useState(false);
 
-    const [action, setAction] = useState("move");
+    const [action, setAction] = useState("");
 
     const [categories, setCategories] = useState([]);   // Category list
     const [keywords, setKeywords] = useState([]);   // Keyword list
@@ -43,7 +43,8 @@ function Keywords() {
         await insertKeyword(data).then((res) => {
             data.id = res.insertId;
             setKeywords([...keywords, data]);
-        })
+            setModalOpen(false);
+        });
     }
 
     const handleDelete = async (id) => {
@@ -73,7 +74,8 @@ function Keywords() {
                     </select>
                     <input type="text" id="keyword" name="keyword" placeholder="Keyword..." />
                     <label htmlFor="action">Action:</label>
-                    <select id="action" name="action" onChange={e => setAction(e.target.value)}>
+                    <select id="action" name="action" onChange={e => setAction(e.target.value)} value={action}>
+                        <option value="" disabled>Select an action...</option>
                         <optgroup label="Categorization">
                             <option value="move">Move to category</option>
                             <option value="ignore">Ignore (do not add)</option>

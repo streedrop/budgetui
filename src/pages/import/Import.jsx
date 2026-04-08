@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { insertTransaction } from '@/services/transaction.api';
-import { fetchCategories } from '@/services/category.api';
-import { fetchKeywords } from '@/services/keyword.api';
+import { useCategories } from '@/hooks/useCategories';
+import { useKeywords } from '@/hooks/useKeywords';
+
+import { prepareTransactions } from './helpers';
 
 import Modal from '@/components/modal/Modal.jsx';
 
@@ -19,10 +21,12 @@ function Import() {
 
     const [modalOpen, setModalOpen] = useState(false);
     const [transactions, setTransactions] = useState([]);
+    const { categories } = useCategories();
+    const { keywords } = useKeywords();
+
     const navigate = useNavigate();
 
     const handleSubmit = async (evt) => {
-
         evt.preventDefault();
         const formData = new FormData(evt.target);
 
@@ -30,110 +34,13 @@ function Import() {
         const files = formData.getAll('files').filter(f => f.size > 0);
         const texts = await Promise.all(files.map(f => f.text()));
 
-        // Retrieve the categories that are already saved
-        const categories = await fetchCategories();
-        // Retrieve the keywords to match with categories
-        const keywords = await fetchKeywords();
-
-        let entries = [];
-
-        if (texts.length > 0)
-            entries = texts.flatMap(text => prepareTransactions(text, categories, keywords));
-        else
-            entries = prepareTransactions(Object.fromEntries(formData).text, categories, keywords);
-
-        // Give every item an ID for react list keys to work
-        entries = entries.map((entry, index) => ({ ...entry, id: index }));
+        // Prepare all the transactions, and give every item an ID for react list keys to work
+        const entries = texts.flatMap(text => prepareTransactions(text), categories, keywords)
+                            .map((entry, index) => ({ ...entry, id: index }));
 
         setTransactions(entries);
 
         setModalOpen(true);
-    }
-
-    const prepareTransactions = (data, categories, keywords) => {
-
-        // Split CSV per row and per column
-        let formatted = data.trim().split('\n').map((item) => { return item.split(',') });
-
-        // Remove and save first row of the CSV, as it's the header
-        const columns = formatted.shift();
-
-        // Remove any empty row of the CSV
-        formatted = formatted.filter((row) => { return row.length === columns.length });
-
-        if (formatted.length == 0) return;
-
-        // Find indexes for fields we need
-        const dateIndex = columns.findIndex((value) => { return value.toLowerCase().includes("date") });
-        const descriptionIndex = columns.findIndex((value) => { return value.toLowerCase().includes("name") });
-        const amountIndex = columns.findIndex((value) => { return value.toLowerCase().includes("amount") });
-        const memoIndex = columns.findIndex((value) => { return value.toLowerCase().includes("memo") });
-
-        // Format entries that will be ready for the display and the database
-        const entries = formatted.reduce(
-            ((acc, item) => {
-                // Tangerine Bank has a memo containing the category
-                const categoryNameFromMemo = item[memoIndex].split("Category: ")[1];
-
-                // Retrieve the category using the memo
-                let category = categories.find((category) => category.name === categoryNameFromMemo);
-
-                // KEYWORD MANAGEMENT
-                const matchingKeywords = keywords.filter(
-                    (keyword) => {
-                        if (keyword.match_type === "contains")
-                            return (keyword.source === "category" && categoryNameFromMemo?.toLowerCase().includes(keyword.keyword.toLowerCase())) ||
-                                (keyword.source === "description" && item[descriptionIndex].toLowerCase().includes(keyword.keyword.toLowerCase()))
-                        else
-                            return (keyword.source === "category" && keyword.keyword.toLowerCase() === categoryNameFromMemo?.toLowerCase()) ||
-                                (keyword.source === "description" && keyword.keyword.toLowerCase() === item[descriptionIndex].toLowerCase())
-                    }
-                );
-
-                item[descriptionIndex] = item[descriptionIndex].split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
-
-                // Indicator that will show or hide a transaction from the list
-                let ignored = false;
-
-                matchingKeywords.forEach((keyword) => {
-                    switch (keyword.action) {
-                        // Move to another category (overrides one that was already found through basic name matching)
-                        case "move":
-                            category = categories.find((category) => category.id === keyword.category_id);
-                            break;
-                        // If even one matching keyword was found that says "ignore", ignore the current transaction
-                        case "ignore":
-                            ignored = true;
-                            return;
-                        case "rename":
-                            item[descriptionIndex] = keyword.new_string;
-                            break;
-                        case "replace":
-                            item[descriptionIndex] = item[descriptionIndex].replaceAll(keyword.keyword, keyword.new_string);
-                            break;
-                    }
-                });
-
-                // Create a transaction and set its attributes accordingly
-                let newItem = {};
-                newItem.amount = Number(item[amountIndex].replace("-", ""));
-                newItem.description = item[descriptionIndex].trim();
-                newItem.date = new Date(item[dateIndex]).toISOString().split("T")[0];
-                newItem.ignored = ignored;
-                if (category) {
-                    newItem.category_id = category.id;
-                    newItem.category_name = category.name;
-                }
-                else {
-                    newItem.category_id = null;
-                    newItem.category_name = `Uncategorized (${categoryNameFromMemo ? categoryNameFromMemo : ''})`;
-                }
-
-                acc.push(newItem);
-                return acc;
-            }), [])
-
-        return entries;
     }
 
     // Remove a transaction from the list entirely
@@ -165,8 +72,6 @@ function Import() {
                 <form className={styles.import} onSubmit={handleSubmit}>
                     <label htmlFor="files">Select file(s):</label>
                     <input type="file" id="files" name="files" accept=".csv" multiple />
-                    <label htmlFor="text">Or paste below:</label>
-                    <textarea id="text" name="text"></textarea>
                     <Button type="submit">Import</Button>
                 </form>
             </div>
