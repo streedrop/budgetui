@@ -3,7 +3,7 @@ import styles from './styles/Dashboard.module.css';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useTransactions } from '@/hooks/rq/useTransactions.js';
+import { useTransactions } from '@/hooks/transactions/useTransactions.js';
 
 import { transactionsFromThisMonth, transactionsFromThisYear } from '@/utils/filters';
 

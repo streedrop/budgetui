@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import emptyFilters from '@/constants/EmptyFilters'
 import { dateToMonthYear } from '@/utils/formatters';
 
-import { useTransactions } from '@/hooks/rq/useTransactions.js';
+import { useTransactions } from '@/hooks/transactions/useTransactions.js';
 import Button from '@/components/buttons/Button';
 
 function Filter({ filters, setFilters, date = true, amount = true }) {

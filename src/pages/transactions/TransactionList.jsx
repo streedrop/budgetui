@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 /*import { amountFormatter } from '@/utils/formatters';
 import { groupTransactionsByMonth } from '@/utils/groupers';*/
-import { useDeleteTransaction } from '@/hooks/rq/useDeleteTransaction.js';
+import { useDeleteTransaction } from '@/hooks/transactions/useDeleteTransaction.js';
 
 import AddButton from '@/components/buttons/AddButton';
 import FilterButton from '@/components/buttons/FilterButton';

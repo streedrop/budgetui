@@ -1,7 +1,9 @@
+import { handleError } from "@/utils/api";
+
 export async function fetchRules() {
     const res = await fetch("/api/rules");
 
-    if (!res.ok) throw new Error("Failed to fetch rules");
+    await handleError(res);
 
     return res.json();
 }
@@ -15,7 +17,7 @@ export async function insertRule(data) {
         body: JSON.stringify(data)
     });
 
-    if (!res.ok) throw new Error("Failed to insert rule");
+    await handleError(res);
 
     return res.json();
 }
@@ -24,6 +26,8 @@ export async function deleteRule(id) {
     const res = await fetch(`/api/rules/${id}`, {
         method: "DELETE",
     });
+
+    await handleError(res);
     
     return res;
 }

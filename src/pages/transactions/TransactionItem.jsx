@@ -3,7 +3,7 @@ import styles from './styles/TransactionItem.module.css';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { dateToMonthDay, dateToYear, amountFormatter } from '@/utils/formatters';
-import { useDeleteTransaction } from '@/hooks/rq/useDeleteTransaction.js';
+import { useDeleteTransaction } from '@/hooks/transactions/useDeleteTransaction.js';
 
 import DeleteButton from '@/components/buttons/DeleteButton';
 import EditButton from '@/components/buttons/EditButton';

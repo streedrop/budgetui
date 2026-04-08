@@ -1,9 +1,11 @@
+import { handleError } from "@/utils/api";
+
 export async function fetchTransactions(id) {
     const url = id ? `/api/transactions/category/${id}` : '/api/transactions';
 
     const res = await fetch(url);
 
-    if (!res.ok) throw new Error("Failed to fetch transactions");
+    await handleError(res);
 
     return res.json();
 }
@@ -11,7 +13,7 @@ export async function fetchTransactions(id) {
 export async function fetchTransaction(id) {
     const res = await fetch(`/api/transactions/${id}`);
 
-    if (!res.ok) throw new Error("Failed to fetch transaction");
+    await handleError(res);
 
     return res.json();
 }
@@ -25,10 +27,7 @@ export async function insertTransaction(data) {
         body: JSON.stringify(data)
     });
 
-    if (!res.ok) {
-        const body = await res.json();
-        throw new Error(body.error);
-    }
+    await handleError(res);
 
     return res.json();
 }
@@ -42,7 +41,7 @@ export async function updateTransaction(id, data) {
         body: JSON.stringify(data)
     });
 
-    if (!res.ok) throw new Error("Failed to update transaction");
+    await handleError(res);
 
     return res.json();
 }
@@ -51,6 +50,8 @@ export async function deleteTransaction(id) {
     const res = await fetch(`/api/transactions/${id}`, {
         method: "DELETE",
     });
+
+    await handleError(res);
 
     return res;
 }

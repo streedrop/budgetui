@@ -1,7 +1,9 @@
+import { handleError } from "@/utils/api";
+
 export async function fetchCategories() {
     const res = await fetch("/api/categories");
 
-    if (!res.ok) throw new Error("Failed to fetch categories");
+    await handleError(res);
 
     return res.json();
 }
@@ -9,7 +11,7 @@ export async function fetchCategories() {
 export async function fetchCategory(id) {
     const res = await fetch(`/api/categories/${id}`);
 
-    if (!res.ok) throw new Error("Failed to fetch category");
+    await handleError(res);
 
     return res.json();
 }
@@ -23,7 +25,7 @@ export async function insertCategory(data) {
         body: JSON.stringify(data)
     });
 
-    if (!res.ok) throw new Error("Failed to insert category");
+    await handleError(res);
 
     return res.json();
 }
@@ -37,7 +39,7 @@ export async function updateCategory(id, data) {
         body: JSON.stringify(data)
     });
 
-    if (!res.ok) throw new Error("Failed to update category");
+    await handleError(res);
 
     return res.json();
 }
@@ -46,6 +48,8 @@ export async function deleteCategory(id) {
     const res = await fetch(`/api/categories/${id}`, {
         method: "DELETE",
     });
+
+    await handleError(res);
     
     return res;
 }

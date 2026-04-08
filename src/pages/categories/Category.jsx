@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import icons from '@/constants/CategoryIcons';
 
 import { useCategory } from '@/hooks/useCategory.js';
-import { useTransactions } from '@/hooks/rq/useTransactions.js';
+import { useTransactions } from '@/hooks/transactions/useTransactions.js';
 import { useBudgets } from '@/hooks/useBudgets.js';
 import { deleteBudget } from '@/services/budget.api.js';
 import { dateToNumericMonthYear } from '@/utils/formatters.js';

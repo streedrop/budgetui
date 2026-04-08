@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import { useCategories } from '@/hooks/useCategories.js';
-import { useCreateTransaction } from '@/hooks/rq/useCreateTransaction.js';
-import { useEditTransaction } from '@/hooks/rq/useEditTransaction.js';
-import { useTransaction } from '@/hooks/rq/useTransaction.js';
+import { useCreateTransaction } from '@/hooks/transactions/useCreateTransaction.js';
+import { useEditTransaction } from '@/hooks/transactions/useEditTransaction.js';
+import { useTransaction } from '@/hooks/transactions/useTransaction.js';
 import CancelButton from '@/components/buttons/CancelButton';
 import SaveButton from '@/components/buttons/SaveButton';
 import AddButton from '@/components/buttons/AddButton';

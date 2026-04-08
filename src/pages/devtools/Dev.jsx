@@ -1,6 +1,6 @@
 import styles from './styles/Dev.module.css';
 
-import { useTransactions } from '@/hooks/rq/useTransactions.js';
+import { useTransactions } from '@/hooks/transactions/useTransactions.js';
 import { useCategories } from '@/hooks/useCategories.js';
 import { useRules } from '@/hooks/useRules.js';
 

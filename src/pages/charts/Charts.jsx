@@ -1,7 +1,7 @@
 import { useBudgets } from '@/hooks/useBudgets.js';
 import { useBudgetFilters } from '@/hooks/useBudgetFilters.js';
 import { useCategories } from '@/hooks/useCategories.js';
-import { useTransactions } from '@/hooks/useTransactions.js';
+import { useTransactions } from '@/hooks/transactions/useTransactions';
 import { useTransactionFilters } from '@/hooks/useTransactionFilters.js';
 
 import Filter from '@/components/filter/Filter.jsx';
@@ -14,7 +14,7 @@ function Charts() {
     const { budgets } = useBudgets();
     const { filtered: filteredBudgets, setFilters: setBFilters } = useBudgetFilters(budgets);
 
-    const { transactions } = useTransactions();
+    const { data: transactions = [] } = useTransactions();
     const { filtered: filteredTransactions, filters, setFilters: setTFilters } = useTransactionFilters(transactions);
 
     function handleFilterChange(newFilters) {

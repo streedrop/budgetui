@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import { useTransactions } from '@/hooks/rq/useTransactions.js';
+import { useTransactions } from '@/hooks/transactions/useTransactions.js';
 import { useTransactionFilters } from '@/hooks/useTransactionFilters.js';
 
 import AddButton from '@/components/buttons/AddButton.jsx';
