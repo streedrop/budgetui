@@ -4,10 +4,11 @@ import icons from '@/constants/CategoryIcons'
 
 import { useNavigate } from 'react-router-dom';
 
+import { useDeleteCategory } from '@/hooks/categories/useDeleteCategory';
 import DeleteButton from '@/components/buttons/DeleteButton';
 import EditButton from '@/components/buttons/EditButton';
 
-function CategoryItem({ category, onDelete }) {
+function CategoryItem({ category }) {
 
     const navigate = useNavigate();
 
@@ -23,9 +24,12 @@ function CategoryItem({ category, onDelete }) {
         navigate(`/categories/${category.id}/edit`);
     }
 
+    const { mutate: deleteCategory } = useDeleteCategory();
+
     const deleteFunc = (evt) => {
         evt.stopPropagation();
-        onDelete(category.id);
+        
+        deleteCategory(category.id);
     }
 
     return (

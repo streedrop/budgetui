@@ -2,7 +2,9 @@ import styles from './styles/CategoryForm.module.css';
 
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchCategory, insertCategory, updateCategory } from '@/services/category.api';
+import { useCategory } from '@/hooks/categories/useCategory';
+import { useCreateCategory } from '@/hooks/categories/useCreateCategory';
+import { useEditCategory } from '@/hooks/categories/useEditCategory';
 
 import Modal from '@/components/modal/Modal';
 import Button from '@/components/buttons/Button';
@@ -24,22 +26,21 @@ function CategoryForm() {
     const [data, setFormData] = useState(emptyFormData);    // Form data
     const [modalOpen, setModalOpen] = useState(false);
 
+    const { mutate: createCategory } = useCreateCategory();
+    const { mutate: editCategory } = useEditCategory();
+    const { data: category = [], isLoading, error } = useCategory(id);
+
     const [icon, setIcon] = useState(0);
 
     const navigate = useNavigate();
 
-    // Fetch the category & pre-fill form
+    // Pre-fill form
     useEffect(() => {
-        if (!isEditMode) return;
-
-        async function loadCategory() {
-            const data = await fetchCategory(id);
-            setFormData(data);
-            setIcon(data.icon);
+        if (category && isEditMode) {
+            setFormData(category);
+            setIcon(category.icon);
         }
-
-        loadCategory();
-    }, [id]);
+    }, [category]);
 
     // Add / Save button
     async function handleSubmit(evt) {
@@ -49,16 +50,16 @@ function CategoryForm() {
         const data = Object.fromEntries(formData);
 
         if (isEditMode)
-            await updateCategory(id, data);
+            editCategory({ id, data });
         else
-            await insertCategory(data);
+            createCategory(data);
 
-        navigate('/categories');
+        navigate(-1);
     };
 
     // Cancel button
     const handleCancel = () => {
-        navigate('/categories');
+        navigate(-1);
     }
 
     return (

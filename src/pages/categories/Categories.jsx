@@ -1,32 +1,20 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useCategories } from '@/hooks/useCategories.js';
-import { deleteCategory } from '@/services/category.api.js';
+import { useCategories } from '@/hooks/categories/useCategories';
 
 import AddButton from '@/components/buttons/AddButton.jsx';
 import CategoryList from './CategoryList.jsx';
 import CategoryItem from './CategoryItem.jsx';
 
 function Categories() {
-  const { categories, setCategories } = useCategories();
-
-  const handleDelete = async (id) => {
-
-    if (!confirm("Are you sure you want to delete this category and all its transactions?"))
-      return;
-
-    const res = await deleteCategory(id);
-    if (!res.ok) return;
-
-    setCategories(prev => prev.filter(category => category.id !== id));
-  };
+  const { data: categories } = useCategories();
 
   const navigate = useNavigate();
 
   //if (loading) return <p>Loading...</p>;
   //if (error) return <p>Error: {error}</p>;
 
-  if (categories.length == 0)
+  if (!categories || categories.length == 0)
     return (<p>No categories to display.</p>)
 
   return (
@@ -38,11 +26,11 @@ function Categories() {
       </section>
       {categories.find(c => c.is_income == null) && (
         <div>
-          <CategoryItem category={categories.find(c => c.is_income == null)} onDelete={handleDelete}></CategoryItem>
+          <CategoryItem category={categories.find(c => c.is_income == null)}></CategoryItem>
         </div>
       )}
-      <CategoryList categories={categories.filter(c => c.is_income == true)} is_income={true} onDelete={handleDelete}></CategoryList>
-      <CategoryList categories={categories.filter(c => c.is_income == false)} is_income={false} onDelete={handleDelete}></CategoryList>
+      <CategoryList categories={categories.filter(c => c.is_income == true)} is_income={true}></CategoryList>
+      <CategoryList categories={categories.filter(c => c.is_income == false)} is_income={false}></CategoryList>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import styles from './styles/Dev.module.css';
 
 import { useTransactions } from '@/hooks/transactions/useTransactions.js';
-import { useCategories } from '@/hooks/useCategories.js';
+import { useCategories } from '@/hooks/categories/useCategories.js';
 import { useRules } from '@/hooks/useRules.js';
 
 import ColorPicker from '@/components/ColorPicker/ColorPicker';
@@ -11,7 +11,7 @@ import Button from '@/components/buttons/Button';
 function Dev() {
 
     const { data: transactions = [] } = useTransactions();
-    const { categories } = useCategories();
+    const { data: categories = [] } = useCategories();
     const { rules } = useRules();
 
     const generateSeeder = () => {

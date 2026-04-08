@@ -1,9 +1,9 @@
 import styles from './styles/Rules.module.css';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { insertRule, deleteRule } from '@/services/rule.api';
-import { useCategories } from '@/hooks/useCategories';
+import { useCategories } from '@/hooks/categories/useCategories';
 import { useRules } from '@/hooks/useRules';
 
 import Modal from '@/components/modal/Modal.jsx';
@@ -17,7 +17,7 @@ function Rules() {
 
     const [action, setAction] = useState("");
 
-    const { categories, setCategories } = useCategories(); // Category list
+    const { data: categories = [] } = useCategories(); // Category list
     const { rules, setRules } = useRules();   // Rule list
 
     const addRule = async (evt) => {

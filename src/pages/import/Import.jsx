@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { insertTransaction } from '@/services/transaction.api';
-import { useCategories } from '@/hooks/useCategories';
+import { useCategories } from '@/hooks/categories/useCategories';
 import { useRules } from '@/hooks/useRules';
 
 import { prepareTransactions } from './helpers';
@@ -21,7 +21,7 @@ function Import() {
 
     const [modalOpen, setModalOpen] = useState(false);
     const [transactions, setTransactions] = useState([]);
-    const { categories } = useCategories();
+    const { data: categories = [] } = useCategories();
     const { rules } = useRules();
 
     const navigate = useNavigate();

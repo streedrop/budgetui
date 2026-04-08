@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import icons from '@/constants/CategoryIcons';
 
-import { useCategory } from '@/hooks/useCategory.js';
+import { useCategory } from '@/hooks/categories/useCategory.js';
 import { useTransactions } from '@/hooks/transactions/useTransactions.js';
 import { useBudgets } from '@/hooks/useBudgets.js';
 import { deleteBudget } from '@/services/budget.api.js';
@@ -23,7 +23,7 @@ function Category() {
 
     const [modalOpen, setModalOpen] = useState(false);
 
-    const { category } = useCategory(id);
+    const { data: category } = useCategory(id);
     const { budgets, setBudgets } = useBudgets(id);
     const { data: transactions = [], isLoading, error } = useTransactions(id);
 

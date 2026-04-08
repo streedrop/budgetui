@@ -3,7 +3,7 @@ import styles from './styles/TransactionForm.module.css';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
-import { useCategories } from '@/hooks/useCategories.js';
+import { useCategories } from '@/hooks/categories/useCategories';
 import { useCreateTransaction } from '@/hooks/transactions/useCreateTransaction.js';
 import { useEditTransaction } from '@/hooks/transactions/useEditTransaction.js';
 import { useTransaction } from '@/hooks/transactions/useTransaction.js';
@@ -21,7 +21,7 @@ function TransactionForm() {
     const { id } = useParams();               // Current transaction ID
     const [searchParams] = useSearchParams();
     const isEditMode = Boolean(id);                     // ID = editing, No ID = creating
-    const { categories } = useCategories();
+    const { data: categories = [] } = useCategories();
     const [data, setFormData] = useState(emptyFormData);    // Form data
     const { mutate: createTransaction } = useCreateTransaction();
     const { mutate: editTransaction } = useEditTransaction();

@@ -1,6 +1,6 @@
 import { useBudgets } from '@/hooks/useBudgets.js';
 import { useBudgetFilters } from '@/hooks/useBudgetFilters.js';
-import { useCategories } from '@/hooks/useCategories.js';
+import { useCategories } from '@/hooks/categories/useCategories.js';
 import { useTransactions } from '@/hooks/transactions/useTransactions';
 import { useTransactionFilters } from '@/hooks/useTransactionFilters.js';
 
@@ -9,7 +9,7 @@ import ChartList from './ChartList.jsx';
 
 function Charts() {
 
-    const { categories } = useCategories();
+    const { data: categories = [] } = useCategories();
 
     const { budgets } = useBudgets();
     const { filtered: filteredBudgets, setFilters: setBFilters } = useBudgetFilters(budgets);
