@@ -1,58 +1,44 @@
-import styles from './styles/Keywords.module.css';
+import styles from './styles/Rules.module.css';
 
 import { useState, useEffect } from 'react';
 
-import { fetchCategories } from '@/services/category.api';
-import { fetchKeywords, insertKeyword, deleteKeyword } from '@/services/keyword.api';
+import { insertRule, deleteRule } from '@/services/rule.api';
+import { useCategories } from '@/hooks/useCategories';
+import { useRules } from '@/hooks/useRules';
 
 import Modal from '@/components/modal/Modal.jsx';
 import AddButton from '@/components/buttons/AddButton';
 import DeleteButton from '@/components/buttons/DeleteButton';
 
-function Keywords() {
+
+function Rules() {
 
     const [modalOpen, setModalOpen] = useState(false);
 
     const [action, setAction] = useState("");
 
-    const [categories, setCategories] = useState([]);   // Category list
-    const [keywords, setKeywords] = useState([]);   // Keyword list
+    const { categories, setCategories } = useCategories(); // Category list
+    const { rules, setRules } = useRules();   // Rule list
 
-    // Populate category and keyword list
-    useEffect(() => {
-        const loadCategories = async () => {
-            const data = await fetchCategories();
-            setCategories(data);
-        };
-
-        const loadKeywords = async () => {
-            const data = await fetchKeywords();
-            setKeywords(data);
-        };
-
-        loadCategories();
-        loadKeywords();
-    }, []);
-
-    const addKeyword = async (evt) => {
+    const addRule = async (evt) => {
         evt.preventDefault();
 
         const formData = new FormData(evt.target);
         const data = Object.fromEntries(formData);
 
-        await insertKeyword(data).then((res) => {
+        await insertRule(data).then((res) => {
             data.id = res.insertId;
-            setKeywords([...keywords, data]);
+            setRules([...rules, data]);
             setModalOpen(false);
         });
     }
 
     const handleDelete = async (id) => {
 
-        const res = await deleteKeyword(id);
+        const res = await deleteRule(id);
         if (!res.ok) return;
 
-        setKeywords(prev => prev.filter(item => !(item.id == id)));
+        setRules(prev => prev.filter(item => !(item.id == id)));
     };
 
     return (
@@ -60,7 +46,7 @@ function Keywords() {
             <h1>Rules / Automations</h1>
             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                 <h2>Add a rule</h2>
-                <form className={styles.form} onSubmit={addKeyword}>
+                <form className={styles.form} onSubmit={addRule}>
                     <label htmlFor="source">Source:</label>
                     <select id="source" name="source">
                         <option value="description">Transaction description</option>
@@ -109,7 +95,7 @@ function Keywords() {
                 </form>
             </Modal>
 
-            <h2>Current keywords</h2>
+            <h2>Current rules</h2>
             <AddButton className={styles.openModal} action={() => setModalOpen(true)} />
             <div className={styles.list}>
                 <div className={styles.header}>
@@ -117,22 +103,22 @@ function Keywords() {
                     <h4>Action</h4>
                     <h4 className={styles.actions}>Actions</h4>
                 </div>
-                {keywords.map((keyword, index) => (
+                {rules.map((rule, index) => (
 
                     <div className={styles.item} key={index}>
-                        {`${keyword.source == "description" ? "Description" : "Category name"}
-                            ${keyword.match_type == "contains" ? "contains" : "is equal to"}
-                            "${keyword.keyword}"
+                        {`${rule.source == "description" ? "Description" : "Category name"}
+                            ${rule.match_type == "contains" ? "contains" : "is equal to"}
+                            "${rule.keyword}"
                         `}
-                        {keyword.action == "ignore" && <p>Ignore</p>}
-                        {keyword.action == "move" && <p>Move to {categories.find(category => keyword.category_id == category.id)?.name}</p>}
-                        {keyword.action == "rename" && <p>Rename to "{keyword.new_string}"</p>}
-                        {keyword.action == "replace" && (
-                            keyword.new_string == '' ? <p>Remove "{keyword.keyword}" from name</p> : <p>Replace "{keyword.keyword}" by "{keyword.new_string}"</p>
+                        {rule.action == "ignore" && <p>Ignore</p>}
+                        {rule.action == "move" && <p>Move to {categories.find(category => rule.category_id == category.id)?.name}</p>}
+                        {rule.action == "rename" && <p>Rename to "{rule.new_string}"</p>}
+                        {rule.action == "replace" && (
+                            rule.new_string == '' ? <p>Remove "{rule.keyword}" from name</p> : <p>Replace "{rule.keyword}" by "{rule.new_string}"</p>
                         )}
 
                         <div className={styles.actions}>
-                            <DeleteButton action={() => handleDelete(keyword.id)} />
+                            <DeleteButton action={() => handleDelete(rule.id)} />
                         </div>
                         <hr />
                     </div>
@@ -143,4 +129,4 @@ function Keywords() {
     )
 }
 
-export default Keywords
+export default Rules

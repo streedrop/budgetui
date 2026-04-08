@@ -1,6 +1,6 @@
 import { transactionNameFormatter } from '@/utils/formatters';
 
-export const prepareTransactions = (data, categories, keywords) => {
+export const prepareTransactions = (data, categories, rules) => {
     // Split CSV per row and per column
     let formatted = data.trim().split('\n').map((item) => { return item.split(',') });
 
@@ -43,7 +43,7 @@ export const prepareTransactions = (data, categories, keywords) => {
                 transaction.category_name = category.name;
             }
 
-            applyRules(keywords, transaction, categories);
+            applyRules(rules, transaction, categories);
 
             acc.push(transaction);
             return acc;

@@ -17,7 +17,7 @@ import TransactionForm from './pages/transactions/TransactionForm.jsx'
 import Charts from './pages/charts/Charts.jsx'
 
 import Import from './pages/import/Import.jsx'
-import Keywords from './pages/import/Keywords.jsx'
+import Rules from './pages/import/Rules.jsx'
 
 import Dev from './pages/devtools/Dev.jsx'
 
@@ -43,7 +43,7 @@ function App() {
             <Route path="/categories/:id/edit" element={<CategoryForm />} />
             <Route path="/charts" element={<Charts />} />
             <Route path="/import" element={<Import />} />
-            <Route path="/import/keywords" element={<Keywords />} />
+            <Route path="/import/rules" element={<Rules />} />
             <Route path="/dev" element={<Dev />} />
           </Routes>
           <div id={RECHARTS_DEVTOOLS_PORTAL_ID} />

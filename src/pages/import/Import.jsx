@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { insertTransaction } from '@/services/transaction.api';
 import { useCategories } from '@/hooks/useCategories';
-import { useKeywords } from '@/hooks/useKeywords';
+import { useRules } from '@/hooks/useRules';
 
 import { prepareTransactions } from './helpers';
 
@@ -22,7 +22,7 @@ function Import() {
     const [modalOpen, setModalOpen] = useState(false);
     const [transactions, setTransactions] = useState([]);
     const { categories } = useCategories();
-    const { keywords } = useKeywords();
+    const { rules } = useRules();
 
     const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ function Import() {
         const texts = await Promise.all(files.map(f => f.text()));
 
         // Prepare all the transactions, and give every item an ID for react list keys to work
-        const entries = texts.flatMap(text => prepareTransactions(text), categories, keywords)
+        const entries = texts.flatMap(text => prepareTransactions(text), categories, rules)
                             .map((entry, index) => ({ ...entry, id: index }));
 
         setTransactions(entries);
@@ -67,7 +67,7 @@ function Import() {
         <>
             <h1>Import transactions</h1>
             <p>Import or paste CSV from Tangerine Bank in the area below to import your transactions.</p>
-            <Button className={styles.keywords} action={() => navigate('/import/keywords')}>Manage rules / automations</Button>
+            <Button className={styles.rules} action={() => navigate('/import/rules')}>Manage rules / automations</Button>
             <div>
                 <form className={styles.import} onSubmit={handleSubmit}>
                     <label htmlFor="files">Select file(s):</label>

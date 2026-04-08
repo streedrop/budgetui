@@ -1,4 +1,4 @@
-.keywords {
+.rules {
     width: fit-content;
 }
 
@@ -7,19 +7,10 @@
     flex-direction: column;
     gap: 20px;
     width: 50%;
-    margin: auto;
 }
 
 .import button{
-    width: 50%;
-    margin: auto;
-}
-
-.import textarea{
-    height: 200px;
-    width: 100%;
-    margin: auto;
-    resize: none;
+    width: fit-content;
 }
 
 .buttons {

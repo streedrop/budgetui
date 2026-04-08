@@ -2,7 +2,7 @@ import styles from './styles/Dev.module.css';
 
 import { useTransactions } from '@/hooks/rq/useTransactions.js';
 import { useCategories } from '@/hooks/useCategories.js';
-import { useKeywords } from '@/hooks/useKeywords.js';
+import { useRules } from '@/hooks/useRules.js';
 
 import ColorPicker from '@/components/ColorPicker/ColorPicker';
 import IconPicker from '@/components/IconPicker/IconPicker';
@@ -12,7 +12,7 @@ function Dev() {
 
     const { data: transactions = [] } = useTransactions();
     const { categories } = useCategories();
-    const { keywords: rules } = useKeywords();
+    const { rules } = useRules();
 
     const generateSeeder = () => {
         let rules_str = 'INSERT INTO rules (source, match_type, keyword, action, category_id, new_string) VALUES\n';
