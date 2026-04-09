@@ -51,6 +51,7 @@
         "title": "Transactions",
         "description": "Les transactions que vous ajoutez devraient être catégorisées afin de mieux interpréter les résultats.",
         "add": "Ajouter une transaction",
+        "import": "Importer des transactions",
         "list": {
             "title": "Liste de transactions",
             "header": {
@@ -80,7 +81,7 @@
         "add": "Ajouter une catégorie",
         "uncategorized": "Non-catégorisé",
         "list": {
-            "income": "Revenu",
+            "income": "Revenus",
             "expenses": "Dépenses",
             "transactions": "transaction",
             "empty": {
@@ -97,7 +98,7 @@
             "type": {
                 "label": "Type:",
                 "expenses": "Dépenses",
-                "income": "Revenu"
+                "income": "Revenus"
             }
         },
         "page": {
@@ -131,6 +132,8 @@
     },
     "rules": {
         "title": "Règles / Automatisations",
+        "description": "Les règles permettent d'effectuer des actions automatisées directement à l'importation des transactions afin de contrôler les comportements répétitifs indésirables venant des fichiers de banque.",
+        "add": "Ajouter une règle",
         "form": {
             "title": "Ajouter une règle",
             "source": {
@@ -186,6 +189,7 @@
         "delete": "Supprimer",
         "edit": "Modifier",
         "filter": "Filtrer...",
+        "import": "Importer",
         "save": "Sauvegarder"
     },
     "filters": {

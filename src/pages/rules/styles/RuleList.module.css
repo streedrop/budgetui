@@ -1,0 +1,13 @@
+.header {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    column-gap: 5px;
+    justify-items: start;
+    align-items: center;
+    margin: 10px auto;
+    border-radius: 10px;
+}
+
+.actions {
+    justify-self: end;
+}

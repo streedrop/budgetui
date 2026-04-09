@@ -71,7 +71,7 @@ function CategoryForm() {
 
     return (
         <>
-            <h1>{isEditMode ? t('categories.form.edit') : t('categories.form.new')}</h1>
+            <h1>{isEditMode ? t('categories.form.edit') : t('categories.form.add')}</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <label htmlFor="name">{t('categories.form.name')}</label>
                 <input type="text" id="name" name="name" defaultValue={data.name} />

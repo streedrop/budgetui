@@ -1,23 +1,4 @@
-.openModal {
-    width: 20%;
-}
-
-.form {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    row-gap: 1rem;
-    column-gap: 10px;
-    margin: 20px auto 0 auto;
-    align-items: center;
-}
-
-.form button {
-    grid-column: span 3;
-    width: 50%;
-    margin: auto;
-}
-
-.header, .item {
+.item {
     display: grid;
     grid-template-columns: 2fr 2fr 1fr;
     column-gap: 5px;

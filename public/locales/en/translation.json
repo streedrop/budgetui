@@ -51,6 +51,7 @@
         "title": "Transactions",
         "description": "Every transaction you add should be categorized to see it's data and interpret results better.",
         "add": "Add transaction",
+        "import": "Import transactions",
         "list": {
             "title": "Transaction List",
             "header": {
@@ -131,8 +132,10 @@
     },
     "rules": {
         "title": "Rules / Automations",
+        "description": "Rules allow you to define automatic actions that will trigger when you import transactions to control repetitive undesired behavior that come with bank files.",
+        "add": "Add rule",
         "form": {
-            "title": "Add a rule",
+            "title": "New rule",
             "source": {
                 "label": "Source:",
                 "description": "Transaction description",
@@ -186,6 +189,7 @@
         "delete": "Delete",
         "edit": "Edit",
         "filter": "Filter...",
+        "import": "Import",
         "save": "Save"
     },
     "filters": {

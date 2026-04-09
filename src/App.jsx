@@ -17,7 +17,7 @@ import TransactionForm from './pages/transactions/TransactionForm.jsx'
 import Charts from './pages/charts/Charts.jsx'
 
 import Import from './pages/import/Import.jsx'
-import Rules from './pages/import/Rules.jsx'
+import Rules from './pages/rules/Rules.jsx'
 
 import Dev from './pages/devtools/Dev.jsx'
 
