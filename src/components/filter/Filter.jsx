@@ -1,6 +1,7 @@
 import styles from './Filter.module.css'
 
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import emptyFilters from '@/constants/EmptyFilters'
 import { dateToMonthYear } from '@/utils/formatters';
@@ -9,6 +10,8 @@ import { useTransactions } from '@/hooks/transactions/useTransactions.js';
 import Button from '@/components/buttons/Button';
 
 function Filter({ filters, setFilters, date = true, amount = true }) {
+    const { t } = useTranslation();
+
     const { data: transactions = [], isLoading, error } = useTransactions();
     const [dateRange, setDateRange] = useState("0");
     const [selectedYear, setSelectedYear] = useState(null);
@@ -64,21 +67,21 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
 
     return (
         <div className={styles.filters}>
-            <h3 className={styles.title}>Filters</h3>
+            <h3 className={styles.title}>{t('filters.title')}</h3>
             <form className={`${styles.form}`}>
                 {date && (
                     <div className={`${styles.filter} ${styles.date}`}>
-                        <h4>Date range</h4>
+                        <h4>{t('filters.date.title')}</h4>
                         <div className={styles.rangeSelector}>
                             <input type="radio" id="yearly" name="dateRange" value="1" checked={dateRange === '1'} onChange={evt => setDateRange(evt.target.value)} />
-                            <label htmlFor="yearly">Yearly</label>
+                            <label htmlFor="yearly">{t('filters.date.yearly')}</label>
                             <input type="radio" id="monthly" name="dateRange" value="2" checked={dateRange === '2'} onChange={evt => setDateRange(evt.target.value)} />
-                            <label htmlFor="monthly">Monthly</label>
+                            <label htmlFor="monthly">{t('filters.date.monthly')}</label>
                             <input type="radio" id="custom" name="dateRange" value="3" checked={dateRange === '3'} onChange={evt => setDateRange(evt.target.value)} />
-                            <label htmlFor="custom">Custom</label>
+                            <label htmlFor="custom">{t('filters.date.custom')}</label>
                         </div>
                         <div className={`${styles.periodSelector} ${dateRange != "1" ? styles.hidden : ''}`}>
-                            <label htmlFor="year">Select year: </label>
+                            <label htmlFor="year">{t('filters.date.year')}</label>
                             <select name="year" id="year" onChange={evt => setSelectedYear(evt.target.value)}>
                                 {
                                     years.map(year =>
@@ -88,7 +91,7 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
                             </select>
                         </div>
                         <div className={`${styles.periodSelector} ${dateRange != "2" ? styles.hidden : ''}`}>
-                            <label htmlFor="month">Select month: </label>
+                            <label htmlFor="month">{t('filters.date.month')}</label>
                             <select name="month" id="month" onChange={evt => setSelectedMonth(evt.target.value)}>
                                 {
                                     months.map(month =>
@@ -99,11 +102,11 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
                         </div>
                         <div className={`${styles.subForm} ${dateRange != "3" ? styles.hidden : ''}`}>
                             <div>
-                                <label htmlFor="from">From: </label>
+                                <label htmlFor="from">{t('filters.date.from')}</label>
                                 <input id="from" type="date" value={filters.from} onChange={evt => setFilters(prev => ({ ...prev, from: evt.target.value }))} />
                             </div>
                             <div>
-                                <label htmlFor="to">To: </label>
+                                <label htmlFor="to">{t('filters.date.to')}</label>
                                 <input id="to" type="date" value={filters.to} onChange={evt => setFilters(prev => ({ ...prev, to: evt.target.value }))} />
                             </div>
                         </div>
@@ -111,16 +114,16 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
                 )}
                 {amount && (
                     <div className={`${styles.filter} ${styles.amount}`}>
-                        <h4>Amount</h4>
+                        <h4>{t('filters.amount.title')}</h4>
                         <div className={styles.subForm}>
                             <div>
-                                <label htmlFor="minAmount">From: </label>
+                                <label htmlFor="minAmount">{t('filters.amount.from')}</label>
                                 <span className='amount-input'>
                                     <input id="minAmount" type="number" step="any" min="0" value={filters.minAmount} onChange={evt => setFilters(prev => ({ ...prev, minAmount: evt.target.value }))} />
                                     $</span>
                             </div>
                             <div>
-                                <label htmlFor="maxAmount">To: </label>
+                                <label htmlFor="maxAmount">{t('filters.amount.to')}</label>
                                 <span className='amount-input'><input id="maxAmount" type="number" step="any" min="0" value={filters.maxAmount} onChange={evt => setFilters(prev => ({ ...prev, maxAmount: evt.target.value }))} />
                                     $</span>
                             </div>
@@ -128,7 +131,7 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
                     </div>
                 )}
                 <div className={`${styles.filter}`}>
-                    <Button action={resetFilters}>Reset</Button>
+                    <Button action={resetFilters}>{t('filters.reset')}</Button>
                 </div>
             </form>
         </div>

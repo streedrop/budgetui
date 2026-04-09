@@ -134,6 +134,10 @@ nav.collapsed .viewmode {
   display: none;
 }
 
+nav.collapsed .languageSelector {
+  display: none;
+}
+
 nav .tablet,
 nav .laptop,
 nav .desktop {

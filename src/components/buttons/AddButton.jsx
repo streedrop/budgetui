@@ -1,13 +1,17 @@
 import styles from './Button.module.css';
 
-function AddButton({ children = "Add", action, className = "" }) {
+import { useTranslation } from 'react-i18next';
 
+function AddButton({ children, action, className = "" }) {
+    const { t } = useTranslation();
+
+    const label = children ?? t('buttons.add');
     // Defined action
     if(action)
         return (
             <button type="button" className={`${className} ${styles.blue}`} onClick={action}>
                 <i className="fa-solid fa-plus"></i>
-                <p>{children}</p>
+                <p>{label}</p>
             </button>
         )
 
@@ -15,7 +19,7 @@ function AddButton({ children = "Add", action, className = "" }) {
     return (
         <button type="submit" className={`${className} ${styles.blue}`}>
             <i className="fa-solid fa-plus"></i>
-            <p>{children}</p>
+            <p>{label}</p>
         </button>
     );
 }

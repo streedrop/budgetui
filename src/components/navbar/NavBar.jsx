@@ -1,8 +1,12 @@
 import styles from './NavBar.module.css';
 
+import LanguageSelector from '@/components/LanguageSelector/LanguageSelector';
+
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function NavBar({ collapsed, setCollapsed }) {
+  const { t } = useTranslation();
 
   const navClass = ({ isActive }) => isActive ? styles.active : ''
 
@@ -19,42 +23,47 @@ function NavBar({ collapsed, setCollapsed }) {
       <div className={styles.links}>
         <NavLink to="/" className={navClass}>
           <i className="fa-regular fa-house"></i>
-          <span>Dashboard</span>
+          <span>{t('nav.dashboard')}</span>
         </NavLink>
         <NavLink to="/transactions" className={navClass}>
           <i className="fa-solid fa-list"></i>
-          <span>Transactions</span>
+          <span>{t('nav.transactions')}</span>
         </NavLink>
         <NavLink to="/categories" className={navClass}>
           <i className="fa-regular fa-folder"></i>
-          <span>Categories</span>
+          <span>{t('nav.categories')}</span>
         </NavLink>
         <NavLink to="/charts" className={navClass}>
           <i className="fa-regular fa-chart-bar"></i>
-          <span>Charts</span>
+          <span>{t('nav.charts')}</span>
         </NavLink>
 
         <hr />
 
         <NavLink to="/import" className={navClass}>
           <i className="fa-regular fa-file"></i>
-          <span>Import</span>
+          <span>{t('nav.import')}</span>
         </NavLink>
         <NavLink to="/dev" className={navClass}>
           <i className="fa-regular fa-file-code"></i>
-          <span>Dev Tools</span>
+          <span>{t('nav.dev')}</span>
         </NavLink>
       </div>
 
       <hr />
 
       <div className={styles.viewmode}>
-        <p>Current view mode: </p>
-        <p className={styles.mobile}>Mobile</p>
-        <p className={styles.tablet}>Tablet</p>
-        <p className={styles.laptop}>Laptop</p>
-        <p className={styles.desktop}>Desktop</p>
+        <p>{t('nav.viewmode.title')}</p>
+        <p className={styles.mobile}>{t('nav.viewmode.mobile')}</p>
+        <p className={styles.tablet}>{t('nav.viewmode.tablet')}</p>
+        <p className={styles.laptop}>{t('nav.viewmode.laptop')}</p>
+        <p className={styles.desktop}>{t('nav.viewmode.desktop')}</p>
       </div>
+
+      <div className={styles.languageSelector}>
+        <LanguageSelector />
+      </div>
+
     </nav>
   );
 }

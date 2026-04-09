@@ -1,6 +1,7 @@
 import styles from './styles/Rules.module.css';
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { insertRule, deleteRule } from '@/services/rule.api';
 import { useCategories } from '@/hooks/categories/useCategories';
@@ -12,6 +13,7 @@ import DeleteButton from '@/components/buttons/DeleteButton';
 
 
 function Rules() {
+    const { t } = useTranslation();
 
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -43,32 +45,32 @@ function Rules() {
 
     return (
         <>
-            <h1>Rules / Automations</h1>
+            <h1>{t('rules.title')}</h1>
             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-                <h2>Add a rule</h2>
+                <h2>{t('rules.form.title')}</h2>
                 <form className={styles.form} onSubmit={addRule}>
-                    <label htmlFor="source">Source:</label>
+                    <label htmlFor="source">{t('rules.form.source.label')}</label>
                     <select id="source" name="source">
-                        <option value="description">Transaction description</option>
-                        <option value="category">Transaction category name</option>
+                        <option value="description">{t('rules.form.source.description')}</option>
+                        <option value="category">{t('rules.form.source.category')}</option>
                     </select>
                     <div />
-                    <label htmlFor="match_type">Condition:</label>
+                    <label htmlFor="match_type">{t('rules.form.condition.label')}</label>
                     <select id="match_type" name="match_type">
-                        <option value="contains">Contains text</option>
-                        <option value="equals">Must fully match</option>
+                        <option value="contains">{t('rules.form.condition.contains')}</option>
+                        <option value="equals">{t('rules.form.condition.equals')}</option>
                     </select>
-                    <input type="text" id="keyword" name="keyword" placeholder="Keyword..." />
-                    <label htmlFor="action">Action:</label>
+                    <input type="text" id="keyword" name="keyword" placeholder={t('rules.form.condition.placeholder')} />
+                    <label htmlFor="action">{t('rules.form.action.label')}</label>
                     <select id="action" name="action" onChange={e => setAction(e.target.value)} value={action}>
-                        <option value="" disabled>Select an action...</option>
-                        <optgroup label="Categorization">
-                            <option value="move">Move to category</option>
-                            <option value="ignore">Ignore (do not add)</option>
+                        <option value="" disabled>{t('rules.form.action.placeholder')}</option>
+                        <optgroup label={t('rules.form.action.categorization.title')}>
+                            <option value="move">{t('rules.form.action.categorization.move')}</option>
+                            <option value="ignore">{t('rules.form.action.categorization.ignore')}</option>
                         </optgroup>
-                        <optgroup label="Name change">
-                            <option value="rename">Rename transaction to</option>
-                            <option value="replace">Replace keyword by</option>
+                        <optgroup label={t('rules.form.action.nameChange.title')}>
+                            <option value="rename">{t('rules.form.action.nameChange.rename')}</option>
+                            <option value="replace">{t('rules.form.action.nameChange.replace')}</option>
                         </optgroup>
                     </select>
                     {action == "move" && (
@@ -86,35 +88,35 @@ function Rules() {
                         <div />
                     )}
                     {action == "rename" && (
-                        <input type="text" name="new_string" id="new_string" placeholder="New name..." />
+                        <input type="text" name="new_string" id="new_string" placeholder={t('rules.form.action.nameChange.rename_placeholder')} />
                     )}
                     {action == "replace" && (
-                        <input type="text" name="new_string" id="new_string" placeholder="Replace By..." />
+                        <input type="text" name="new_string" id="new_string" placeholder={t('rules.form.action.nameChange.replace_placeholder')} />
                     )}
                     <AddButton />
                 </form>
             </Modal>
 
-            <h2>Current rules</h2>
+            <h2>{t('rules.list.title')}</h2>
             <AddButton className={styles.openModal} action={() => setModalOpen(true)} />
             <div className={styles.list}>
                 <div className={styles.header}>
-                    <h4>Condition</h4>
-                    <h4>Action</h4>
-                    <h4 className={styles.actions}>Actions</h4>
+                    <h4>{t('rules.list.header.condition')}</h4>
+                    <h4>{t('rules.list.header.action')}</h4>
+                    <h4 className={styles.actions}>{t('rules.list.header.actions')}</h4>
                 </div>
                 {rules.map((rule, index) => (
 
                     <div className={styles.item} key={index}>
-                        {`${rule.source == "description" ? "Description" : "Category name"}
-                            ${rule.match_type == "contains" ? "contains" : "is equal to"}
-                            "${rule.keyword}"
+                        {`${t(`rules.list.${rule.source}`)}
+                            ${t(`rules.list.${rule.match_type}`)}
+                            '${rule.keyword}'
                         `}
-                        {rule.action == "ignore" && <p>Ignore</p>}
-                        {rule.action == "move" && <p>Move to {categories.find(category => rule.category_id == category.id)?.name}</p>}
-                        {rule.action == "rename" && <p>Rename to "{rule.new_string}"</p>}
+                        {rule.action == "ignore" && <p>{t('rules.list.ignore')}</p>}
+                        {rule.action == "move" && <p>{t('rules.list.move')} {categories.find(category => rule.category_id == category.id)?.name}</p>}
+                        {rule.action == "rename" && <p>{t('rules.list.rename')} '{rule.new_string}'</p>}
                         {rule.action == "replace" && (
-                            rule.new_string == '' ? <p>Remove "{rule.keyword}" from name</p> : <p>Replace "{rule.keyword}" by "{rule.new_string}"</p>
+                            rule.new_string == '' ? <p>{t('rules.list.remove', {keyword: rule.keyword})}</p> : <p>{t('rules.list.replace', {keyword: rule.keyword, new_string: rule.new_string})}</p>
                         )}
 
                         <div className={styles.actions}>

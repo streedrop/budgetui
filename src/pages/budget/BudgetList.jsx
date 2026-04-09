@@ -1,4 +1,5 @@
 import styles from './styles/BudgetList.module.css';
+import { useTranslation } from 'react-i18next';
 
 import { useState, useEffect } from 'react';
 
@@ -6,6 +7,7 @@ import { dateToMonth, amountFormatter } from '@/utils/formatters';
 import { groupBudgetsByYear } from '@/utils/groupers';
 
 function BudgetList({ budgets, onDelete }) {
+    const { t } = useTranslation();
 
     const [grouped, setGrouped] = useState([]);
 
@@ -17,7 +19,7 @@ function BudgetList({ budgets, onDelete }) {
         return (<p>Loading...</p>);
 
     if (budgets.length == 0)
-        return (<p>No budget to display.</p>);
+        return (<p>{t('categories.page.budget.empty')}</p>);
 
     return (
         <div className={styles.list}>

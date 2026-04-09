@@ -1,0 +1,210 @@
+{
+    "nav": {
+        "dashboard": "Tableau de bord",
+        "transactions": "Transactions",
+        "categories": "Catégories",
+        "charts": "Graphiques",
+        "import": "Importer",
+        "dev": "Dev Tools",
+        "viewmode": {
+            "title": "Mode visuel actuel:",
+            "mobile": "Mobile",
+            "tablet": "Tablette",
+            "laptop": "Portable",
+            "desktop": "Ordinateur de bureau"
+        },
+        "languages": {
+            "french": "Français",
+            "english": "Anglais"
+        }
+    },
+    "dashboard": {
+        "title": "Tableau de bord",
+        "description": "Bienvenue! Vous nous avez manqués.",
+        "stats": {
+            "title": "Statistiques",
+            "allTime": "Récapitulatif total",
+            "thisYear": "Cette année",
+            "thisMonth": "Ce mois-ci",
+            "transactions": "Transactions",
+            "categories": "Catégories",
+            "income": "Revenu total",
+            "expenses": "Dépenses totales"
+        },
+        "navigate": {
+            "title": "Application de budget",
+            "transactions": {
+                "title": "Transactions",
+                "description": "Ajoutez vos données."
+            },
+            "categories": {
+                "title": "Catégories",
+                "description": "Organisez vos données."
+            },
+            "charts": {
+                "title": "Graphiques",
+                "description": "Visualisez vos données."
+            }
+        }
+    },
+    "transactions": {
+        "title": "Transactions",
+        "description": "Les transactions que vous ajoutez devraient être catégorisées afin de mieux interpréter les résultats.",
+        "add": "Ajouter une transaction",
+        "list": {
+            "title": "Liste de transactions",
+            "header": {
+                "date": "Date",
+                "description": "Transaction",
+                "category": "Catégorie",
+                "amount": "Montant",
+                "actions": "Actions"
+            },
+            "empty": {
+                "title": "Aucune transaction à afficher",
+                "description": "Essayez de réinitialiser vos filtres ou d'ajouter plus de transactions"
+            }
+        },
+        "form": {
+            "add": "Nouvelle transaction",
+            "edit": "Modifier une transaction",
+            "description": "Description:",
+            "amount": "Montant:",
+            "category": "Catégorie:",
+            "date": "Date:"
+        }
+    },
+    "categories": {
+        "title": "Catégories",
+        "description": "Organisez vos transactions dans des catégories afin de définir des objectifs, visualiser des graphiques et définir ce qu'il vous faut améliorer.",
+        "add": "Ajouter une catégorie",
+        "uncategorized": "Non-catégorisé",
+        "list": {
+            "income": "Revenu",
+            "expenses": "Dépenses",
+            "transactions": "transaction",
+            "empty": {
+                "title": "Aucune catégorie à afficher",
+                "description": "Ajoutez des catégories pour organiser vos transactions et visualiser des graphiques."
+            }
+        },
+        "form": {
+            "add": "Nouvelle catégorie",
+            "edit": "Modifier une categorie",
+            "name": "Nom:",
+            "icon": "Icône:",
+            "description": "Description:",
+            "type": {
+                "label": "Type:",
+                "expenses": "Dépenses",
+                "income": "Revenu"
+            }
+        },
+        "page": {
+            "budget": {
+                "title": "Budget mensuel",
+                "add": "Modifier le budget",
+                "empty": "Aucun budget à afficher.",
+                "form": {
+                    "title": "Gérer le budget",
+                    "date": "Période:",
+                    "from": "De:",
+                    "to": "À:",
+                    "amount": "Budget mensuel:"
+                }
+            }
+        }
+    },
+    "charts": {
+        "title": "Graphiques"
+    },
+    "import": {
+        "title": "Importer des transactions",
+        "description": "Importez un fichier CSV de la Banque Tangerine dans la zone ci-dessous pour importer des transactions automatiquement.",
+        "openRules": "Gérer les règles / automatisations",
+        "file": "Sélectionner un/des fichier(s):",
+        "import": "Importer",
+        "confirm": {
+            "title": "Confirmer les transactions",
+            "description": "Les transactions suivantes seront ajoutées:"
+        }
+    },
+    "rules": {
+        "title": "Règles / Automatisations",
+        "form": {
+            "title": "Ajouter une règle",
+            "source": {
+                "label": "Source:",
+                "description": "Description de la transaction",
+                "category": "Nom de la catégorie de la transaction"
+            },
+            "condition": {
+                "label": "Condition:",
+                "contains": "Contient le mot-clé",
+                "equals": "Doit être identique au mot-clé",
+                "placeholder": "Mot-clé..."
+            },
+            "action": {
+                "label": "Action:",
+                "placeholder": "Sélectionner une action...",
+                "categorization": {
+                    "title": "Catégorisation",
+                    "move": "Déplacer dans la catégorie",
+                    "ignore": "Ignorer (ne pas inclure)"
+                },
+                "nameChange": {
+                    "title": "Modification de la description",
+                    "rename": "Renommer la transaction",
+                    "rename_placeholder": "Nouveau nom...",
+                    "replace": "Remplacer le mot-clé par",
+                    "replace_placeholder": "Remplacer par..."
+                }
+            }
+        },
+        "list": {
+            "title": "Règles actuelles",
+            "header": {
+                "condition": "Condition",
+                "action": "Action",
+                "actions": "Actions"
+            },
+            "description": "La description",
+            "category": "Le nom de la catégorie",
+            "contains": "contient",
+            "equals": "est exactement",
+            "move": "Déplacer dans",
+            "ignore": "Ignorer",
+            "rename": "Renommer",
+            "replace": "Remplacer '{{keyword}}' par '{{new_string}}' dans la description",
+            "remove": "Retirer '{{keyword}}' de la description"
+        }
+    },
+    "buttons": {
+        "add": "Ajouter",
+        "cancel": "Annuler",
+        "confirm": "Confirmer",
+        "delete": "Supprimer",
+        "edit": "Modifier",
+        "filter": "Filtrer...",
+        "save": "Sauvegarder"
+    },
+    "filters": {
+        "title": "Filtres",
+        "date": {
+            "title": "Période",
+            "yearly": "Annuel",
+            "year": "Sélectionner l'année:",
+            "monthly": "Mensuel",
+            "month": "Sélectionner le mois:",
+            "custom": "Personnalisé",
+            "from": "De:",
+            "to": "À:"
+        },
+        "amount": {
+            "title": "Montant",
+            "from": "De:",
+            "to": "À:"
+        },
+        "reset": "Réinitialiser"
+    }
+}

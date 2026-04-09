@@ -3,12 +3,14 @@ import styles from './styles/CategoryItem.module.css';
 import icons from '@/constants/CategoryIcons'
 
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { useDeleteCategory } from '@/hooks/categories/useDeleteCategory';
 import DeleteButton from '@/components/buttons/DeleteButton';
 import EditButton from '@/components/buttons/EditButton';
 
 function CategoryItem({ category }) {
+    const { t } = useTranslation();
 
     const navigate = useNavigate();
 
@@ -35,7 +37,7 @@ function CategoryItem({ category }) {
     return (
         <div className={styles.item} key={category.id} onClick={() => goToInfo()}>
             <i className={`${styles.icon} ${icons[category.icon]}`}></i>
-            <p><b>{category.name}</b></p>
+            <p><b>{t(category.name)}</b></p>
             <p className={styles.description}>{category.description}</p>
             <div className={styles.actions}>
                 {category.id && (
@@ -45,7 +47,7 @@ function CategoryItem({ category }) {
                     </>
                 )}
             </div>
-            <p>{category.count} transaction{category.count == 1 ? '' : 's'}</p>
+            <p>{category.count} {t('categories.list.transactions')}{category.count == 1 ? '' : 's'}</p>
         </div>
     );
 }

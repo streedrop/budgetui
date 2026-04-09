@@ -2,6 +2,7 @@ import styles from './styles/Category.module.css';
 
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import icons from '@/constants/CategoryIcons';
 
@@ -18,6 +19,8 @@ import BudgetForm from '@/pages/budget/BudgetForm.jsx';
 import TransactionList from '@/pages/transactions/TransactionList.jsx';
 
 function Category() {
+    const { t } = useTranslation();
+
     const { id } = useParams();
     const isUncategorized = id === "uncategorized";
 
@@ -38,7 +41,7 @@ function Category() {
 
     return (
         <> {isUncategorized ?
-            (<h1>Uncategorized</h1>)
+            (<h1>{t('categories.uncategorized')}</h1>)
             :
             (<>
                 <header className={styles.title}>
@@ -52,9 +55,9 @@ function Category() {
                 <section className={`${styles.hidden} ${styles.chart}`}>
                 </section>
                 <section className={styles.budget}>
-                    <h2>Monthly budget</h2>
+                    <h2>{t('categories.page.budget.title')}</h2>
                     <BudgetList budgets={budgets} onDelete={handleDeleteBudget}></BudgetList>
-                    <Button className={styles.set} action={() => setModalOpen(true)}>Set budget</Button>
+                    <Button className={styles.set} action={() => setModalOpen(true)}>{t('categories.page.budget.add')}</Button>
                 </section>
                 <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                     <BudgetForm onCancel={() => setModalOpen(false)} onSuccess={() => { setModalOpen(false) }}></BudgetForm>

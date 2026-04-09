@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { useBudgets } from '@/hooks/useBudgets.js';
 import { useBudgetFilters } from '@/hooks/useBudgetFilters.js';
 import { useCategories } from '@/hooks/categories/useCategories.js';
@@ -8,6 +10,7 @@ import Filter from '@/components/filter/Filter.jsx';
 import ChartList from './ChartList.jsx';
 
 function Charts() {
+    const { t } = useTranslation();
 
     const { data: categories = [] } = useCategories();
 
@@ -24,7 +27,7 @@ function Charts() {
 
     return (
         <>
-            <h1>Charts</h1>
+            <h1>{t('charts.title')}</h1>
             <Filter filters={filters} setFilters={handleFilterChange} amount={false} />
             <ChartList transactions={filteredTransactions} categories={categories} budgets={filteredBudgets} />
         </>

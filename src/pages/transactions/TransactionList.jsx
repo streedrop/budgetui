@@ -1,19 +1,14 @@
 import styles from './styles/TransactionList.module.css';
 
 import { useNavigate } from 'react-router-dom';
-
-/*import { amountFormatter } from '@/utils/formatters';
-import { groupTransactionsByMonth } from '@/utils/groupers';*/
-import { useDeleteTransaction } from '@/hooks/transactions/useDeleteTransaction.js';
+import { useTranslation } from 'react-i18next';
 
 import AddButton from '@/components/buttons/AddButton';
 import FilterButton from '@/components/buttons/FilterButton';
 import TransactionItem from './TransactionItem';
 
 function TransactionList({ transactions, deletable = true, onSelect, editable = true, openFilters, category_id }) {
-    // group transactions by month for display
-    /*const groupedByMonth = groupTransactionsByMonth(transactions);*/
-    const { mutate } = useDeleteTransaction();
+    const { t } = useTranslation();
 
     const navigate = useNavigate();
 
@@ -27,7 +22,7 @@ function TransactionList({ transactions, deletable = true, onSelect, editable = 
     return (
         <div className={styles.list}>
             <div className={styles.title}>
-                <h2>Transaction List</h2>
+                <h2>{t('transactions.list.title')}</h2>
                 <div className={styles.actions}>
                     {openFilters && (
                         <FilterButton action={() => { openFilters(true) }} />
@@ -42,11 +37,11 @@ function TransactionList({ transactions, deletable = true, onSelect, editable = 
                     (
                         <>
                             <div className={styles.header}>
-                                <h4 className={styles.date}>Date</h4>
-                                <h4 className={styles.transaction}>Transaction</h4>
-                                <h4 className={styles.category}>Category</h4>
-                                <h4 className={styles.amount}>Amount</h4>
-                                <h4 className={styles.actions}>Actions</h4>
+                                <h4 className={styles.date}>{t('transactions.list.header.date')}</h4>
+                                <h4 className={styles.transaction}>{t('transactions.list.header.description')}</h4>
+                                <h4 className={styles.category}>{t('transactions.list.header.category')}</h4>
+                                <h4 className={styles.amount}>{t('transactions.list.header.amount')}</h4>
+                                <h4 className={styles.actions}>{t('transactions.list.header.actions')}</h4>
                             </div>
                             {
                                 transactions.map(transaction => (
@@ -63,43 +58,12 @@ function TransactionList({ transactions, deletable = true, onSelect, editable = 
                     :
                     <div className={styles.noTransactions}>
                         <i className="fa-regular fa-rectangle-xmark"></i>
-                        <h3>No transactions to display</h3>
-                        <p>Try clearing your filters or adding more transactions.</p>
+                        <h3>{t('transactions.list.empty.title')}</h3>
+                        <p>{t('transactions.list.empty.description')}</p>
                     </div>
             }
         </div>
     );
-
-    // Ordered by month:
-    /*return (
-        <div className={styles.list}>
-            {Object.entries(groupedByMonth).map(([month, { sum, transactions }]) => (
-                <div key={month}>
-                    <div className={styles.month}>
-                        <h2>{month}</h2>
-                        <h2>{amountFormatter(sum)}</h2>
-                    </div>
-                    <div className={styles.header}>
-                        <h4 className={styles.date}>Date</h4>
-                        <h4 className={styles.transaction}>Transaction</h4>
-                        <h4 className={styles.amount}>Amount</h4>
-                        <h4 className={styles.actions}>Actions</h4>
-                    </div>
-                    {
-                        transactions.map(transaction => (
-                            <TransactionItem
-                                key={transaction.id}
-                                transaction={transaction}
-                                onDelete={onDelete}
-                                onSelect={onSelect}
-                                editable={editable}
-                            />
-                        ))
-                    }
-                </div>
-            ))}
-        </div>
-    );*/
 }
 
 export default TransactionList

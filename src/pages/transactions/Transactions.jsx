@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useTransactions } from '@/hooks/transactions/useTransactions.js';
 import { useTransactionFilters } from '@/hooks/useTransactionFilters.js';
@@ -9,6 +10,7 @@ import FilterOverlay from '@/components/filter/FilterOverlay.jsx';
 import TransactionList from './TransactionList.jsx';
 
 function Transactions() {
+  const { t } = useTranslation();
   const { data : transactions = [], isLoading, error } = useTransactions();
   const { filtered, filters, setFilters } = useTransactionFilters(transactions);
 
@@ -21,10 +23,10 @@ function Transactions() {
 
   return (
     <>
-      <h1>Transactions</h1>
+      <h1>{t('transactions.title')}</h1>
       <section>
-        <p>Every transaction you add should be categorized to see it's data and interpret results better.</p>
-        <AddButton action={() => navigate('/transactions/new')}>Add transaction</AddButton>
+        <p>{t('transactions.description')}</p>
+        <AddButton action={() => navigate('/transactions/new')}>{t('transactions.add')}</AddButton>
       </section>
       <FilterOverlay isOpen={openFilters} onClose={() => setOpenFilters(false)} filters={filters} setFilters={setFilters}  />
       {/* <Filter filters={filters} setFilters={setFilters} /> */}

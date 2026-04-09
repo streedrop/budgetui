@@ -1,0 +1,210 @@
+{
+    "nav": {
+        "dashboard": "Dashboard",
+        "transactions": "Transactions",
+        "categories": "Categories",
+        "charts": "Charts",
+        "import": "Import",
+        "dev": "Dev Tools",
+        "viewmode": {
+            "title": "Current view mode:",
+            "mobile": "Mobile",
+            "tablet": "Tablet",
+            "laptop": "Laptop",
+            "desktop": "Desktop"
+        },
+        "languages": {
+            "french": "French",
+            "english": "English"
+        }
+    },
+    "dashboard": {
+        "title": "Dashboard",
+        "description": "Welcome! We missed you.",
+        "stats": {
+            "title": "Stats",
+            "allTime": "All Time",
+            "thisYear": "This Year",
+            "thisMonth": "This Month",
+            "transactions": "Transactions",
+            "categories": "Categories",
+            "income": "Total income",
+            "expenses": "Total expenses"
+        },
+        "navigate": {
+            "title": "Budgeting App",
+            "transactions": {
+                "title": "Transactions",
+                "description": "Add your data."
+            },
+            "categories": {
+                "title": "Categories",
+                "description": "Organize your data."
+            },
+            "charts": {
+                "title": "Charts",
+                "description": "See your data."
+            }
+        }
+    },
+    "transactions": {
+        "title": "Transactions",
+        "description": "Every transaction you add should be categorized to see it's data and interpret results better.",
+        "add": "Add transaction",
+        "list": {
+            "title": "Transaction List",
+            "header": {
+                "date": "Date",
+                "description": "Transaction",
+                "category": "Category",
+                "amount": "Amount",
+                "actions": "Actions"
+            },
+            "empty": {
+                "title": "No transactions to display",
+                "description": "Try clearing your filters or adding more transactions."
+            }
+        },
+        "form": {
+            "add": "New transaction",
+            "edit": "Edit transaction",
+            "description": "Description:",
+            "amount": "Amount:",
+            "category": "Category:",
+            "date": "Date:"
+        }
+    },
+    "categories": {
+        "title": "Categories",
+        "description": "Arrange your transactions into categories to set goals, see graphs and notice what could be improved.",
+        "add": "Add category",
+        "uncategorized": "Uncategorized",
+        "list": {
+            "income": "Income",
+            "expenses": "Expenses",
+            "transactions": "transaction",
+            "empty": {
+                "title": "No categories to display",
+                "description": "Add categories to organize your transactions and visualize in charts."
+            }
+        },
+        "form": {
+            "add": "New category",
+            "edit": "Edit category",
+            "name": "Name:",
+            "icon": "Icon:",
+            "description": "Description:",
+            "type": {
+                "label": "Type:",
+                "expenses": "Expenses",
+                "income": "Income"
+            }
+        },
+        "page": {
+            "budget": {
+                "title": "Monthly Budget",
+                "add": "Set budget",
+                "empty": "No budget to display.",
+                "form": {
+                    "title": "Manage budget",
+                    "date": "Month range:",
+                    "from": "From:",
+                    "to": "To:",
+                    "amount": "Monthly budget:"
+                }
+            }
+        }
+    },
+    "charts": {
+        "title": "Charts"
+    },
+    "import": {
+        "title": "Import transactions",
+        "description": "Import a CSV file from Tangerine Bank in the area below to automatically add transactions",
+        "openRules": "Manage rules / automations",
+        "file": "Select file(s):",
+        "import": "Import",
+        "confirm": {
+            "title": "Confirm transactions",
+            "description": "The following transactions are going to be added:"
+        }
+    },
+    "rules": {
+        "title": "Rules / Automations",
+        "form": {
+            "title": "Add a rule",
+            "source": {
+                "label": "Source:",
+                "description": "Transaction description",
+                "category": "Transaction category name"
+            },
+            "condition": {
+                "label": "Condition:",
+                "contains": "Contains text",
+                "equals": "Must fully match",
+                "placeholder": "Keyword..."
+            },
+            "action": {
+                "label": "Action:",
+                "placeholder": "Select an action...",
+                "categorization": {
+                    "title": "Categorization",
+                    "move": "Move to category",
+                    "ignore": "Ignore (do not add)"
+                },
+                "nameChange": {
+                    "title": "Name change",
+                    "rename": "Rename transaction to",
+                    "rename_placeholder": "New name...",
+                    "replace": "Replace keyword by",
+                    "replace_placeholder": "Replace by..."
+                }
+            }
+        },
+        "list": {
+            "title": "Current rules",
+            "header": {
+                "condition": "Condition",
+                "action": "Action",
+                "actions": "Actions"
+            },
+            "description": "Description",
+            "category": "Category name",
+            "contains": "contains",
+            "equals": "is equal to",
+            "move": "Move to",
+            "ignore": "Ignore",
+            "rename": "Rename to",
+            "replace": "Replace '{{keyword}}' by '{{new_string}}' in description",
+            "remove": "Remove '{{keyword}}' from description"
+        }
+    },
+    "buttons": {
+        "add": "Add",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "delete": "Delete",
+        "edit": "Edit",
+        "filter": "Filter...",
+        "save": "Save"
+    },
+    "filters": {
+        "title": "Filters",
+        "date": {
+            "title": "Date range",
+            "yearly": "Yearly",
+            "year": "Select year:",
+            "monthly": "Monthly",
+            "month": "Select month:",
+            "custom": "Custom",
+            "from": "From:",
+            "to": "To:"
+        },
+        "amount": {
+            "title": "Amount",
+            "from": "From:",
+            "to": "To:"
+        },
+        "reset": "Reset"
+    }
+}

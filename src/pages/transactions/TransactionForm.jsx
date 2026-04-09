@@ -2,6 +2,7 @@ import styles from './styles/TransactionForm.module.css';
 
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { useCategories } from '@/hooks/categories/useCategories';
 import { useCreateTransaction } from '@/hooks/transactions/useCreateTransaction.js';
@@ -18,6 +19,8 @@ const emptyFormData = {
 };
 
 function TransactionForm() {
+    const { t } = useTranslation();
+
     const { id } = useParams();               // Current transaction ID
     const [searchParams] = useSearchParams();
     const isEditMode = Boolean(id);                     // ID = editing, No ID = creating
@@ -70,15 +73,15 @@ function TransactionForm() {
 
     return (
         <>
-            <h1>{isEditMode ? 'Edit transaction' : 'New transaction'}</h1>
+            <h1>{isEditMode ? t('transactions.form.edit') : t('transactions.form.add')}</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <label htmlFor="description">Description: </label>
+                <label htmlFor="description">{t('transactions.form.description')} </label>
                 <input type="text" id="description" name="description" defaultValue={data.description} />
 
-                <label htmlFor="amount">Amount: </label>
+                <label htmlFor="amount">{t('transactions.form.amount')} </label>
                 <input type="text" id="amount" name="amount" defaultValue={data.amount} />
 
-                <label htmlFor="category">Category:</label>
+                <label htmlFor="category">{t('transactions.form.category')}</label>
                 <select id="category" name="category_id" value={data.category_id}
                     onChange={(e) =>
                         setFormData({
@@ -86,14 +89,14 @@ function TransactionForm() {
                             category_id: e.target.value
                         })
                     }>
-                    <option value="">Uncategorized</option>
+                    <option value="">{t('categories.uncategorized')}</option>
                     {categories.map(category => (
                         <option key={category.id} value={category.id}>
                             {category.name}
                         </option>
                     ))}
                 </select>
-                <label htmlFor="date">Date:</label>
+                <label htmlFor="date">{t('transactions.form.date')}</label>
                 <input type="date" id="date" name="date" defaultValue={data.date ? data.date.split("T")[0] : ""}></input>
                 <CancelButton action={handleCancel} />
                 {isEditMode ? (<SaveButton />) : (<AddButton />)}

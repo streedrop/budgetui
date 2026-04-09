@@ -2,6 +2,7 @@ import styles from './styles/Import.module.css';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { insertTransaction } from '@/services/transaction.api';
 import { useCategories } from '@/hooks/categories/useCategories';
@@ -18,6 +19,7 @@ import TransactionList from '@/pages/transactions/TransactionList';
 
 
 function Import() {
+    const { t } = useTranslation();
 
     const [modalOpen, setModalOpen] = useState(false);
     const [transactions, setTransactions] = useState([]);
@@ -36,7 +38,7 @@ function Import() {
 
         // Prepare all the transactions, and give every item an ID for react list keys to work
         const entries = texts.flatMap(text => prepareTransactions(text), categories, rules)
-                            .map((entry, index) => ({ ...entry, id: index }));
+            .map((entry, index) => ({ ...entry, id: index }));
 
         setTransactions(entries);
 
@@ -65,19 +67,20 @@ function Import() {
 
     return (
         <>
-            <h1>Import transactions</h1>
-            <p>Import or paste CSV from Tangerine Bank in the area below to import your transactions.</p>
-            <Button className={styles.rules} action={() => navigate('/import/rules')}>Manage rules / automations</Button>
+            <h1>{t('import.title')}</h1>
+            <p>{t('import.description')}</p>
+            <Button className={styles.rules} action={() => navigate('/import/rules')}>{t('import.openRules')}</Button>
             <div>
                 <form className={styles.import} onSubmit={handleSubmit}>
-                    <label htmlFor="files">Select file(s):</label>
+                    <label htmlFor="files">{t('import.file')}</label>
                     <input type="file" id="files" name="files" accept=".csv" multiple />
-                    <Button type="submit">Import</Button>
+                    <Button type="submit">{t('import.import')}</Button>
                 </form>
             </div>
 
             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-                <p>The following transactions are going to be added:</p>
+                <h2>{t('import.confirm.title')}</h2>
+                <p>{t('import.confirm.description')}</p>
                 <TransactionList transactions={transactions} deletable={false} onSelect={handleSelect} editable={false}></TransactionList>
                 <div className={styles.buttons}>
                     <CancelButton action={() => setModalOpen(false)} />
