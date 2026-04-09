@@ -13,7 +13,7 @@ function TransactionList({ transactions, deletable = true, onSelect, editable = 
     const navigate = useNavigate();
 
     const goToAdd = () => {
-        if(category_id)
+        if (category_id)
             navigate(`/transactions/new?category=${category_id}`);
         else
             navigate('/transactions/new');
@@ -25,7 +25,7 @@ function TransactionList({ transactions, deletable = true, onSelect, editable = 
                 <h2>{t('transactions.list.title')}</h2>
                 <div className={styles.actions}>
                     {openFilters && (
-                        <FilterButton action={() => { openFilters(true) }} />
+                        <FilterButton action={openFilters} />
                     )}
                     {editable && (
                         <AddButton action={goToAdd} />
@@ -34,29 +34,27 @@ function TransactionList({ transactions, deletable = true, onSelect, editable = 
             </div>
             {
                 transactions.length > 0 ?
-                    (
-                        <>
-                            <div className={styles.header}>
-                                <h4 className={styles.date}>{t('transactions.list.header.date')}</h4>
-                                <h4 className={styles.transaction}>{t('transactions.list.header.description')}</h4>
-                                <h4 className={styles.category}>{t('transactions.list.header.category')}</h4>
-                                <h4 className={styles.amount}>{t('transactions.list.header.amount')}</h4>
-                                <h4 className={styles.actions}>{t('transactions.list.header.actions')}</h4>
-                            </div>
-                            {
-                                transactions.map(transaction => (
-                                    <TransactionItem
-                                        key={transaction.id}
-                                        transaction={transaction}
-                                        deletable={deletable}
-                                        onSelect={onSelect}
-                                        editable={editable}
-                                    />
-                                ))}
-                        </>
-                    )
+                    <>
+                        <div className={styles.header}>
+                            <h4 className={styles.date}>{t('transactions.list.header.date')}</h4>
+                            <h4 className={styles.transaction}>{t('transactions.list.header.description')}</h4>
+                            <h4 className={styles.category}>{t('transactions.list.header.category')}</h4>
+                            <h4 className={styles.amount}>{t('transactions.list.header.amount')}</h4>
+                            <h4 className={styles.actions}>{t('transactions.list.header.actions')}</h4>
+                        </div>
+                        {
+                            transactions.map(transaction => (
+                                <TransactionItem
+                                    key={transaction.id}
+                                    transaction={transaction}
+                                    deletable={deletable}
+                                    onSelect={onSelect}
+                                    editable={editable}
+                                />
+                            ))}
+                    </>
                     :
-                    <div className={styles.noTransactions}>
+                    <div className={styles.empty}>
                         <i className="fa-regular fa-rectangle-xmark"></i>
                         <h3>{t('transactions.list.empty.title')}</h3>
                         <p>{t('transactions.list.empty.description')}</p>

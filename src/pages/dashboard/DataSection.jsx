@@ -3,6 +3,8 @@ import styles from './styles/DataSection.module.css';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useCategories } from '@/hooks/categories/useCategories'
+
 import { amountFormatter } from '@/utils/formatters';
 import { totalExpensesAndIncome } from '@/utils/calculators';
 import ExpensesVsIncomeBarOneYear from '@/charts/ByMonth/ExpensesVsIncome/OneYear/ExpensesVsIncome';
@@ -12,6 +14,8 @@ function DataSection({ transactions, type }) {
     const { t } = useTranslation();
 
     const [data, setData] = useState({ income: 0, expenses: 0 });
+
+    const { data: categories = [] } = useCategories();
 
     useEffect(() => {
         if (!transactions)
@@ -37,7 +41,7 @@ function DataSection({ transactions, type }) {
                     type == 0 && (
                         <div className={styles.stat}>
                             <p className={styles.label}>{t('dashboard.stats.categories')}</p>
-                            <p className={styles.data}>{3}</p>
+                            <p className={styles.data}>{categories.length}</p>
                         </div>
                     )
                 }

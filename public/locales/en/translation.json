@@ -81,6 +81,7 @@
         "add": "Add category",
         "uncategorized": "Uncategorized",
         "list": {
+            "title": "Category List",
             "income": "Income",
             "expenses": "Expenses",
             "transactions": "transaction",
@@ -179,7 +180,11 @@
             "ignore": "Ignore",
             "rename": "Rename to",
             "replace": "Replace '{{keyword}}' by '{{new_string}}' in description",
-            "remove": "Remove '{{keyword}}' from description"
+            "remove": "Remove '{{keyword}}' from description",
+            "empty": {
+                "title": "No rules to display",
+                "description": "Add rules to define automated behaviors when importing transactions."
+            }
         }
     },
     "buttons": {

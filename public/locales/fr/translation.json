@@ -81,6 +81,7 @@
         "add": "Ajouter une catégorie",
         "uncategorized": "Non-catégorisé",
         "list": {
+            "title": "Category List",
             "income": "Revenus",
             "expenses": "Dépenses",
             "transactions": "transaction",
@@ -179,7 +180,11 @@
             "ignore": "Ignorer",
             "rename": "Renommer",
             "replace": "Remplacer '{{keyword}}' par '{{new_string}}' dans la description",
-            "remove": "Retirer '{{keyword}}' de la description"
+            "remove": "Retirer '{{keyword}}' de la description",
+            "empty": {
+                "title": "Aucune règle à afficher",
+                "description": "Ajoutez des règles pour définir des comportements automatisés lors de l'importation de transactions."
+            }
         }
     },
     "buttons": {

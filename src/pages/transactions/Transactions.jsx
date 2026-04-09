@@ -35,8 +35,7 @@ function Transactions() {
         </div>
       </section>
       <FilterOverlay isOpen={openFilters} onClose={() => setOpenFilters(false)} filters={filters} setFilters={setFilters} />
-      {/* <Filter filters={filters} setFilters={setFilters} /> */}
-      <TransactionList transactions={filtered} openFilters={setOpenFilters} />
+      <TransactionList transactions={filtered} openFilters={() => setOpenFilters(true)} />
     </>
   );
 }

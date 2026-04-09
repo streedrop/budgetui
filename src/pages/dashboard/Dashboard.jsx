@@ -1,6 +1,5 @@
 import styles from './styles/Dashboard.module.css';
 
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -13,21 +12,7 @@ import DataSection from './DataSection';
 function Home() {
   const { t } = useTranslation();
 
-  const { data: transactions = null, isLoading, error } = useTransactions();
-  const [thisMonth, setThisMonth] = useState([]);
-  const [yearToDate, setYearToDate] = useState([]);
-
-  useEffect(() => {
-    if (!transactions)
-      return;
-
-    setThisMonth(transactionsFromThisMonth(transactions));
-    setYearToDate(transactionsFromThisYear(transactions));
-
-  }, [transactions]);
-
-  if (!transactions)
-    return;
+  const { data: transactions = [], isLoading, error } = useTransactions();
 
   return (
     <>
@@ -35,8 +20,8 @@ function Home() {
       <p>{t('dashboard.description')}</p>
       <section className={styles.stats}>
         <DataSection transactions={transactions} type={0} />
-        <DataSection transactions={yearToDate} type={1} />
-        <DataSection transactions={thisMonth} type={2} />
+        <DataSection transactions={transactionsFromThisYear(transactions)} type={1} />
+        <DataSection transactions={transactionsFromThisMonth(transactions)} type={2} />
       </section>
       <section>
         <h2>{t('dashboard.navigate.title')}</h2>

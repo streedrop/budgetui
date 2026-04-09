@@ -37,7 +37,7 @@
     justify-self: end;
 }
 
-.noTransactions {
+.empty {
     margin: 20px;
     display: flex;
     flex-direction: column;
@@ -45,7 +45,7 @@
     gap: 10px;
 }
 
-.noTransactions i {
+.empty i {
     color:gray;
     font-size: 5em;
 }
