@@ -63,16 +63,22 @@
             },
             "empty": {
                 "title": "Aucune transaction à afficher",
-                "description": "Essayez de réinitialiser vos filtres ou d'ajouter plus de transactions"
+                "description": "Essayez de réinitialiser vos filtres ou d'ajouter plus de transactions."
             }
         },
         "form": {
             "add": "Nouvelle transaction",
             "edit": "Modifier une transaction",
-            "description": "Description:",
-            "amount": "Montant:",
-            "category": "Catégorie:",
-            "date": "Date:"
+            "description": {
+                "label": "Description",
+                "placeholder": "Ex. Nom du marchand, ID de facture, etc."
+            },
+            "amount": {
+                "label": "Montant",
+                "placeholder": "0,00 $"
+            },
+            "category": "Catégorie",
+            "date": "Date"
         }
     },
     "categories": {
@@ -81,7 +87,7 @@
         "add": "Ajouter une catégorie",
         "uncategorized": "Non-catégorisé",
         "list": {
-            "title": "Category List",
+            "title": "Liste de catégories",
             "income": "Revenus",
             "expenses": "Dépenses",
             "transactions": "transaction",
@@ -136,20 +142,20 @@
         "description": "Les règles permettent d'effectuer des actions automatisées directement à l'importation des transactions afin de contrôler les comportements répétitifs indésirables venant des fichiers de banque.",
         "add": "Ajouter une règle",
         "form": {
-            "title": "Ajouter une règle",
+            "title": "Nouvelle règle",
             "source": {
-                "label": "Source:",
+                "label": "Source",
                 "description": "Description de la transaction",
                 "category": "Nom de la catégorie de la transaction"
             },
             "condition": {
-                "label": "Condition:",
+                "label": "Condition",
                 "contains": "Contient le mot-clé",
                 "equals": "Doit être identique au mot-clé",
                 "placeholder": "Mot-clé..."
             },
             "action": {
-                "label": "Action:",
+                "label": "Action",
                 "placeholder": "Sélectionner une action...",
                 "categorization": {
                     "title": "Catégorisation",

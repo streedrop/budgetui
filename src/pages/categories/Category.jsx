@@ -24,7 +24,7 @@ function Category() {
     const { id } = useParams();
     const isUncategorized = id === "uncategorized";
 
-    const [modalOpen, setModalOpen] = useState(false);
+    const [budgetModal, setBudgetModal] = useState(false);
 
     const { data: category } = useCategory(id);
     const { budgets, setBudgets } = useBudgets(id);
@@ -57,16 +57,16 @@ function Category() {
                 <section className={styles.budget}>
                     <h2>{t('categories.page.budget.title')}</h2>
                     <BudgetList budgets={budgets} onDelete={handleDeleteBudget}></BudgetList>
-                    <Button className={styles.set} action={() => setModalOpen(true)}>{t('categories.page.budget.add')}</Button>
+                    <Button className={styles.set} action={() => setBudgetModal(true)}>{t('categories.page.budget.add')}</Button>
                 </section>
-                <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-                    <BudgetForm onCancel={() => setModalOpen(false)} onSuccess={() => { setModalOpen(false) }}></BudgetForm>
+                <Modal isOpen={budgetModal} onClose={() => setBudgetModal(false)}>
+                    <BudgetForm onCancel={() => setBudgetModal(false)} onSuccess={() => { setBudgetModal(false) }} />
                 </Modal>
             </>)}
 
             <section className={styles.transactions}>
                 <h2>Transactions</h2>
-                <TransactionList transactions={transactions} category_id={id}></TransactionList>
+                <TransactionList transactions={transactions} category_id={id} />
             </section>
         </>
     );

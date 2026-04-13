@@ -1,26 +1,23 @@
 import styles from './styles/TransactionList.module.css';
 
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import Modal from '@/components/modal/Modal.jsx';
 import AddButton from '@/components/buttons/AddButton';
 import FilterButton from '@/components/buttons/FilterButton';
+import Empty from '@/components/empty/Empty';
+
+import TransactionForm from './TransactionForm';
 import TransactionItem from './TransactionItem';
 
 function TransactionList({ transactions, deletable = true, onSelect, editable = true, openFilters, category_id }) {
     const { t } = useTranslation();
 
-    const navigate = useNavigate();
-
-    const goToAdd = () => {
-        if (category_id)
-            navigate(`/transactions/new?category=${category_id}`);
-        else
-            navigate('/transactions/new');
-    }
+    const [newTransactionModal, setNewTransactionModal] = useState(false);
 
     return (
-        <div className={styles.list}>
+        <div className={`${styles.list} ${transactions.length == 0 ? styles.empty : ''}`}>
             <div className={styles.title}>
                 <h2>{t('transactions.list.title')}</h2>
                 <div className={styles.actions}>
@@ -28,7 +25,7 @@ function TransactionList({ transactions, deletable = true, onSelect, editable = 
                         <FilterButton action={openFilters} />
                     )}
                     {editable && (
-                        <AddButton action={goToAdd} />
+                        <AddButton action={() => setNewTransactionModal(true)} />
                     )}
                 </div>
             </div>
@@ -54,12 +51,11 @@ function TransactionList({ transactions, deletable = true, onSelect, editable = 
                             ))}
                     </>
                     :
-                    <div className={styles.empty}>
-                        <i className="fa-regular fa-rectangle-xmark"></i>
-                        <h3>{t('transactions.list.empty.title')}</h3>
-                        <p>{t('transactions.list.empty.description')}</p>
-                    </div>
+                    <Empty item="transactions" />
             }
+            <Modal isOpen={newTransactionModal} onClose={() => setNewTransactionModal(false)}>
+                <TransactionForm closeModal={() => setNewTransactionModal(false)} category_id={category_id} />
+            </Modal>
         </div>
     );
 }

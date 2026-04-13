@@ -55,7 +55,7 @@ function BudgetForm({ onCancel, onSuccess }) {
                     </div>
                 </div>
                 <label className={styles.budget} htmlFor="budget">{t('categories.page.budget.form.amount')}</label>
-                <span className='amount-input'><input type="number" id="budget" name="budget" />$</span>
+                <span className='amount-input'><input id="budget" name="budget" />$</span>
                 <CancelButton action={onCancel} />
                 <SaveButton />
             </form>

@@ -1,4 +1,4 @@
-import styles from '@/components/ColorPicker/ColorPicker.module.css'
+import styles from './styles/ColorPicker.module.css'
 
 import { useState, useEffect } from 'react';
 

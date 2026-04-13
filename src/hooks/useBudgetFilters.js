@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import emptyFilters from '@/constants/EmptyFilters'
+import { emptyFilters } from '@/constants/EmptyData';
 
 export function useBudgetFilters(budgets) {
   const [filters, setFilters] = useState(emptyFilters);

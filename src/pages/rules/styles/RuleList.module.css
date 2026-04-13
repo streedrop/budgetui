@@ -11,16 +11,3 @@
 .actions {
     justify-self: end;
 }
-
-.empty {
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.empty i {
-    color:gray;
-    font-size: 5em;
-}

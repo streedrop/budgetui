@@ -1,6 +1,6 @@
 import styles from './NavBar.module.css';
 
-import LanguageSelector from '@/components/LanguageSelector/LanguageSelector';
+import LanguagePicker from '@/components/pickers/LanguagePicker';
 
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -60,8 +60,8 @@ function NavBar({ collapsed, setCollapsed }) {
         <p className={styles.desktop}>{t('nav.viewmode.desktop')}</p>
       </div>
 
-      <div className={styles.languageSelector}>
-        <LanguageSelector />
+      <div className={styles.languagePicker}>
+        <LanguagePicker />
       </div>
 
     </nav>

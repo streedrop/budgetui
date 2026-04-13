@@ -13,7 +13,7 @@ import Button from '@/components/buttons/Button';
 import CancelButton from '@/components/buttons/CancelButton';
 import SaveButton from '@/components/buttons/SaveButton';
 import AddButton from '@/components/buttons/AddButton';
-import IconPicker from '@/components/IconPicker/IconPicker';
+import IconPicker from '@/components/pickers/IconPicker';
 
 const emptyFormData = {
     name: "",

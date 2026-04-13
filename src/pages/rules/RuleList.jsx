@@ -2,6 +2,7 @@ import styles from './styles/RuleList.module.css';
 
 import { useTranslation } from 'react-i18next';
 
+import Empty from '@/components/empty/Empty.jsx';
 import RuleItem from './RuleItem';
 
 function RuleList({ rules }) {
@@ -23,11 +24,7 @@ function RuleList({ rules }) {
 
                     </div>
                     :
-                    <div className={styles.empty}>
-                        <i className="fa-regular fa-rectangle-xmark"></i>
-                        <h3>{t('rules.list.empty.title')}</h3>
-                        <p>{t('rules.list.empty.description')}</p>
-                    </div>
+                    <Empty item={'rules'} />
             }
 
         </>

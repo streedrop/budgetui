@@ -10,6 +10,8 @@ import { useTransactionFilters } from '@/hooks/useTransactionFilters.js';
 import AddButton from '@/components/buttons/AddButton.jsx';
 import ImportButton from '@/components/buttons/ImportButton.jsx';
 import FilterOverlay from '@/components/filter/FilterOverlay.jsx';
+import Modal from '@/components/modal/Modal.jsx';
+import TransactionForm from './TransactionForm.jsx';
 import TransactionList from './TransactionList.jsx';
 
 function Transactions() {
@@ -18,6 +20,7 @@ function Transactions() {
   const { filtered, filters, setFilters } = useTransactionFilters(transactions);
 
   const [openFilters, setOpenFilters] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -30,12 +33,15 @@ function Transactions() {
       <section>
         <p>{t('transactions.description')}</p>
         <div className={styles.actions}>
-          <AddButton action={() => navigate('/transactions/new')}>{t('transactions.add')}</AddButton>
-          <ImportButton action={() => navigate('/transactions/new')}>{t('transactions.import')}</ImportButton>
+          <AddButton action={() => setOpenModal(true)}>{t('transactions.add')}</AddButton>
+          <ImportButton action={() => navigate('/import')}>{t('transactions.import')}</ImportButton>
         </div>
       </section>
       <FilterOverlay isOpen={openFilters} onClose={() => setOpenFilters(false)} filters={filters} setFilters={setFilters} />
       <TransactionList transactions={filtered} openFilters={() => setOpenFilters(true)} />
+      <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
+        <TransactionForm closeModal={() => setOpenModal(false)} />
+      </Modal>
     </>
   );
 }

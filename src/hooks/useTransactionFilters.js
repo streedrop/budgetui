@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import emptyFilters from '@/constants/EmptyFilters';
+import { emptyFilters } from '@/constants/EmptyData';
 import { dateToYearMonthDay } from '@/utils/formatters';
 
 export function useTransactionFilters(transactions) {

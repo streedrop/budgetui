@@ -1,4 +1,4 @@
-import styles from './IconPicker.module.css';
+import styles from './styles/IconPicker.module.css';
 
 import icons from '@/constants/CategoryIcons';
 

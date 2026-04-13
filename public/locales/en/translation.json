@@ -69,10 +69,16 @@
         "form": {
             "add": "New transaction",
             "edit": "Edit transaction",
-            "description": "Description:",
-            "amount": "Amount:",
-            "category": "Category:",
-            "date": "Date:"
+            "description": {
+                "label": "Description",
+                "placeholder": "Ex. Merchant name, Bill ID, etc."
+            },
+            "amount": {
+                "label": "Amount",
+                "placeholder": "$0.00"
+            },
+            "category": "Category",
+            "date": "Date"
         }
     },
     "categories": {
@@ -138,18 +144,18 @@
         "form": {
             "title": "New rule",
             "source": {
-                "label": "Source:",
+                "label": "Source",
                 "description": "Transaction description",
                 "category": "Transaction category name"
             },
             "condition": {
-                "label": "Condition:",
+                "label": "Condition",
                 "contains": "Contains text",
                 "equals": "Must fully match",
                 "placeholder": "Keyword..."
             },
             "action": {
-                "label": "Action:",
+                "label": "Action",
                 "placeholder": "Select an action...",
                 "categorization": {
                     "title": "Categorization",

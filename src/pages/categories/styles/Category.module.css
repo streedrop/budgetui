@@ -27,6 +27,7 @@
 
 .transactions {
     align-items: normal;
+    flex: 1;
 }
 
 .hidden {

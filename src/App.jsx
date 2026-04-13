@@ -36,7 +36,6 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/transactions/new" element={<TransactionForm />} />
-            <Route path="/transactions/:id/edit" element={<TransactionForm />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/categories/:id" element={<Category />} />
             <Route path="/categories/new" element={<CategoryForm />} />

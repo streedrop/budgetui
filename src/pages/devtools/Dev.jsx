@@ -4,8 +4,8 @@ import { useTransactions } from '@/hooks/transactions/useTransactions';
 import { useCategories } from '@/hooks/categories/useCategories';
 import { useRules } from '@/hooks/rules/useRules';
 
-import ColorPicker from '@/components/ColorPicker/ColorPicker';
-import IconPicker from '@/components/IconPicker/IconPicker';
+import ColorPicker from '@/components/pickers/ColorPicker';
+import IconPicker from '@/components/pickers/IconPicker';
 import Button from '@/components/buttons/Button';
 
 function Dev() {

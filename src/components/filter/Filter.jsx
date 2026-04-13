@@ -3,7 +3,7 @@ import styles from './Filter.module.css'
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import emptyFilters from '@/constants/EmptyFilters'
+import { emptyFilters } from '@/constants/EmptyData';
 import { dateToMonthYear } from '@/utils/formatters';
 
 import { useTransactions } from '@/hooks/transactions/useTransactions.js';
