@@ -4,7 +4,7 @@
     justify-items: start;
     align-items: center;
     height: 75px;
-    background-color: var(--item-background);
+    background-color: var(--list-item-background);
 }
 
 .item:nth-child(odd) {

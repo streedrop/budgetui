@@ -1,3 +1,5 @@
+import styles from './styles/Categories.module.css'
+
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -18,13 +20,15 @@ function Categories() {
 
   return (
     <>
-  
+
       <section>
         <h1>{t('categories.title')}</h1>
         <p>{t('categories.description')}</p>
-        <AddButton action={() => navigate('/categories/new')}>{t('categories.add')}</AddButton>
+        <div className={styles.actions}>
+          <AddButton action={() => navigate('/categories/new')}>{t('categories.add')}</AddButton>
+        </div>
+
       </section>
-      
 
       <CategoryList categories={categories} />
 
