@@ -37,7 +37,7 @@ function Import() {
         const texts = await Promise.all(files.map(f => f.text()));
 
         // Prepare all the transactions, and give every item an ID for react list keys to work
-        const entries = texts.flatMap(text => prepareTransactions(text), categories, rules)
+        const entries = texts.flatMap(text => prepareTransactions(text, categories, rules))
             .map((entry, index) => ({ ...entry, id: index }));
 
         setTransactions(entries);
