@@ -7,13 +7,13 @@ nav {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #2d2d2d;
+  background-color: var(--nav-background);
   overflow-x: hidden;
   text-align: left;
   /*
   Which one ?
   border-radius: 0px 20px 20px 0px;
-  box-shadow: 5px 0px 10px #2d2d2d;*/
+  box-shadow: 5px 0px 10px var(--nav-background);*/
 
 }
 
@@ -102,12 +102,11 @@ nav a {
   display: flex;
   gap: 10px;
   align-items: center;
-  color: rgb(185, 185, 185);
+  color: var(--text);
 }
 
 nav a:hover {
   background-color: rgba(0, 128, 0, 0.5);
-  color: white;
   border-radius: 10px;
 }
 

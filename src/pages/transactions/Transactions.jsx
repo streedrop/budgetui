@@ -29,8 +29,9 @@ function Transactions() {
 
   return (
     <>
-      <h1>{t('transactions.title')}</h1>
+
       <section>
+        <h1>{t('transactions.title')}</h1>
         <p>{t('transactions.description')}</p>
         <div className={styles.actions}>
           <AddButton action={() => setOpenModal(true)}>{t('transactions.add')}</AddButton>

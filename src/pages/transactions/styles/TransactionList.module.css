@@ -1,11 +1,9 @@
 .list {
-    border: 1px solid grey;
+    border: 1px solid gray;
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
 }
 
-.list.empty {
+.container.empty {
     flex: 1;
 }
 
@@ -13,8 +11,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid grey;
 }
 
 /*.month {
@@ -29,8 +25,9 @@
     justify-items: start;
     align-items: center;
     padding: 10px 20px;
-    border-bottom: 1px solid grey;
-    background-color: #333333;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: var(--list-header-background);
 }
 
 .actions {

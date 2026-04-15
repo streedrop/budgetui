@@ -67,16 +67,20 @@ function Import() {
 
     return (
         <>
-            <h1>{t('import.title')}</h1>
-            <p>{t('import.description')}</p>
-            <Button className={styles.rules} action={() => navigate('/import/rules')}>{t('import.openRules')}</Button>
-            <div>
+            <section>
+                <h1>{t('import.title')}</h1>
+                <p>{t('import.description')}</p>
+                <Button className={styles.rules} action={() => navigate('/import/rules')}>{t('import.openRules')}</Button>
+            </section>
+
+            <section>
+                <h2>{t('import.new')}</h2>
                 <form className={styles.import} onSubmit={handleSubmit}>
                     <label htmlFor="files">{t('import.file')}</label>
                     <input type="file" id="files" name="files" accept=".csv" multiple />
                     <Button type="submit">{t('import.import')}</Button>
                 </form>
-            </div>
+            </section>
 
             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
                 <h2>{t('import.confirm.title')}</h2>

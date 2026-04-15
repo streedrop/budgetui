@@ -20,9 +20,11 @@ function Rules() {
 
     return (
         <>
-            <h1>{t('rules.title')}</h1>
-            <p>{t('rules.description')}</p>
-            <AddButton className={styles.openModal} action={() => setModalOpen(true)}>{t('rules.add')}</AddButton>
+            <section>
+                <h1>{t('rules.title')}</h1>
+                <p>{t('rules.description')}</p>
+                <AddButton className={styles.openModal} action={() => setModalOpen(true)}>{t('rules.add')}</AddButton>
+            </section>
             
             <RuleList rules={rules} />
 

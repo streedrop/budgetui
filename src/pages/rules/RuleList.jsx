@@ -9,7 +9,7 @@ function RuleList({ rules }) {
     const { t } = useTranslation();
 
     return (
-        <>
+        <section>
             <h2>{t('rules.list.title')}</h2>
             {
                 rules.length > 0 ?
@@ -27,7 +27,7 @@ function RuleList({ rules }) {
                     <Empty item={'rules'} />
             }
 
-        </>
+        </section>
     )
 }
 

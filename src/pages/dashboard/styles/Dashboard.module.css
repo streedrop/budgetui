@@ -15,7 +15,7 @@
 
   border-radius: 10px;
 
-  background-color: #333333;
+  background-color: var(--item-background);
   border: 1px solid transparent;
   color: lightgrey;
 

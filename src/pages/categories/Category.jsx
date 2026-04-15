@@ -41,17 +41,20 @@ function Category() {
 
     return (
         <> {isUncategorized ?
-            (<h1>{t('categories.uncategorized')}</h1>)
+            (<section><h1>{t('categories.uncategorized')}</h1></section>)
             :
             (<>
-                <header className={styles.title}>
-                    <i className={`${styles.icon} ${icons[category.icon]}`}></i>
-                    <h1>{category.name}</h1>
-                </header>
+                <section>
+                    <div className={styles.title}>
+                        <i className={`${styles.icon} ${icons[category.icon]}`}></i>
+                        <h1>{category.name}</h1>
+                    </div>
 
-                {category.description && (
-                    <p><em>{category.description}</em></p>
-                )}
+                    {category.description && (
+                        <p>{category.description}</p>
+                    )}
+                </section>
+
                 <section className={`${styles.hidden} ${styles.chart}`}>
                 </section>
                 <section className={styles.budget}>
@@ -64,10 +67,7 @@ function Category() {
                 </Modal>
             </>)}
 
-            <section className={styles.transactions}>
-                <h2>Transactions</h2>
-                <TransactionList transactions={transactions} category_id={id} />
-            </section>
+            <TransactionList transactions={transactions} category_id={id} />
         </>
     );
 }

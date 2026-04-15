@@ -16,13 +16,13 @@ function Home() {
 
   return (
     <>
-      <h1>{t('dashboard.title')}</h1>
-      <p>{t('dashboard.description')}</p>
-      <section className={styles.stats}>
-        <DataSection transactions={transactions} type={0} />
-        <DataSection transactions={transactionsFromThisYear(transactions)} type={1} />
-        <DataSection transactions={transactionsFromThisMonth(transactions)} type={2} />
+      <section>
+        <h1>{t('dashboard.title')}</h1>
+        <p>{t('dashboard.description')}</p>
       </section>
+      <DataSection transactions={transactions} type={0} />
+      <DataSection transactions={transactionsFromThisYear(transactions)} type={1} />
+      <DataSection transactions={transactionsFromThisMonth(transactions)} type={2} />
       <section>
         <h2>{t('dashboard.navigate.title')}</h2>
         <div className={styles.pages}>

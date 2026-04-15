@@ -26,12 +26,12 @@ function DataSection({ transactions, type }) {
     }, [transactions]);
 
     return (
-        <div className={styles.stats}>
+        <section className={styles.stats}>
             <h2 className={styles.title}>
                 {type == 0 && t('dashboard.stats.allTime')}
                 {type == 1 && t('dashboard.stats.thisYear')}
                 {type == 2 && t('dashboard.stats.thisMonth')}
-                </h2>
+            </h2>
             <div className={styles.statRow}>
                 <div className={styles.stat}>
                     <p className={styles.label}>{t('dashboard.stats.transactions')}</p>
@@ -54,11 +54,9 @@ function DataSection({ transactions, type }) {
                     <p className={styles.data}>{amountFormatter(data.expenses)}</p>
                 </div>
             </div>
-            <div className={styles.chart}>
-                { type == 0 && <ExpensesVsIncomeBarAllTime transactions={transactions} year={2026} height={400} /> }
-                { type == 1 && <ExpensesVsIncomeBarOneYear transactions={transactions} year={2026} height={400} /> }
-            </div>
-        </div>
+            {type == 0 && <ExpensesVsIncomeBarAllTime transactions={transactions} year={2026} height={400} />}
+            {type == 1 && <ExpensesVsIncomeBarOneYear transactions={transactions} year={2026} height={400} />}
+        </section>
     );
 
 }

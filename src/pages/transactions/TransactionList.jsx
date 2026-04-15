@@ -17,7 +17,7 @@ function TransactionList({ transactions, deletable = true, onSelect, editable = 
     const [newTransactionModal, setNewTransactionModal] = useState(false);
 
     return (
-        <div className={`${styles.list} ${transactions.length == 0 ? styles.empty : ''}`}>
+        <section className={`${styles.container} ${transactions.length == 0 ? styles.empty : ''}`}>
             <div className={styles.title}>
                 <h2>{t('transactions.list.title')}</h2>
                 <div className={styles.actions}>
@@ -31,7 +31,7 @@ function TransactionList({ transactions, deletable = true, onSelect, editable = 
             </div>
             {
                 transactions.length > 0 ?
-                    <>
+                    <div className={styles.list}>
                         <div className={styles.header}>
                             <h4 className={styles.date}>{t('transactions.list.header.date')}</h4>
                             <h4 className={styles.transaction}>{t('transactions.list.header.description')}</h4>
@@ -49,14 +49,14 @@ function TransactionList({ transactions, deletable = true, onSelect, editable = 
                                     editable={editable}
                                 />
                             ))}
-                    </>
+                    </div>
                     :
                     <Empty item="transactions" />
             }
             <Modal isOpen={newTransactionModal} onClose={() => setNewTransactionModal(false)}>
                 <TransactionForm closeModal={() => setNewTransactionModal(false)} category_id={category_id} />
             </Modal>
-        </div>
+        </section>
     );
 }
 

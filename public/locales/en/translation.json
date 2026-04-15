@@ -53,7 +53,7 @@
         "add": "Add transaction",
         "import": "Import transactions",
         "list": {
-            "title": "Transaction List",
+            "title": "Transactions",
             "header": {
                 "date": "Date",
                 "description": "Transaction",
@@ -87,7 +87,7 @@
         "add": "Add category",
         "uncategorized": "Uncategorized",
         "list": {
-            "title": "Category List",
+            "title": "Categories",
             "income": "Income",
             "expenses": "Expenses",
             "transactions": "transaction",
@@ -129,6 +129,7 @@
     "import": {
         "title": "Import transactions",
         "description": "Import a CSV file from Tangerine Bank in the area below to automatically add transactions",
+        "new": "New import",
         "openRules": "Manage rules / automations",
         "file": "Select file(s):",
         "import": "Import",

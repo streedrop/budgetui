@@ -18,11 +18,13 @@ function Categories() {
 
   return (
     <>
-      <h1>{t('categories.title')}</h1>
+  
       <section>
+        <h1>{t('categories.title')}</h1>
         <p>{t('categories.description')}</p>
         <AddButton action={() => navigate('/categories/new')}>{t('categories.add')}</AddButton>
       </section>
+      
 
       <CategoryList categories={categories} />
 

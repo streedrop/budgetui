@@ -1,0 +1,14 @@
+.list {
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.header {
+    background-color: var(--list-header-background);
+    padding: 10px 20px;
+}
+
+.header:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}

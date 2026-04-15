@@ -1,0 +1,43 @@
+:root {
+    --app-background: #242424;
+    --component-background: #333333;
+
+    --list-header-background: #3c3b42;
+    --list-item-background: #292929;
+    --list-item-background-2: #2e2e2e;
+    --list-item-background-hover: #605d6e;
+
+    --nav-background: #2d2d2d;
+
+    --modal-overlay: rgba(0, 0, 0, 0.5);
+    --modal-background: #242424;
+
+    --button-default-background: #1a1a1a;
+    --button-default-text: rgba(255, 255, 255, 0.87);
+    --button-light: rgba(255, 255, 255, 0.87);
+    --button-dark: black;
+
+    --text: rgba(255, 255, 255, 0.87);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --app-background: #f5f5f5;
+    --component-background: #ffffff;
+
+    --list-header-background: #ddd9f0;
+    --list-item-background: #dadada;
+    --list-item-background-2: #e6e6e6;
+    --list-item-background-hover: #3c3b42;
+
+    --nav-background: #ffffff;
+
+    --modal-overlay: rgba(0, 0, 0, 0.5);
+    --modal-background: white;
+
+    --button-default-background: #f9f9f9;
+    --button-default-text: black;
+
+    --text: #000000;
+  }
+}

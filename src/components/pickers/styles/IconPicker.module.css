@@ -24,7 +24,7 @@
 
 .icon:hover {
     cursor: pointer;
-    background-color: #333333;
+    background-color: var(--item-background);
 }
 
 .selected {
