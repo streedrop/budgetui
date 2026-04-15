@@ -25,18 +25,18 @@ function ChartList({ transactions, categories, budgets }) {
                 <div className={styles.list}>
                     <div className={styles.chart}>
                         <h4>1.1.1. TotalByCategoryPie</h4>
-                        <TotalByCategoryPie transactions={transactions} categories={categories}></TotalByCategoryPie>
+                        <TotalByCategoryPie transactions={transactions} categories={categories} />
                     </div>
                     <div className={styles.chart}>
                         <h4>1.1.2. TotalByCategoryBar</h4>
-                        <TotalByCategoryBar transactions={transactions} categories={categories}></TotalByCategoryBar>
+                        <TotalByCategoryBar transactions={transactions} categories={categories} />
                     </div>
                 </div>
                 <h3>1.2. ForecastVsActual</h3>
                 <div className={styles.list}>
                     <div className={styles.chart}>
                         <h4>1.2.1. ForecastVsActual</h4>
-                        <ForecastVsActual transactions={transactions} categories={categories} budgets={budgets}></ForecastVsActual>
+                        <ForecastVsActual transactions={transactions} categories={categories} budgets={budgets} />
                     </div>
                 </div>
             </section>

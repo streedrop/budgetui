@@ -7,6 +7,8 @@ import { useCategories } from '@/hooks/categories/useCategories'
 
 import { amountFormatter } from '@/utils/formatters';
 import { totalExpensesAndIncome } from '@/utils/calculators';
+
+import TotalByCategoryPie from '@/charts/ByCategory/TotalByCategory/TotalByCategoryPie';
 import ExpensesVsIncomeBarOneYear from '@/charts/ByMonth/ExpensesVsIncome/OneYear/ExpensesVsIncome';
 import ExpensesVsIncomeBarAllTime from '@/charts/ByMonth/ExpensesVsIncome/AllMonths/ExpensesVsIncome';
 
@@ -54,8 +56,25 @@ function DataSection({ transactions, type }) {
                     <p className={styles.data}>{amountFormatter(data.expenses)}</p>
                 </div>
             </div>
-            {type == 0 && <ExpensesVsIncomeBarAllTime transactions={transactions} year={2026} height={400} />}
-            {type == 1 && <ExpensesVsIncomeBarOneYear transactions={transactions} year={2026} height={400} />}
+            <div className={styles.chartRow}>
+                {type == 0 &&
+                    <>
+                        <ExpensesVsIncomeBarAllTime transactions={transactions} year={2026} height={400} />
+                        <TotalByCategoryPie transactions={transactions} categories={categories} />
+                    </>
+                }
+                {type == 1 &&
+                    <>
+                        <ExpensesVsIncomeBarOneYear transactions={transactions} year={2026} height={400} />
+                        <TotalByCategoryPie transactions={transactions} categories={categories} />
+                    </>
+                }
+                {type == 2 &&
+                    <>
+                        <TotalByCategoryPie transactions={transactions} categories={categories} />
+                    </>
+                }
+            </div>
         </section>
     );
 

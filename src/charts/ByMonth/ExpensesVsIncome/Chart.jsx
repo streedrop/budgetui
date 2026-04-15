@@ -1,4 +1,5 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
+import { RechartsDevtools } from '@recharts/devtools';
 
 import { amountFormatter } from '@/utils/formatters';
 import { getCustomBar, capitalize } from '@/utils/charts';
@@ -20,6 +21,7 @@ function Chart({ data, height }) {
                 labelFormatter={() => ''}
                 formatter={(value, name, props) => [amountFormatter(value), capitalize(props.name)]}
             />
+            <RechartsDevtools />
         </BarChart>
     );
 }
