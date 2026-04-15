@@ -8,6 +8,7 @@ import { useTransactions } from '@/hooks/transactions/useTransactions.js';
 import { transactionsFromThisMonth, transactionsFromThisYear } from '@/utils/filters';
 
 import DataSection from './DataSection';
+import UncategorizedNotification from '@/components/notifications/UncategorizedNotification';
 
 function Home() {
   const { t } = useTranslation();
@@ -20,6 +21,7 @@ function Home() {
         <h1>{t('dashboard.title')}</h1>
         <p>{t('dashboard.description')}</p>
       </section>
+      <UncategorizedNotification amount={transactions.filter(t => t.category_id == null).length} />
       <DataSection transactions={transactions} type={0} />
       <DataSection transactions={transactionsFromThisYear(transactions)} type={1} />
       <DataSection transactions={transactionsFromThisMonth(transactions)} type={2} />

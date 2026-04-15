@@ -1,0 +1,57 @@
+.notification {
+    border-radius: 10px;
+    padding: 10px 0;
+
+    display: grid;
+    grid-template-columns: 4% 92% 4%;
+}
+
+.notification:hover {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.blue {
+    border: 2px solid rgb(0, 110, 255);
+    background-color: rgba(0, 110, 255, 0.4);
+}
+
+.blue h4, .blue p, .blue i {
+    color: rgb(0, 110, 255);
+}
+
+.yellow {
+    border: 2px solid rgb(255, 200, 0);
+    background-color: rgba(255, 200, 0, 0.4);
+}
+
+.yellow h4, .yellow p, .yellow i {
+    color: rgb(255, 200, 0);
+}
+
+.red {
+    border: 2px solid rgb(255, 0, 0);
+    background-color: rgba(255, 0, 0, 0.4);
+}
+
+.red h4, .red p, .red i {
+    color: rgb(255, 0, 0);
+}
+
+.notification i {
+    align-self: center;
+    justify-self: center;
+}
+
+.notification i:first-child {
+    font-size: xx-large;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
