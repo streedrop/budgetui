@@ -21,7 +21,7 @@ button {
     transition: border-color 0.25s;
 }
 
-button:hover {
+button:hover:enabled {
     border-color: #646cff;
 }
 
@@ -30,12 +30,17 @@ button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
 }
 
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .red {
     background-color: rgb(172, 0, 0);
     color: var(--button-light);
 }
 
-.red:hover {
+.red:hover:enabled {
     background-color: red;
     border-color: transparent;
 }
@@ -45,7 +50,7 @@ button:focus-visible {
     color: var(--button-light);
 }
 
-.blue:hover {
+.blue:hover:enabled {
     background-color: rgb(0, 102, 255);
     border-color: transparent;
 }
@@ -55,7 +60,7 @@ button:focus-visible {
     color: var(--button-light);
 }
 
-.green:hover {
+.green:hover:enabled {
     background-color: green;
     border-color: transparent;
 }
@@ -65,7 +70,7 @@ button:focus-visible {
     color: var(--button-dark);
 }
 
-.white:hover {
+.white:hover:enabled {
     background-color: rgb(255, 255, 255);
     border-color: transparent;
 }

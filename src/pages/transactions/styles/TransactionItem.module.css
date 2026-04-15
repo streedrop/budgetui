@@ -1,6 +1,6 @@
 .item {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr 0.5fr 1.5fr;
+    grid-template-columns: 0.5fr 1fr 2fr 1fr 0.5fr 1.5fr;
     column-gap: 5px;
     justify-items: start;
     align-items: center;
@@ -20,13 +20,13 @@
     border-bottom-right-radius: 10px;
 }
 
-.item.ignored p {
+/*.item.ignored p {
     color: dimgrey;
 }
 
 .item.ignored {
     background-color: black;
-}
+}*/
 
 .no-year,
 .description,
@@ -76,4 +76,8 @@
 
 .item input[type='checkbox']:hover {
     accent-color: rgb(0, 102, 255);
+}
+
+.item .selector {
+    grid-row: span 2;
 }

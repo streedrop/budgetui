@@ -1,0 +1,36 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+}
+
+.modal {
+    position: absolute;
+    right: 290px;
+    top: 270px;
+    width: 300px;
+    background: var(--modal-background);
+    border: 1px solid grey;
+    border-radius: 8px;
+    /*min-width: 300px;*/
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form label {
+    justify-self: start;
+    font-size: small;
+    display: block;
+}
+
+.form select {
+    width: 100%;
+}
+

@@ -1,6 +1,6 @@
 import styles from './Button.module.css';
 
-function Button({ children, type = "button", action, className = "" }) {
+function Button({ children, type = "button", disabled = false, action, className = "" }) {
     if (type == "submit")
         return (
             <button type="submit">
@@ -9,7 +9,7 @@ function Button({ children, type = "button", action, className = "" }) {
         );
 
     return (
-        <button type="button" onClick={action} className={className}>
+        <button type="button" disabled={disabled} onClick={action} className={className}>
             <p>{children}</p>
         </button>
     );

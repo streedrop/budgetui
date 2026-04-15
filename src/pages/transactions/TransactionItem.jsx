@@ -8,7 +8,7 @@ import { useDeleteTransaction } from '@/hooks/transactions/useDeleteTransaction.
 import DeleteButton from '@/components/buttons/DeleteButton';
 import EditButton from '@/components/buttons/EditButton';
 
-function TransactionItem({ transaction, deletable, onSelect, editable }) {
+function TransactionItem({ transaction, deletable, onSelect, editable, selected }) {
 
     const navigate = useNavigate();
 
@@ -20,38 +20,35 @@ function TransactionItem({ transaction, deletable, onSelect, editable }) {
     const isCurrentYear = new Date().getFullYear() == new Date(transaction.date).getFullYear();
 
     return (
-        <>
-            <div className={`${styles.item} ${transaction.ignored ? styles.ignored : ''}`} key={transaction.id}>
-                <p className={`${isCurrentYear && styles['no-year']}`}>{dateToMonthDay(transaction.date)}</p>
-                <p className={styles.description}>{transaction.description}</p>
+        <div className={`${styles.item}`} key={transaction.id}>
 
-                {transaction.category_name ? (() => {
-                    const p = <p className={`${transaction.category_id ? styles['with-link'] : styles.category}`}>{transaction.category_name}</p>;
-                    return transaction.category_id
-                        ? <Link className={styles.category} to={`/categories/${transaction.category_id}`}>{p}</Link>
-                        : p;
-                })() : (<p>-</p>)}
+            <input className={styles.selector} type="checkbox" checked={selected.some(t => t.id === transaction.id)} onChange={() => onSelect(transaction)} />
 
-                <p className={styles.amount}>{transaction.is_income ? '+' : '-'}{amountFormatter(transaction.amount)}</p>
-                <div className={styles.actions}>
-                    {editable &&
-                        (<EditButton action={goToEdit} />)
-                    }
+            <p className={`${isCurrentYear && styles['no-year']}`}>{dateToMonthDay(transaction.date)}</p>
+            <p className={styles.description}>{transaction.description}</p>
 
-                    {onSelect &&
-                        (<input type="checkbox" checked={!transaction.ignored} onChange={() => onSelect(transaction.id)} />)
-                    }
+            {transaction.category_name ? (() => {
+                const p = <p className={`${transaction.category_id ? styles['with-link'] : styles.category}`}>{transaction.category_name}</p>;
+                return transaction.category_id
+                    ? <Link className={styles.category} to={`/categories/${transaction.category_id}`}>{p}</Link>
+                    : p;
+            })() : (<p>-</p>)}
 
-                    {deletable &&
-                        (<DeleteButton action={() => deleteTransaction(transaction.id)} />)
-                    }
-
-                </div>
-                {
-                    isCurrentYear ? (<div></div>) : (<p>{dateToYear(transaction.date)}</p>)
+            <p className={styles.amount}>{transaction.is_income ? '+' : '-'}{amountFormatter(transaction.amount)}</p>
+            <div className={styles.actions}>
+                {editable &&
+                    (<EditButton action={goToEdit} />)
                 }
+
+                {deletable &&
+                    (<DeleteButton action={() => deleteTransaction(transaction.id)} />)
+                }
+
             </div>
-        </>
+            {
+                isCurrentYear ? (<div></div>) : (<p>{dateToYear(transaction.date)}</p>)
+            }
+        </div>
     );
 }
 

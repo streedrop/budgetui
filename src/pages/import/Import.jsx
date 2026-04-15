@@ -17,12 +17,12 @@ import CancelButton from '@/components/buttons/CancelButton';
 import ConfirmButton from '@/components/buttons/ConfirmButton';
 import TransactionList from '@/pages/transactions/TransactionList';
 
-
 function Import() {
     const { t } = useTranslation();
 
     const [modalOpen, setModalOpen] = useState(false);
     const [transactions, setTransactions] = useState([]);
+    const [selected, setSelected] = useState([]);
     const { data: categories = [] } = useCategories();
     const { data: rules = [] } = useRules();
 
@@ -41,6 +41,7 @@ function Import() {
             .map((entry, index) => ({ ...entry, id: index }));
 
         setTransactions(entries);
+        setSelected(entries.filter(t => t.ignored == false));
 
         setModalOpen(true);
     }
@@ -50,16 +51,18 @@ function Import() {
         setTransactions(prev => prev.filter(transaction => transaction.id !== id));
     };
 
-    // Dim down a transaction so it won't be added
-    const handleSelect = (id) => {
-        // Toggle the new ignored val
-        setTransactions(prev => prev.map(item => item.id === id ? { ...item, ignored: !item.ignored } : item));
+    // Unselect
+    const handleSelect = (transaction) => {
+        if (selected.some(t => t.id === transaction.id))
+            setSelected(selected.filter(t => t.id !== transaction.id))
+        else
+            setSelected([...selected, transaction]);
     };
 
     // Actually insert the transactions in the database
     const insertTransactions = async () => {
         // Remove id (it's a fake one) and category name (we already have category ID) as those are just for display
-        const data = transactions.filter((item) => item.ignored == false).map(({ id, category_name, ignored, ...rest }) => rest);
+        const data = selected.map(({ id, category_name, ignored, ...rest }) => rest);
         await Promise.all(data.map(transaction => insertTransaction(transaction)));
 
         setModalOpen(false);
@@ -83,16 +86,22 @@ function Import() {
             </section>
 
             <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-                <h2>{t('import.confirm.title')}</h2>
-                <p>{t('import.confirm.description')}</p>
-                <TransactionList transactions={transactions} deletable={false} onSelect={handleSelect} editable={false}></TransactionList>
-                <div className={styles.buttons}>
-                    <CancelButton action={() => setModalOpen(false)} />
-                    <ConfirmButton action={insertTransactions} />
-                </div>
+                <section>
+                    <h2>{t('import.confirm.title')}</h2>
+                    <p>{t('import.confirm.description')}</p>
+                    <div className={styles.buttons}>
+                        <CancelButton action={() => setModalOpen(false)} />
+                        <ConfirmButton action={insertTransactions} />
+                    </div>
+                </section>
+                <TransactionList transactions={transactions} deletable={false} onSelect={handleSelect} editable={false} preselected={selected} />
+                <section>
+                    <div className={styles.buttons}>
+                        <CancelButton action={() => setModalOpen(false)} />
+                        <ConfirmButton action={insertTransactions} />
+                    </div>
+                </section>
             </Modal>
-
-
         </>
     )
 }

@@ -65,6 +65,11 @@
             "empty": {
                 "title": "No transactions to display",
                 "description": "Try clearing your filters or adding more transactions."
+            },
+            "move": {
+                "title": "Move transactions",
+                "label": "Move to:",
+                "submit": "Move"
             }
         },
         "form": {
@@ -136,7 +141,7 @@
         "import": "Import",
         "confirm": {
             "title": "Confirm transactions",
-            "description": "The following transactions are going to be added:"
+            "description": "The following transactions will be added."
         }
     },
     "rules": {
@@ -203,7 +208,11 @@
         "edit": "Edit",
         "filter": "Filter...",
         "import": "Import",
-        "save": "Save"
+        "save": "Save",
+        "selected": {
+            "move": "Move selected",
+            "delete": "Delete selected"
+        }
     },
     "filters": {
         "title": "Filters",

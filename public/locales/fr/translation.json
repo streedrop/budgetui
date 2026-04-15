@@ -65,6 +65,11 @@
             "empty": {
                 "title": "Aucune transaction à afficher",
                 "description": "Essayez de réinitialiser vos filtres ou d'ajouter plus de transactions."
+            },
+            "move": {
+                "title": "Déplacer transactions",
+                "label": "Déplacer vers:",
+                "submit": "Déplacer"
             }
         },
         "form": {
@@ -136,7 +141,7 @@
         "import": "Importer",
         "confirm": {
             "title": "Confirmer les transactions",
-            "description": "Les transactions suivantes seront ajoutées:"
+            "description": "Les transactions suivantes seront ajoutées."
         }
     },
     "rules": {
@@ -203,7 +208,11 @@
         "edit": "Modifier",
         "filter": "Filtrer...",
         "import": "Importer",
-        "save": "Sauvegarder"
+        "save": "Sauvegarder",
+        "selected": {
+            "move": "Déplacer sélectionnées",
+            "delete": "Supprimer sélectionnées"
+        }
     },
     "filters": {
         "title": "Filtres",
