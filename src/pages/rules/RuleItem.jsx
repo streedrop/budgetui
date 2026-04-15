@@ -31,7 +31,6 @@ function RuleItem({ rule }) {
                 <div className={styles.actions}>
                     <DeleteButton action={() => deleteRule(rule.id)} />
                 </div>
-                <hr />
             </div>
         </>
     )

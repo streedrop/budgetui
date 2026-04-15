@@ -70,7 +70,7 @@ function Import() {
             <section>
                 <h1>{t('import.title')}</h1>
                 <p>{t('import.description')}</p>
-                <Button className={styles.rules} action={() => navigate('/import/rules')}>{t('import.openRules')}</Button>
+                <Button className={styles.rules} action={() => navigate('/rules')}>{t('import.openRules')}</Button>
             </section>
 
             <section>

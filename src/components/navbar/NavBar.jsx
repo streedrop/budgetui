@@ -44,6 +44,10 @@ function NavBar({ collapsed, setCollapsed }) {
           <i className="fa-regular fa-file"></i>
           <span>{t('nav.import')}</span>
         </NavLink>
+        <NavLink to="/rules" className={navClass}>
+          <i className="fa-solid fa-list-check"></i>
+          <span>{t('nav.rules')}</span>
+        </NavLink>
         <NavLink to="/dev" className={navClass}>
           <i className="fa-regular fa-file-code"></i>
           <span>{t('nav.dev')}</span>

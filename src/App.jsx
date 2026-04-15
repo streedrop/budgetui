@@ -42,7 +42,7 @@ function App() {
             <Route path="/categories/:id/edit" element={<CategoryForm />} />
             <Route path="/charts" element={<Charts />} />
             <Route path="/import" element={<Import />} />
-            <Route path="/import/rules" element={<Rules />} />
+            <Route path="/rules" element={<Rules />} />
             <Route path="/dev" element={<Dev />} />
           </Routes>
           <div id={RECHARTS_DEVTOOLS_PORTAL_ID} />

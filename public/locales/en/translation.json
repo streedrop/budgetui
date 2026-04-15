@@ -5,6 +5,7 @@
         "categories": "Categories",
         "charts": "Charts",
         "import": "Import",
+        "rules": "Rules",
         "dev": "Dev Tools",
         "viewmode": {
             "title": "Current view mode:",
