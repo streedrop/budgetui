@@ -8,9 +8,7 @@ import icons from '@/constants/CategoryIcons';
 
 import { useCategory } from '@/hooks/categories/useCategory.js';
 import { useTransactions } from '@/hooks/transactions/useTransactions.js';
-import { useBudgets } from '@/hooks/useBudgets.js';
-import { deleteBudget } from '@/services/budget.api.js';
-import { dateToNumericMonthYear } from '@/utils/formatters.js';
+import { useBudgets } from '@/hooks/budgets/useBudgets.js';
 
 import Modal from '@/components/modal/Modal.jsx';
 import Button from '@/components/buttons/Button';
@@ -27,15 +25,8 @@ function Category() {
     const [budgetModal, setBudgetModal] = useState(false);
 
     const { data: category } = useCategory(id);
-    const { budgets, setBudgets } = useBudgets(id);
+    const { data: budgets } = useBudgets(id);
     const { data: transactions = [], isLoading, error } = useTransactions(id);
-
-    const handleDeleteBudget = async (month) => {
-        const res = await deleteBudget(id, dateToNumericMonthYear(month));
-        if (!res.ok) return;
-
-        setBudgets(prev => prev.filter(budget => { return !(budget.category_id == id && budget.month == month) }));
-    }
 
     if ((isUncategorized && !transactions) || (!isUncategorized && !category)) return <div>Loading...</div>;
 
@@ -59,7 +50,7 @@ function Category() {
                 </section>
                 <section className={styles.budget}>
                     <h2>{t('categories.page.budget.title')}</h2>
-                    <BudgetList budgets={budgets} onDelete={handleDeleteBudget}></BudgetList>
+                    <BudgetList budgets={budgets} category_id={id} />
                     <Button className={styles.set} action={() => setBudgetModal(true)}>{t('categories.page.budget.add')}</Button>
                 </section>
                 <Modal isOpen={budgetModal} onClose={() => setBudgetModal(false)}>

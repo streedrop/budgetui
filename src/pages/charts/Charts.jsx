@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { useBudgets } from '@/hooks/useBudgets.js';
+import { useBudgets } from '@/hooks/budgets/useBudgets.js';
 import { useBudgetFilters } from '@/hooks/useBudgetFilters.js';
 import { useCategories } from '@/hooks/categories/useCategories.js';
 import { useTransactions } from '@/hooks/transactions/useTransactions';
@@ -14,7 +14,7 @@ function Charts() {
 
     const { data: categories = [] } = useCategories();
 
-    const { budgets } = useBudgets();
+    const { data: budgets = [] } = useBudgets();
     const { filtered: filteredBudgets, setFilters: setBFilters } = useBudgetFilters(budgets);
 
     const { data: transactions = [] } = useTransactions();

@@ -3,16 +3,20 @@ import { useTranslation } from 'react-i18next';
 
 import { useState, useEffect } from 'react';
 
-import { dateToMonth, amountFormatter } from '@/utils/formatters';
+import { useDeleteBudget } from '@/hooks/budgets/useDeleteBudget.js';
+
+import { dateToMonth, dateToNumericMonthYear, amountFormatter } from '@/utils/formatters';
 import { groupBudgetsByYear } from '@/utils/groupers';
 
-function BudgetList({ budgets, onDelete }) {
+function BudgetList({ budgets, category_id }) {
     const { t } = useTranslation();
 
     const [grouped, setGrouped] = useState([]);
+    const { mutate: deleteBudget } = useDeleteBudget();
 
     useEffect(() => {
-        setGrouped(groupBudgetsByYear(budgets));
+        if(budgets)
+            setGrouped(groupBudgetsByYear(budgets));
     }, [budgets]);
 
     if (!budgets)
@@ -40,7 +44,7 @@ function BudgetList({ budgets, onDelete }) {
                                 {budget.amount !== null
                                     ? <>
                                         <p>{amountFormatter(budget.amount)}</p>
-                                        <button type="button" className="delete" onClick={() => onDelete(budget.month)}><i className="fa-regular fa-circle-xmark fa-m"></i></button>
+                                        <button type="button" className="delete" onClick={() => deleteBudget({id: category_id, month: dateToNumericMonthYear(budget.month)})}><i className="fa-regular fa-circle-xmark fa-m"></i></button>
                                     </>
                                     : <><p>—</p></>
                                 }

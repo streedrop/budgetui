@@ -3,15 +3,19 @@ import styles from './styles/BudgetForm.module.css';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { upsertBudget, deleteBudget } from '@/services/budget.api';
+import { useSetBudget } from '@/hooks/budgets/useSetBudget.js';
+import { useDeleteBudget } from '@/hooks/budgets/useDeleteBudget.js';
 import { incrementMonth } from '@/utils/dateString';
-import CancelButton from '../../components/buttons/CancelButton';
-import SaveButton from '../../components/buttons/SaveButton';
+import CancelButton from '@/components/buttons/CancelButton';
+import SaveButton from '@/components/buttons/SaveButton';
 
 function BudgetForm({ onCancel, onSuccess }) {
     const { t } = useTranslation();
 
     const { id } = useParams(); // Current category ID
+
+    const { mutate: deleteBudget } = useDeleteBudget();
+    const { mutate: setBudget } = useSetBudget();
 
     async function handleSubmit(evt) {
         evt.preventDefault();
@@ -26,7 +30,7 @@ function BudgetForm({ onCancel, onSuccess }) {
         const isDelete = Number(data.budget) == 0;
 
         while (month <= toDate) {
-            isDelete ? await deleteBudget(id, month) : await upsertBudget(id, month, { amount: data.budget });
+            isDelete ? await deleteBudget({ id, month }) : await setBudget({ id, month, data: { amount: data.budget } });
             month = incrementMonth(month);
         }
 
