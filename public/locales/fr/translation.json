@@ -4,6 +4,7 @@
         "transactions": "Transactions",
         "categories": "Catégories",
         "charts": "Graphiques",
+        "summary": "Sommaire",
         "import": "Importer",
         "rules": "Règles",
         "dev": "Dev Tools",
@@ -131,6 +132,10 @@
     },
     "charts": {
         "title": "Graphiques"
+    },
+    "summary": {
+        "title": "Sommaire",
+        "description": "Visualiser des statistiques et des graphiques permet de mettre en perspective les changements que vous voulez apporter à votre gestion financière."
     },
     "import": {
         "title": "Importer des transactions",

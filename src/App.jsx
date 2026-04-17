@@ -15,6 +15,7 @@ import Transactions from './pages/transactions/Transactions.jsx'
 import TransactionForm from './pages/transactions/TransactionForm.jsx'
 
 import Charts from './pages/charts/Charts.jsx'
+import Summary from './pages/summary/Summary.jsx'
 
 import Import from './pages/import/Import.jsx'
 import Rules from './pages/rules/Rules.jsx'
@@ -41,6 +42,7 @@ function App() {
             <Route path="/categories/new" element={<CategoryForm />} />
             <Route path="/categories/:id/edit" element={<CategoryForm />} />
             <Route path="/charts" element={<Charts />} />
+            <Route path="/summary" element={<Summary />} />
             <Route path="/import" element={<Import />} />
             <Route path="/rules" element={<Rules />} />
             <Route path="/dev" element={<Dev />} />

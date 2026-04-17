@@ -4,6 +4,7 @@
         "transactions": "Transactions",
         "categories": "Categories",
         "charts": "Charts",
+        "summary": "Summary",
         "import": "Import",
         "rules": "Rules",
         "dev": "Dev Tools",
@@ -131,6 +132,10 @@
     },
     "charts": {
         "title": "Charts"
+    },
+    "summary": {
+        "title": "Summary",
+        "description": "Visualizing stats and graphs allow you to figure out the changes you want to make to your money management."
     },
     "import": {
         "title": "Import transactions",

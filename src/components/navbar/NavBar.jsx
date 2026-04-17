@@ -37,6 +37,10 @@ function NavBar({ collapsed, setCollapsed }) {
           <i className="fa-regular fa-chart-bar"></i>
           <span>{t('nav.charts')}</span>
         </NavLink>
+        <NavLink to="/summary" className={navClass}>
+          <i className="fa-regular fa-newspaper"></i>
+          <span>{t('nav.summary')}</span>
+        </NavLink>
 
         <hr />
 
