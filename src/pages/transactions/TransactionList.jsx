@@ -71,9 +71,9 @@ function TransactionList({ transactions, deletable = true, onSelect = () => {}, 
                                     key={transaction.id}
                                     transaction={transaction}
                                     deletable={deletable}
-                                    onSelect={whenSelected}
                                     editable={editable}
                                     selected={selected}
+                                    onSelect={whenSelected}
                                 />
                             ))}
                     </div>

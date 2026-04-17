@@ -32,7 +32,7 @@ function TransactionItem({ transaction, deletable, onSelect, editable, selected 
                 return transaction.category_id
                     ? <Link className={styles.category} to={`/categories/${transaction.category_id}`}>{p}</Link>
                     : p;
-            })() : (<p>-</p>)}
+            })() : (<p>—</p>)}
 
             <p className={styles.amount}>{transaction.is_income ? '+' : '-'}{amountFormatter(transaction.amount)}</p>
             <div className={styles.actions}>

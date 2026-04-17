@@ -31,19 +31,20 @@ export const prepareTransactions = (data, categories, rules) => {
                 date: new Date(item[dateIndex]).toISOString().split("T")[0],
                 ignored: false,
                 category_id: null,
-                category_name: `Uncategorized${categoryNameFromMemo ? ` (${categoryNameFromMemo})` : ''}`
+                category_name: categoryNameFromMemo ?? ''
+                /*category_name: `Uncategorized${categoryNameFromMemo ? ` (${categoryNameFromMemo})` : ''}`*/
             };
 
+            applyRules(rules, transaction, categories);
+
             // Using memo, attempt to find a category that already exists with the same name
-            const category = categories.find((category) => category.name === categoryNameFromMemo);
+            const category = categories.find((category) => category.name === transaction.category_name);
 
             // Update category if a category was found
             if (category) {
                 transaction.category_id = category.id;
                 transaction.category_name = category.name;
             }
-
-            applyRules(rules, transaction, categories);
 
             acc.push(transaction);
             return acc;
@@ -86,7 +87,8 @@ export const applyRules = (rules, transaction, categories) => {
         switch (rule.action) {
             // Move transaction to another category (overrides one that was already found through basic name matching)
             case "move":
-                transaction.category = categories.find((category) => category.id === rule.category_id);
+                const category = categories.find((category) => category.id === rule.category_id);
+                transaction.category_name = category.name;
                 break;
             // Ignore (unselect) the transaction
             case "ignore":
