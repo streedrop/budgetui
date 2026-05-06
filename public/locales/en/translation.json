@@ -116,6 +116,7 @@
             }
         },
         "page": {
+            "edit": "Edit this category",
             "budget": {
                 "title": "Monthly Budget",
                 "add": "Set budget",

@@ -1,7 +1,7 @@
 import styles from './styles/Category.module.css';
 
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import icons from '@/constants/CategoryIcons';
@@ -12,6 +12,7 @@ import { useBudgets } from '@/hooks/budgets/useBudgets.js';
 
 import Modal from '@/components/modal/Modal.jsx';
 import Button from '@/components/buttons/Button';
+import EditButton from '@/components/buttons/EditButton'
 import BudgetList from '@/pages/budget/BudgetList.jsx';
 import BudgetForm from '@/pages/budget/BudgetForm.jsx';
 import TransactionList from '@/pages/transactions/TransactionList.jsx';
@@ -27,6 +28,8 @@ function Category() {
     const { data: category } = useCategory(id);
     const { data: budgets } = useBudgets(id);
     const { data: transactions = [], isLoading, error } = useTransactions(id);
+
+    const navigate = useNavigate();
 
     if ((isUncategorized && !transactions) || (!isUncategorized && !category)) return <div>Loading...</div>;
 
@@ -44,6 +47,11 @@ function Category() {
                     {category.description && (
                         <p>{category.description}</p>
                     )}
+
+                    <div className={styles.actions}>
+                        <EditButton action={() => navigate(`/categories/${id}/edit`)}>{t('categories.page.edit')}</EditButton>
+                    </div>
+
                 </section>
 
                 <section className={`${styles.hidden} ${styles.chart}`}>

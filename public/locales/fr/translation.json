@@ -116,6 +116,7 @@
             }
         },
         "page": {
+            "edit": "Modifier cette catégorie",
             "budget": {
                 "title": "Budget mensuel",
                 "add": "Modifier le budget",
