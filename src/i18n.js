@@ -22,7 +22,7 @@ i18n
     debug: false,
 
     supportedLngs: languages,
-    nonExplicitSupportedLngs: true,
+    nonExplicitSupportedLngs: false,
 
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
