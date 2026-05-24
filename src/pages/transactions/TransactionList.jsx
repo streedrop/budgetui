@@ -43,7 +43,7 @@ function TransactionList({ transactions, deletable = true, onSelect = () => {}, 
                         <>
                             <DeleteButton action={() => selected.forEach(t => deleteTransaction(t.id))} disabled={selected.length == 0}>{t('buttons.selected.delete')}</DeleteButton>
                             <Button action={() => setMoveModal(true)} disabled={selected.length == 0}>{t('buttons.selected.move')}</Button>
-                            <MoveOverlay isOpen={moveModal} onClose={() => setMoveModal(false)} selected={selected} />
+                            <MoveOverlay isOpen={moveModal} onClose={() => setMoveModal(false)} selected={selected} setSelected={setSelected} />
                         </>
                     )}
                     {openFilters && (

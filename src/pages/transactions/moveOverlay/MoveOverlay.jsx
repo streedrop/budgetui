@@ -6,7 +6,7 @@ import { useCategories } from '@/hooks/categories/useCategories';
 import { useEditTransaction } from '@/hooks/transactions/useEditTransaction.js';
 import Button from '@/components/buttons/Button';
 
-function MoveOverlay({ isOpen, onClose, selected }) {
+function MoveOverlay({ isOpen, onClose, selected, setSelected }) {
     const { t } = useTranslation();
 
     const { data: categories = [] } = useCategories();
@@ -20,6 +20,8 @@ function MoveOverlay({ isOpen, onClose, selected }) {
         const data = Object.fromEntries(formData);
 
         selected.forEach(t => editTransaction({ id: t.id, data: { ...t, date: t.date.split("T")[0], category_id: data.category_id } }));
+
+        setSelected([]);
 
         onClose();
     };
