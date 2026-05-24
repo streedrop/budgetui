@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { emptyFilters } from '@/constants/EmptyData';
 import { dateToMonthYear } from '@/utils/formatters';
+import { monthsThatHaveTransactions, yearsThatHaveTransactions } from '@/utils/filters';
 
 import { useTransactions } from '@/hooks/transactions/useTransactions.js';
 import Button from '@/components/buttons/Button';
@@ -17,8 +18,8 @@ function Filter({ filters, setFilters, date = true, amount = true }) {
     const [selectedYear, setSelectedYear] = useState(null);
     const [selectedMonth, setSelectedMonth] = useState(null);
 
-    const years = [...new Set(transactions.map(t => t.date.slice(0, 4)))];
-    const months = [...new Set(transactions.map(t => t.date.slice(0, 7)))];
+    const years = yearsThatHaveTransactions(transactions);
+    const months = monthsThatHaveTransactions(transactions);
 
     // The amount of filters shown
     const nbFilters = [date, amount].filter(Boolean).length;

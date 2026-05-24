@@ -13,3 +13,11 @@ export const transactionsFromThisYear = (transactions) => {
         .filter(t => t.date <= `${date.getFullYear() + 1}-01-01`)
         .filter(t => t.date >= `${date.getFullYear()}-01-01`);
 }
+
+export const monthsThatHaveTransactions = (transactions) => {
+    return [...new Set(transactions.map(t => t.date.slice(0, 7)))];
+}
+
+export const yearsThatHaveTransactions = (transactions) => {
+    return [...new Set(transactions.map(t => t.date.slice(0, 4)))];
+}

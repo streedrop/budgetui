@@ -1,6 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
-import { amountFormatter } from '@/utils/formatters';
+import { amountFormatter, capitalize } from '@/utils/formatters';
 import { getCustomBar } from '@/utils/charts';
 
 import { useData } from './useData';
@@ -24,7 +24,7 @@ function ForecastVsActual({ transactions, categories, budgets }) {
 
                 <Tooltip
                     labelFormatter={() => ''}
-                    formatter={(value, name) => [amountFormatter(value), name.charAt(0).toUpperCase() + name.slice(1)]}
+                    formatter={(value, name) => [amountFormatter(value), capitalize(name)]}
                     itemSorter={(item) => item.name === 'forecast' ? -1 : 1}
                 />
             </BarChart>

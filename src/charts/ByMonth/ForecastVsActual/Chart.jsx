@@ -1,8 +1,8 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { RechartsDevtools } from '@recharts/devtools';
 
-import { amountFormatter } from '@/utils/formatters';
-import { getCustomBar, capitalize } from '@/utils/charts';
+import { amountFormatter, capitalize } from '@/utils/formatters';
+import { getCustomBar } from '@/utils/charts';
 
 function Chart({ data, height }) {
 

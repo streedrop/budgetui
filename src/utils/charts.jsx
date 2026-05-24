@@ -36,8 +36,3 @@ export const getMonths = (transactions, budgets) => {
         )
     ].sort();
 }
-
-// Capitalize first letter of a word, for tooltips
-export const capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}

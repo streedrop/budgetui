@@ -23,8 +23,8 @@ function Home() {
       </section>
       <UncategorizedNotification amount={transactions.filter(t => t.category_id == null).length} />
       <DataSection transactions={transactions} type={0} />
-      <DataSection transactions={transactionsFromThisYear(transactions)} type={1} />
-      <DataSection transactions={transactionsFromThisMonth(transactions)} type={2} />
+      <DataSection transactions={transactions} type={1} />
+      <DataSection transactions={transactions} type={2} />
       <section>
         <h2>{t('dashboard.navigate.title')}</h2>
         <div className={styles.pages}>

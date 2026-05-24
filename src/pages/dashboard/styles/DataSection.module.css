@@ -1,3 +1,22 @@
+.title {
+  display: flex;
+  width: 20%;
+  justify-content: space-between;
+}
+
+.title i:not(.disabled):hover {
+  color: grey;
+  cursor: pointer;
+}
+
+.disabled {
+  color: rgb(70, 70, 70);
+}
+
+.disabled:hover {
+  cursor: default;
+}
+
 .stats {
   width: 100%;
 }

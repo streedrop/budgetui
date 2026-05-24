@@ -71,5 +71,10 @@ export const amountFormatter = (string) => {
 
 // "EPICERIE MAGOG  " => "Epicerie Magog"
 export const transactionNameFormatter = (string) => {
-    return string.split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ').trim()
+    return string.split(' ').map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1).toLowerCase()}`).join(' ').trim()
+}
+
+// Capitalize first letter of a word
+export const capitalize = (string) => {
+    return `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 }

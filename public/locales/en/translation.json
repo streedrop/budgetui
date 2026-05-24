@@ -26,8 +26,7 @@
         "stats": {
             "title": "Stats",
             "allTime": "All Time",
-            "thisYear": "This Year",
-            "thisMonth": "This Month",
+            "year": "Year {{year}}",
             "transactions": "Transactions",
             "categories": "Categories",
             "income": "Total income",
