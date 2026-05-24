@@ -8,13 +8,10 @@ import { useDeleteTransaction } from '@/hooks/transactions/useDeleteTransaction.
 import DeleteButton from '@/components/buttons/DeleteButton';
 import EditButton from '@/components/buttons/EditButton';
 
-function TransactionItem({ transaction, deletable, onSelect, editable, selected }) {
+function TransactionItem({ transaction, deletable, onSelect, edit, selected }) {
 
     const navigate = useNavigate();
 
-    const goToEdit = () => {
-        navigate(`/transactions/${transaction.id}/edit`);
-    }
     const { mutate: deleteTransaction } = useDeleteTransaction();
 
     const isCurrentYear = new Date().getFullYear() == new Date(transaction.date).getFullYear();
@@ -36,8 +33,8 @@ function TransactionItem({ transaction, deletable, onSelect, editable, selected 
 
             <p className={styles.amount}>{transaction.is_income ? '+' : '-'}{amountFormatter(transaction.amount)}</p>
             <div className={styles.actions}>
-                {editable &&
-                    (<EditButton action={goToEdit} />)
+                {edit &&
+                    (<EditButton action={edit} />)
                 }
 
                 {deletable &&

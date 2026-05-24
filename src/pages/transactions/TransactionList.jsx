@@ -21,7 +21,8 @@ function TransactionList({ transactions, deletable = true, onSelect = () => {}, 
 
     const { mutate: deleteTransaction } = useDeleteTransaction();
 
-    const [newTransactionModal, setNewTransactionModal] = useState(false);
+    const [transactionFormModal, setTransactionFormModal] = useState(false);
+    const [editedTransactionID, setEditedTransactionID] = useState(null);
     const [moveModal, setMoveModal] = useState(false);
     const [selected, setSelected] = useState(preselected);
 
@@ -50,7 +51,7 @@ function TransactionList({ transactions, deletable = true, onSelect = () => {}, 
                         <FilterButton action={openFilters} />
                     )}
                     {editable && (
-                        <AddButton action={() => setNewTransactionModal(true)} />
+                        <AddButton action={() => { setEditedTransactionID(null); setTransactionFormModal(true) }} />
                     )}
                 </div>
             </div>
@@ -71,7 +72,7 @@ function TransactionList({ transactions, deletable = true, onSelect = () => {}, 
                                     key={transaction.id}
                                     transaction={transaction}
                                     deletable={deletable}
-                                    editable={editable}
+                                    edit={editable && (() => { setEditedTransactionID(transaction.id); setTransactionFormModal(true); })}
                                     selected={selected}
                                     onSelect={whenSelected}
                                 />
@@ -80,8 +81,8 @@ function TransactionList({ transactions, deletable = true, onSelect = () => {}, 
                     :
                     <Empty item="transactions" />
             }
-            <Modal isOpen={newTransactionModal} onClose={() => setNewTransactionModal(false)}>
-                <TransactionForm closeModal={() => setNewTransactionModal(false)} category_id={category_id} />
+            <Modal isOpen={transactionFormModal} onClose={() => setTransactionFormModal(false) }>
+                <TransactionForm id={editedTransactionID} closeModal={() => setTransactionFormModal(false) } category_id={category_id} />
             </Modal>
         </section>
     );
