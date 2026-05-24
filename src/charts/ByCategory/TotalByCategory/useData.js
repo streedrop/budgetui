@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { colorData } from '@/utils/charts';
 
 export function useData(transactions, categories) {
+    const { t } = useTranslation();
+
     const [data, setData] = useState([]);
 
     useEffect(() => {
         // Initial data
         const data = categories
-            .filter((category) => category.id != null)
             .map((category) => ({
-                name: category.name,
+                name: t(category.name),
                 id: category.id,
                 value: 0,
             }));

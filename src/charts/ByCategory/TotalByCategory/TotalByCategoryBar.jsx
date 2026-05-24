@@ -1,9 +1,11 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
+import { useTranslation } from 'react-i18next';
 
 import { amountFormatter } from '@/utils/formatters';
 import { useData } from './useData';
 
 function TotalByCategoryBar({ transactions, categories }) {
+    const { t } = useTranslation();
 
     const { data } = useData(transactions, categories);
 
@@ -21,7 +23,7 @@ function TotalByCategoryBar({ transactions, categories }) {
             <Bar dataKey="value" />
             <Tooltip
                 labelFormatter={() => ''}
-                formatter={(value, name, props) => [amountFormatter(value), props.payload.name]}
+                formatter={(value, name, props) => [amountFormatter(value), t(props.payload.name)]}
             />
         </BarChart>
     );

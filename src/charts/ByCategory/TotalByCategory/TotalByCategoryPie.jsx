@@ -1,9 +1,11 @@
 import { PieChart, Pie, Tooltip, Legend } from 'recharts';
+import { useTranslation } from 'react-i18next';
 
 import { amountFormatter } from '@/utils/formatters';
 import { useData } from './useData';
 
 function TotalByCategoryPie({ transactions, categories }) {
+    const { t } = useTranslation();
 
     const { data } = useData(transactions, categories);
 
@@ -12,7 +14,7 @@ function TotalByCategoryPie({ transactions, categories }) {
         <PieChart height={400} width={`100%`}>
             <Pie data={data} nameKey="name" dataKey="value" cx="50%" cy="50%" outerRadius={150}/>
             <Tooltip
-                formatter={(value, name) => [amountFormatter(value), name]}
+                formatter={(value, name) => [amountFormatter(value), t(name)]}
             />
             <Legend layout="vertical" align="right" verticalAlign="middle" />
         </PieChart>
