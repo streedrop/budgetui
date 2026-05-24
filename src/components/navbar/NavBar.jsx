@@ -33,10 +33,6 @@ function NavBar({ collapsed, setCollapsed }) {
           <i className="fa-regular fa-folder"></i>
           <span>{t('nav.categories')}</span>
         </NavLink>
-        <NavLink to="/charts" className={navClass}>
-          <i className="fa-regular fa-chart-bar"></i>
-          <span>{t('nav.charts')}</span>
-        </NavLink>
         <NavLink to="/summary" className={navClass}>
           <i className="fa-regular fa-newspaper"></i>
           <span>{t('nav.summary')}</span>
@@ -51,6 +47,13 @@ function NavBar({ collapsed, setCollapsed }) {
         <NavLink to="/rules" className={navClass}>
           <i className="fa-solid fa-list-check"></i>
           <span>{t('nav.rules')}</span>
+        </NavLink>
+
+        <hr />
+
+        <NavLink to="/charts" className={navClass}>
+          <i className="fa-regular fa-chart-bar"></i>
+          <span>{t('nav.charts')}</span>
         </NavLink>
         <NavLink to="/dev" className={navClass}>
           <i className="fa-regular fa-file-code"></i>
