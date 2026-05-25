@@ -13,8 +13,8 @@ import { useBudgets } from '@/hooks/budgets/useBudgets.js';
 import Modal from '@/components/modal/Modal.jsx';
 import Button from '@/components/buttons/Button';
 import EditButton from '@/components/buttons/EditButton'
-import BudgetList from '@/pages/budget/BudgetList.jsx';
-import BudgetForm from '@/pages/budget/BudgetForm.jsx';
+import BudgetList from './budget/BudgetList.jsx';
+import BudgetForm from './budget/BudgetForm.jsx';
 import TransactionList from '@/pages/transactions/TransactionList.jsx';
 
 function Category() {

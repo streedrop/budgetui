@@ -5,6 +5,7 @@
         "categories": "Catégories",
         "charts": "Graphiques",
         "summary": "Sommaire",
+        "budget": "Budget",
         "import": "Importer",
         "rules": "Règles",
         "dev": "Dev Tools",
@@ -136,6 +137,10 @@
     "summary": {
         "title": "Sommaire",
         "description": "Visualiser des statistiques et des graphiques permet de mettre en perspective les changements que vous voulez apporter à votre gestion financière."
+    },
+    "budget": {
+        "title": "Budget",
+        "description": "Planifiez vos dépenses mensuelles afin de voir où vous dépensez trop et effectuer des corrections."
     },
     "import": {
         "title": "Importer des transactions",
