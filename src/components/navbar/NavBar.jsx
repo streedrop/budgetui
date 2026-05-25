@@ -33,9 +33,9 @@ function NavBar({ collapsed, setCollapsed }) {
           <i className="fa-regular fa-folder"></i>
           <span>{t('nav.categories')}</span>
         </NavLink>
-        <NavLink to="/budget" className={navClass}>
+        <NavLink to="/budgets" className={navClass}>
           <i className="fa-regular fa-dollar-sign"></i>
-          <span>{t('nav.budget')}</span>
+          <span>{t('nav.budgets')}</span>
         </NavLink>
         <NavLink to="/summary" className={navClass}>
           <i className="fa-regular fa-newspaper"></i>

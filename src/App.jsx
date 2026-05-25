@@ -16,7 +16,8 @@ import TransactionForm from './pages/transactions/TransactionForm.jsx'
 
 import Charts from './pages/charts/Charts.jsx'
 import Summary from './pages/summary/Summary.jsx'
-import Budget from './pages/budget/Budget.jsx'
+import Budgets from './pages/budgets/Budgets.jsx'
+import BudgetForm from './pages/budgets/BudgetForm.jsx'
 
 import Import from './pages/import/Import.jsx'
 import Rules from './pages/rules/Rules.jsx'
@@ -41,7 +42,8 @@ function App() {
             <Route path="/categories/:id" element={<Category />} />
             <Route path="/categories/new" element={<CategoryForm />} />
             <Route path="/categories/:id/edit" element={<CategoryForm />} />
-            <Route path="/budget" element={<Budget />} />
+            <Route path="/budgets" element={<Budgets />} />
+            <Route path="/budgets/new" element={<BudgetForm />} />
             <Route path="/charts" element={<Charts />} />
             <Route path="/summary" element={<Summary />} />
             <Route path="/import" element={<Import />} />

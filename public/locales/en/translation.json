@@ -5,7 +5,7 @@
         "categories": "Categories",
         "charts": "Charts",
         "summary": "Summary",
-        "budget": "Budget",
+        "budgets": "Budgets",
         "import": "Import",
         "rules": "Rules",
         "dev": "Dev Tools",
@@ -138,9 +138,20 @@
         "title": "Summary",
         "description": "Visualizing stats and graphs allow you to figure out the changes you want to make to your money management."
     },
-    "budget": {
-        "title": "Budget",
-        "description": "Plan your monthly expenses in order to see where you spend too much and make corrections."
+    "budgets": {
+        "title": "Budgets",
+        "description": "Plan your monthly expenses in order to see where you spend too much and make corrections.",
+        "add": "Add a budget",
+        "list": {
+            "title": "Budget list",
+            "empty":  {
+                "title":"No budgets to display",
+                "description":"Add budgets."
+            }
+        },
+        "form": {
+            "title": "Nouveau budget"
+        }
     },
     "import": {
         "title": "Import transactions",

@@ -66,37 +66,43 @@ function CategoryForm() {
         navigate(-1);
     }
 
-    if(isLoading && isEditMode)
+    if (isLoading && isEditMode)
         return <p>Loading...</p>
 
     return (
         <>
-            <h1>{isEditMode ? t('categories.form.edit') : t('categories.form.add')}</h1>
-            <form className={styles.form} onSubmit={handleSubmit}>
-                <label htmlFor="name">{t('categories.form.name')}</label>
-                <input type="text" id="name" name="name" defaultValue={data.name} />
-                <label htmlFor="icon">{t('categories.form.icon')}</label>
-                <Button action={() => setModalOpen(true)}>Select icon...</Button>
-                <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-                    <IconPicker selected={icon} setIcon={setIcon} />
-                </Modal>
-                <input type="hidden" id="icon" name="icon" value={icon} readOnly />
-                <label htmlFor="description">{t('categories.form.description')}</label>
-                <input type="text" id="description" name="description" defaultValue={data.description} />
-                <label>{t('categories.form.type.label')}</label>
-                <div className={styles.type}>
-                    <div>
-                        <input type="radio" id="expense" name="is_income" value="0" checked={data.is_income == 0} onChange={() => setFormData({ ...data, is_income: 0 })} />
-                        <label htmlFor="expense">{t('categories.form.type.expenses')}</label>
+            <section>
+                <h1>{isEditMode ? t('categories.form.edit') : t('categories.form.add')}</h1>
+            </section>
+            <section>
+
+
+                <form className={styles.form} onSubmit={handleSubmit}>
+                    <label htmlFor="name">{t('categories.form.name')}</label>
+                    <input type="text" id="name" name="name" defaultValue={data.name} />
+                    <label htmlFor="icon">{t('categories.form.icon')}</label>
+                    <Button action={() => setModalOpen(true)}>Select icon...</Button>
+                    <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+                        <IconPicker selected={icon} setIcon={setIcon} />
+                    </Modal>
+                    <input type="hidden" id="icon" name="icon" value={icon} readOnly />
+                    <label htmlFor="description">{t('categories.form.description')}</label>
+                    <input type="text" id="description" name="description" defaultValue={data.description} />
+                    <label>{t('categories.form.type.label')}</label>
+                    <div className={styles.type}>
+                        <div>
+                            <input type="radio" id="expense" name="is_income" value="0" checked={data.is_income == 0} onChange={() => setFormData({ ...data, is_income: 0 })} />
+                            <label htmlFor="expense">{t('categories.form.type.expenses')}</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="income" name="is_income" value="1" checked={data.is_income == 1} onChange={() => setFormData({ ...data, is_income: 1 })} />
+                            <label htmlFor="income">{t('categories.form.type.income')}</label>
+                        </div>
                     </div>
-                    <div>
-                        <input type="radio" id="income" name="is_income" value="1" checked={data.is_income == 1} onChange={() => setFormData({ ...data, is_income: 1 })} />
-                        <label htmlFor="income">{t('categories.form.type.income')}</label>
-                    </div>
-                </div>
-                <CancelButton action={handleCancel} />
-                {isEditMode ? (<SaveButton />) : (<AddButton />)}
-            </form>
+                    <CancelButton action={handleCancel} />
+                    {isEditMode ? (<SaveButton />) : (<AddButton />)}
+                </form>
+            </section>
         </>
     );
 }
